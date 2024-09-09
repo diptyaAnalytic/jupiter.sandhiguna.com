@@ -1,0 +1,5 @@
+[device]
+managed=true
+connection-uuid=9c92fad9-6ecb-3e6c-eb4d-8a47c6f50c04
+route-metric-default-effective=101
+route-metric-default-aspired=100

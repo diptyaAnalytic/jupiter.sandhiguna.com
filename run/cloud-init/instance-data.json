@@ -1,0 +1,99 @@
+{
+ "base64_encoded_keys": [],
+ "ds": {
+  "_doc": "EXPERIMENTAL: The structure and format of content scoped under the 'ds' key may change in subsequent releases of cloud-init.",
+  "meta_data": {
+   "availability_zone": "sgp1",
+   "instance-id": 271728189,
+   "interfaces": {
+    "private": [
+     {
+      "ipv4": {
+       "gateway": "0.0.0.0",
+       "ip_address": "10.104.0.2",
+       "netmask": "255.255.240.0"
+      },
+      "mac": "ce:2d:0c:b8:2c:ec",
+      "type": "private"
+     }
+    ],
+    "public": [
+     {
+      "anchor_ipv4": {
+       "gateway": "10.15.0.1",
+       "ip_address": "10.15.0.5",
+       "netmask": "255.255.0.0"
+      },
+      "ipv4": {
+       "gateway": "178.128.208.1",
+       "ip_address": "178.128.213.160",
+       "netmask": "255.255.240.0"
+      },
+      "ipv6": {
+       "cidr": 64,
+       "gateway": "2400:6180:0000:00D0:0000:0000:0000:0001",
+       "ip_address": "2400:6180:0000:00D0:0000:0000:0133:A001"
+      },
+      "mac": "16:51:23:ca:44:59",
+      "type": "public"
+     }
+    ]
+   },
+   "local-hostname": "jupiter.sandhiguna.com",
+   "public-keys": [
+    "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC1gHVk5lW97wR/8AnNDS0cnnCsWtv06T/n4+Q3JhXQ/CpRW1s98xPfaEty49JvU9SZ0dvCDaz2l5dQmhVJqTOZiQHJFevtaqCOYQYOjXqsPmHo4N9oGEMgZQCLeXLBLazqkGZxQHSi9z5ZeglpBUopjogMwPDBNDz9uyNRPAj4DReTWWAF9fIs/5p5cqQIzIt5rCt1Rf5I7rSeLRXIz3mVlKUNl1U1Z4LB8B77qULw0z5iv2B0H2FSoC4XEwa19pZfi5J5t08xR+FW9efu6uF1z9aCmQ9n3oPiAiBZiufdo/GifcSNUanWfXJF0EutEn5AxlmFF9leWUqJp4ou2ba53pN/rDkv0Ws2212fOp/piYZpoAfj6wOTFfp2XWgG62F9oRm068SemVXdqiw4UbTqIE5uBtnKoiVHpj/Tw+duZ7tpPakXwF7FiyOoBFzQHBbTl1sLsuSb2GTPAKIMi8dE52DIodUTI7CSh/NxGi+eAVeRUOa8f0AzrokEj5epLsON5ySNVuL7VpIOPg55NXG83/ZX+w0TauhnyJrA/ntdeoZJOmOO+wTf/0oKTgudpaSxxtQl9vqaJL4fUDpHOZjwNbNOUzYJmys662cTJXJKtLpp9MGkxsAXMl49j0aA+BlyHRL29HRkVVeq+Wo45iDtaHKPd4RP6qRvw04KvPZl7w=="
+   ]
+  }
+ },
+ "merged_cfg": "redacted for non-root user",
+ "sensitive_keys": [
+  "merged_cfg"
+ ],
+ "sys_info": {
+  "dist": [
+   "fedora",
+   "35",
+   "Cloud Edition"
+  ],
+  "platform": "Linux-5.14.14-300.fc35.x86_64-x86_64-with-glibc2.34",
+  "python": "3.10.0",
+  "release": "5.14.14-300.fc35.x86_64",
+  "system": "Linux",
+  "uname": [
+   "Linux",
+   "jupiter.sandhiguna.com",
+   "5.14.14-300.fc35.x86_64",
+   "#1 SMP Wed Oct 20 16:14:50 UTC 2021",
+   "x86_64",
+   "x86_64"
+  ],
+  "variant": "fedora"
+ },
+ "v1": {
+  "_beta_keys": [
+   "subplatform"
+  ],
+  "availability-zone": "sgp1",
+  "availability_zone": "sgp1",
+  "cloud-name": "digitalocean",
+  "cloud_name": "digitalocean",
+  "distro": "fedora",
+  "distro_release": "Cloud Edition",
+  "distro_version": "35",
+  "instance-id": "271728189",
+  "instance_id": "271728189",
+  "kernel_release": "5.14.14-300.fc35.x86_64",
+  "local-hostname": "jupiter",
+  "local_hostname": "jupiter",
+  "machine": "x86_64",
+  "platform": "digitalocean",
+  "public_ssh_keys": [
+   "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQC1gHVk5lW97wR/8AnNDS0cnnCsWtv06T/n4+Q3JhXQ/CpRW1s98xPfaEty49JvU9SZ0dvCDaz2l5dQmhVJqTOZiQHJFevtaqCOYQYOjXqsPmHo4N9oGEMgZQCLeXLBLazqkGZxQHSi9z5ZeglpBUopjogMwPDBNDz9uyNRPAj4DReTWWAF9fIs/5p5cqQIzIt5rCt1Rf5I7rSeLRXIz3mVlKUNl1U1Z4LB8B77qULw0z5iv2B0H2FSoC4XEwa19pZfi5J5t08xR+FW9efu6uF1z9aCmQ9n3oPiAiBZiufdo/GifcSNUanWfXJF0EutEn5AxlmFF9leWUqJp4ou2ba53pN/rDkv0Ws2212fOp/piYZpoAfj6wOTFfp2XWgG62F9oRm068SemVXdqiw4UbTqIE5uBtnKoiVHpj/Tw+duZ7tpPakXwF7FiyOoBFzQHBbTl1sLsuSb2GTPAKIMi8dE52DIodUTI7CSh/NxGi+eAVeRUOa8f0AzrokEj5epLsON5ySNVuL7VpIOPg55NXG83/ZX+w0TauhnyJrA/ntdeoZJOmOO+wTf/0oKTgudpaSxxtQl9vqaJL4fUDpHOZjwNbNOUzYJmys662cTJXJKtLpp9MGkxsAXMl49j0aA+BlyHRL29HRkVVeq+Wo45iDtaHKPd4RP6qRvw04KvPZl7w=="
+  ],
+  "python_version": "3.10.0",
+  "region": null,
+  "subplatform": "metadata (http://169.254.169.254/metadata/v1.json)",
+  "system_platform": "Linux-5.14.14-300.fc35.x86_64-x86_64-with-glibc2.34",
+  "variant": "fedora"
+ }
+}

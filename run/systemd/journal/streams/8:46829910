@@ -1,0 +1,9 @@
+# This is private data. Do not parse
+PRIORITY=30
+LEVEL_PREFIX=1
+FORWARD_TO_SYSLOG=0
+FORWARD_TO_KMSG=0
+FORWARD_TO_CONSOLE=0
+STREAM_ID=71465f7a1faf4a48be718665c3c9ebe5
+IDENTIFIER=DigitalOceanAgent
+UNIT=do-agent.service

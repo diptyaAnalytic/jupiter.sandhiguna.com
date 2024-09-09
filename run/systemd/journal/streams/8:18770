@@ -1,0 +1,9 @@
+# This is private data. Do not parse
+PRIORITY=30
+LEVEL_PREFIX=1
+FORWARD_TO_SYSLOG=0
+FORWARD_TO_KMSG=0
+FORWARD_TO_CONSOLE=0
+STREAM_ID=cd07b032d62949afbab4a281f1cc37b5
+IDENTIFIER=systemd-resolved
+UNIT=systemd-resolved.service

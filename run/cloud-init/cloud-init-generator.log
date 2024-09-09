@@ -1,0 +1,9 @@
+/usr/lib/systemd/system-generators/cloud-init-generator normal=/run/systemd/generator early=/run/systemd/generator.early late=/run/systemd/generator.late
+kernel command line (/proc/cmdline): BOOT_IMAGE=(hd0,gpt1)/boot/vmlinuz-5.14.14-300.fc35.x86_64 root=UUID=386769a3-cfa5-47c8-8797-d5ec58c9cb6c ro no_timer_check net.ifnames=0 console=tty1 console=ttyS0,115200n8
+kernel_cmdline found unset
+etc_file found unset
+default found enabled
+checking for datasource
+ds-identify rc=0
+ds-identify _RET=found
+enabled via /run/systemd/generator.early/multi-user.target.wants/cloud-init.target -> /lib/systemd/system/cloud-init.target
