@@ -1,0 +1,107 @@
+#!/usr/bin/python3
+# -*- coding: utf-8 -*-
+# vim: noai:ts=4:sw=4:expandtab
+#
+# Copyright (C) 2015 Igor Gnatenko <i.gnatenko.brain@gmail.com>
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+""" Main script which will end up in /usr/sbin/rpmconf """
+import argparse
+import errno
+import os
+import sys
+import time
+from rpmconf import rpmconf
+
+def main():
+    """ Main entry point. """
+    parser = argparse.ArgumentParser()
+    parser.add_argument("-a", "--all", dest="all", action="store_true",
+                        help="Check configuration files of all packages.")
+    parser.add_argument("-c", "--clean", dest="clean", action="store_true",
+                        help="Find and delete orphaned"
+                             " .rpmnew and .rpmsave files.")
+    parser.add_argument("-d", "--debug", dest="debug", action="store_true",
+                        help="Dry run. Just show which file will be deleted.")
+    parser.add_argument("-D", "--diff", dest="diff", action="store_true",
+                        help="Non-interactive diff mode. "
+                             "Useful to audit configs. "
+                             "Use with -a or -o options.")
+    parser.add_argument("-f", "--frontend", dest="frontend", action="store",
+                        metavar="EDITOR",
+                        help="Define which frontend should be used for merging."
+                             " For list of valid types see man page.")
+    parser.add_argument("--root", dest="root", action="store",
+                        metavar="ROOT",
+                        help="Specifies an alternative installroot, relative to"
+                             " where all packages are installed.")
+    parser.add_argument("-t", "--test", dest="test", action="store_true",
+                        help="Only test if there are some files for merge. Return "
+                             "0 exit code if there is none such file.")
+    parser.add_argument("-Z", dest="selinux", action="store_true",
+                        help="Display SELinux context of old and new file.")
+    parser.add_argument("-o", "--owner", dest="owner", metavar="PACKAGE",
+                        nargs="*",
+                        help="Check only configuration files of given package.")
+    parser.add_argument("-u", "--unattended", dest="unattended",
+                        choices=["use_maintainer", "use_your", "default"],
+                        nargs="?", const="default", metavar="MODE",
+                        help="Unattended mode: do not prompt user, perform actions "
+                             "based on MODE. use_maintainer replaces existing "
+                             "configuration files with .rpmnew and deletes all "
+                             ".rpmsave files. use_your deletes .rpmnew files and "
+                             "replaces existing configuration files with .rpmsave "
+                             "files. default does use_your for .rpmnew files and "
+                             " use_maintainer for .rpmsave (same as prompts). "
+                             "(default: %(default)s)")
+    parser.add_argument("-V", "--version", dest="version", action="store_true",
+                        help="Display rpmconf version.")
+    parser.add_argument("-x", "--exclude", dest="exclude", metavar="DIRECTORY",
+                        nargs="*",
+                        help="Exclude path from checking. Applies only for -c.")
+
+    args = parser.parse_args()
+    if args.version:
+        print(rpmconf.__version__)
+        sys.exit(0)
+    if not (args.owner or args.all or args.clean):
+        parser.print_help()
+        sys.exit(1)
+    owner = args.owner if args.owner else []
+
+    if os.geteuid() != 0:
+        sys.stderr.write("Most features are not useful without root privileges!!!\n")
+        time.sleep(5)
+
+    rconf = rpmconf.RpmConf(packages=None if args.all else owner,
+                            clean=args.clean, debug=args.debug,
+                            diff=args.diff, frontend=args.frontend,
+                            selinux=args.selinux, test=args.test,
+                            exclude=args.exclude, root=args.root,
+                            unattended=args.unattended)
+
+    try:
+        rconf.run()
+    except IOError as err:
+        if err.errno in (errno.EACCES, errno.EPERM):
+            sys.stderr.write("Error: You need root permissions to do this!\n")
+            sys.exit(1)
+        else:
+            raise
+
+if __name__ == "__main__":
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.exit(1)

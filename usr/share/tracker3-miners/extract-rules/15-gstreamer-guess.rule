@@ -1,0 +1,7 @@
+[ExtractorRule]
+ModulePath=libextract-gstreamer.so
+MimeTypes=video/3gpp;video/mp4;video/x-ms-asf;application/vnd.ms-asf;application/vnd.rn-realmedia;
+FallbackRdfTypes=nfo:Media;nfo:Video;
+Graph=tracker:Video
+Hash=be97d94d017e16ac0cea5d823ac1e8a904f68f4566b1c4a629319fb5b3e104bc
+

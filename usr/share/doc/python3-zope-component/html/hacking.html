@@ -1,0 +1,393 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hacking on zope.component &#8212; zope.component 4.3.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Persistent Registries" href="api/persistent.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="hacking-on-zope-component">
+<h1>Hacking on <code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code><a class="headerlink" href="#hacking-on-zope-component" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="getting-the-code">
+<h2>Getting the Code<a class="headerlink" href="#getting-the-code" title="Permalink to this headline">¶</a></h2>
+<p>The main repository for <code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code> is in the Zope Foundation
+Github repository:</p>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/zopefoundation/zope.component">https://github.com/zopefoundation/zope.component</a></p>
+</div></blockquote>
+<p>You can get a read-only checkout from there:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ git clone https://github.com/zopefoundation/zope.component.git
+</pre></div>
+</div>
+<p>or fork it and get a writeable checkout of your fork:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ git clone git@github.com/jrandom/zope.component.git
+</pre></div>
+</div>
+<p>The project also mirrors the trunk from the Github repository as a
+Bazaar branch on Launchpad:</p>
+<p><a class="reference external" href="https://code.launchpad.net/zope.component">https://code.launchpad.net/zope.component</a></p>
+<p>You can branch the trunk from there using Bazaar:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ bzr branch lp:zope.component
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-in-a-virtualenv">
+<h2>Working in a <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code><a class="headerlink" href="#working-in-a-virtualenv" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installing">
+<h3>Installing<a class="headerlink" href="#installing" title="Permalink to this headline">¶</a></h3>
+<p>If you use the <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> package to create lightweight Python
+development environments, you can run the tests using nothing more
+than the <code class="docutils literal notranslate"><span class="pre">python</span></code> binary in a virtualenv.  First, create a scratch
+environment:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /path/to/virtualenv --no-site-packages /tmp/hack-zope.component
+</pre></div>
+</div>
+<p>Next, get this package registered as a “development egg” in the
+environment:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /tmp/hack-zope.component/bin/python setup.py develop
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-the-tests">
+<h3>Running the tests<a class="headerlink" href="#running-the-tests" title="Permalink to this headline">¶</a></h3>
+<p>Run the tests using the build-in <code class="docutils literal notranslate"><span class="pre">setuptools</span></code> testrunner:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /tmp/hack-zope.component/bin/python setup.py <span class="nb">test</span> -q
+.........................................................................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran <span class="m">249</span> tests <span class="k">in</span> <span class="m">0</span>.000s
+
+OK
+</pre></div>
+</div>
+<p>If you have the <code class="xref py py-mod docutils literal notranslate"><span class="pre">nose</span></code> package installed in the virtualenv, you can
+use its testrunner too:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /tmp/hack-zope.component/bin/nosetests
+.......................................................................................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran <span class="m">263</span> tests <span class="k">in</span> <span class="m">0</span>.000s
+
+OK
+</pre></div>
+</div>
+<p>If you have the <code class="xref py py-mod docutils literal notranslate"><span class="pre">coverage</span></code> pacakge installed in the virtualenv,
+you can see how well the tests cover the code:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /tmp/hack-zope.component/bin/easy_install nose coverage
+...
+$ /tmp/hack-zope.component/bin/nosetests --with coverage
+.......................................................................................................................................................................................................................................................................
+Name                                   Stmts   Miss  Cover   Missing
+--------------------------------------------------------------------
+zope/component.py                         <span class="m">42</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/_api.py                   <span class="m">132</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/_compat.py                  <span class="m">3</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/_declaration.py            <span class="m">30</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/event.py                   <span class="m">10</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/eventtesting.py            <span class="m">11</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/factory.py                 <span class="m">20</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/globalregistry.py          <span class="m">38</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/hookable.py                <span class="m">14</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/hooks.py                   <span class="m">70</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/interface.py               <span class="m">63</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/interfaces.py              <span class="m">63</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/persistentregistry.py      <span class="m">32</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/registry.py                <span class="m">24</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/security.py                <span class="m">65</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/standalonetests.py          <span class="m">2</span>      <span class="m">0</span>   <span class="m">100</span>%
+zope/component/zcml.py                   <span class="m">207</span>      <span class="m">0</span>   <span class="m">100</span>%
+--------------------------------------------------------------------
+TOTAL                                    <span class="m">826</span>      <span class="m">0</span>   <span class="m">100</span>%
+----------------------------------------------------------------------
+Ran <span class="m">263</span> tests <span class="k">in</span> <span class="m">0</span>.000s
+
+OK
+</pre></div>
+</div>
+</div>
+<div class="section" id="building-the-documentation">
+<h3>Building the documentation<a class="headerlink" href="#building-the-documentation" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code> uses the nifty <code class="xref py py-mod docutils literal notranslate"><span class="pre">Sphinx</span></code> documentation system
+for building its docs.  Using the same virtualenv you set up to run the
+tests, you can build the docs:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /tmp/hack-zope.component/bin/easy_install <span class="se">\</span>
+ Sphinx repoze.sphinx.autoitnerface zope.component
+...
+$ <span class="nb">cd</span> docs
+$ <span class="nv">PATH</span><span class="o">=</span>/tmp/hack-zope.component/bin:<span class="nv">$PATH</span> make html
+sphinx-build -b html -d _build/doctrees   . _build/html
+...
+build succeeded.
+
+Build finished. The HTML pages are <span class="k">in</span> _build/html.
+</pre></div>
+</div>
+<p>You can also test the code snippets in the documentation:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ <span class="nv">PATH</span><span class="o">=</span>/tmp/hack-zope.component/bin:<span class="nv">$PATH</span> make doctest
+sphinx-build -b doctest -d _build/doctrees   . _build/doctest
+...
+running tests...
+
+...
+
+Doctest <span class="nv">summary</span>
+<span class="o">===============</span>
+  <span class="m">964</span> tests
+    <span class="m">0</span> failures <span class="k">in</span> tests
+    <span class="m">0</span> failures <span class="k">in</span> setup code
+    <span class="m">0</span> failures <span class="k">in</span> cleanup code
+build succeeded.
+Testing of doctests <span class="k">in</span> the sources finished, look at the  results <span class="k">in</span> _build/doctest/output.txt.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-zc-buildout">
+<h2>Using <code class="xref py py-mod docutils literal notranslate"><span class="pre">zc.buildout</span></code><a class="headerlink" href="#using-zc-buildout" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="setting-up-the-buildout">
+<h3>Setting up the buildout<a class="headerlink" href="#setting-up-the-buildout" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code> ships with its own <code class="file docutils literal notranslate"><span class="pre">buildout.cfg</span></code> file and
+<code class="file docutils literal notranslate"><span class="pre">bootstrap.py</span></code> for setting up a development buildout:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ /path/to/python2.7 bootstrap.py
+...
+Generated script <span class="s1">&#39;.../bin/buildout&#39;</span>
+$ bin/buildout
+Develop: <span class="s1">&#39;/home/jrandom/projects/Zope/zope.component/.&#39;</span>
+...
+Got coverage <span class="m">3</span>.7.1
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>Running the tests<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p>You can now run the tests:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ bin/test --all
+Running zope.testing.testrunner.layer.UnitTests tests:
+  Set up zope.testing.testrunner.layer.UnitTests <span class="k">in</span> <span class="m">0</span>.000 seconds.
+  Ran <span class="m">249</span> tests with <span class="m">0</span> failures and <span class="m">0</span> errors <span class="k">in</span> <span class="m">0</span>.000 seconds.
+Tearing down left over layers:
+  Tear down zope.testing.testrunner.layer.UnitTests <span class="k">in</span> <span class="m">0</span>.000 seconds.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="using-tox">
+<h2>Using <code class="xref py py-mod docutils literal notranslate"><span class="pre">tox</span></code><a class="headerlink" href="#using-tox" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="running-tests-on-multiple-python-versions">
+<h3>Running Tests on Multiple Python Versions<a class="headerlink" href="#running-tests-on-multiple-python-versions" title="Permalink to this headline">¶</a></h3>
+<p><a class="reference external" href="http://tox.testrun.org/latest/">tox</a> is a Python-based test automation
+tool designed to run tests against multiple Python versions.  It creates
+a <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> for each configured version, installs the current package
+and configured dependencies into each <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code>, and then runs the
+configured commands.</p>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code> configures the following <code class="xref py py-mod docutils literal notranslate"><span class="pre">tox</span></code> environments via
+its <code class="docutils literal notranslate"><span class="pre">tox.ini</span></code> file:</p>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">py26</span></code>, <code class="docutils literal notranslate"><span class="pre">py27</span></code>, <code class="docutils literal notranslate"><span class="pre">py33</span></code>, <code class="docutils literal notranslate"><span class="pre">py34</span></code>, and <code class="docutils literal notranslate"><span class="pre">pypy</span></code> environments
+builds a <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> with the appropriate interpreter, installs
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code> and dependencies, and runs the tests
+via <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">setup.py</span> <span class="pre">test</span> <span class="pre">-q</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">coverage</span></code> environment builds a <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code> with <code class="docutils literal notranslate"><span class="pre">python2.6</span></code>,
+installs <code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code>, installs
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">nose</span></code> and <code class="xref py py-mod docutils literal notranslate"><span class="pre">coverage</span></code>, and runs <code class="docutils literal notranslate"><span class="pre">nosetests</span></code> with statement
+coverage.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">docs</span></code> environment builds a virtualenv with <code class="docutils literal notranslate"><span class="pre">python2.6</span></code>, installs
+<code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code>, installs <code class="docutils literal notranslate"><span class="pre">Sphinx</span></code> and
+dependencies, and then builds the docs and exercises the doctest snippets.</p></li>
+</ul>
+<p>This example requires that you have a working <code class="docutils literal notranslate"><span class="pre">python2.6</span></code> on your path,
+as well as installing <code class="docutils literal notranslate"><span class="pre">tox</span></code>:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ tox -e py26
+GLOB sdist-make: /home/tseaver/projects/Zope/Z3/zopetoolkit/src/zope.component/setup.py
+py26 inst-nodeps: /home/tseaver/projects/Zope/Z3/zopetoolkit/src/zope.component/.tox/dist/zope.component-4.2.2.dev0.zip
+py26 runtests: <span class="nv">PYTHONHASHSEED</span><span class="o">=</span><span class="s1">&#39;3711600167&#39;</span>
+py26 runtests: commands<span class="o">[</span><span class="m">0</span><span class="o">]</span> <span class="p">|</span> python setup.py <span class="nb">test</span> -q
+running <span class="nb">test</span>
+
+...
+
+running build_ext
+.........................................................................................................................................................................................................................................................
+----------------------------------------------------------------------
+Ran <span class="m">249</span> tests <span class="m">0</span>.000s
+
+OK
+___________________________________ summary ____________________________________
+  py26: commands succeeded
+  congratulations :<span class="o">)</span>
+</pre></div>
+</div>
+<p>Running <code class="docutils literal notranslate"><span class="pre">tox</span></code> with no arguments runs all the configured environments,
+including building the docs and testing their snippets:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ tox
+GLOB sdist-make: .../zope.component/setup.py
+py26 sdist-reinst: .../zope.component/.tox/dist/zope.component-4.0.2dev.zip
+...
+Doctest <span class="nv">summary</span>
+<span class="o">===============</span>
+  <span class="m">964</span> tests
+    <span class="m">0</span> failures <span class="k">in</span> tests
+    <span class="m">0</span> failures <span class="k">in</span> setup code
+    <span class="m">0</span> failures <span class="k">in</span> cleanup code
+build succeeded.
+___________________________________ summary ____________________________________
+  py26: commands succeeded
+  py26min: commands succeeded
+  py27: commands succeeded
+  pypy: commands succeeded
+  py32: commands succeeded
+  py33: commands succeeded
+  py34: commands succeeded
+  coverage: commands succeeded
+  docs: commands succeeded
+  congratulations :<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="contributing-to-zope-component">
+<h2>Contributing to <code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code><a class="headerlink" href="#contributing-to-zope-component" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="submitting-a-bug-report">
+<h3>Submitting a Bug Report<a class="headerlink" href="#submitting-a-bug-report" title="Permalink to this headline">¶</a></h3>
+<p><code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code> tracks its bugs on Github:</p>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/zopefoundation/zope.component/issues">https://github.com/zopefoundation/zope.component/issues</a></p>
+</div></blockquote>
+<p>Please submit bug reports and feature requests there.</p>
+</div>
+<div class="section" id="sharing-your-changes">
+<h3>Sharing Your Changes<a class="headerlink" href="#sharing-your-changes" title="Permalink to this headline">¶</a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please ensure that all tests are passing before you submit your code.
+If possible, your submission should include new tests for new features
+or bug fixes, although it is possible that you may have tested your
+new code by updating existing tests.</p>
+</div>
+<p>If have made a change you would like to share, the best route is to fork
+the Githb repository, check out your fork, make your changes on a branch
+in your fork, and push it.  You can then submit a pull request from your
+branch:</p>
+<blockquote>
+<div><p><a class="reference external" href="https://github.com/zopefoundation/zope.component/pulls">https://github.com/zopefoundation/zope.component/pulls</a></p>
+</div></blockquote>
+<p>If you branched the code from Launchpad using Bazaar, you have another
+option:  you can “push” your branch to Launchpad:</p>
+<div class="highlight-sh notranslate"><div class="highlight"><pre><span></span>$ bzr push lp:~jrandom/zope.component/cool_feature
+</pre></div>
+</div>
+<p>After pushing your branch, you can link it to a bug report on Github,
+or request that the maintainers merge your branch using the Launchpad
+“merge request” feature.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">zope.component</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="narr.html">Zope Component Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="socketexample.html">The Zope 3 Component Architecture (Socket Example)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event.html">Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="factory.html">Factories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistentregistry.html">Persistent Component Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zcml.html">ZCML directives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure.html">Package configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hooks.html">The current component registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testlayer.html">Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code> API Reference</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Hacking on <code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code></a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#getting-the-code">Getting the Code</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#working-in-a-virtualenv">Working in a <code class="docutils literal notranslate"><span class="pre">virtualenv</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-zc-buildout">Using <code class="xref py py-mod docutils literal notranslate"><span class="pre">zc.buildout</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#using-tox">Using <code class="xref py py-mod docutils literal notranslate"><span class="pre">tox</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#contributing-to-zope-component">Contributing to <code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="api/persistent.html" title="previous chapter">Persistent Registries</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;Zope Foundation and Contributors.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/hacking.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

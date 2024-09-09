@@ -1,0 +1,7 @@
+[ExtractorRule]
+ModulePath=libextract-iso.so
+MimeTypes=application/x-cd-image
+FallbackRdfTypes=nfo:FilesystemImage
+Graph=tracker:Software
+Hash=483556cc580dc7b5b858576aa91c1daa702df04f33905c7d1be7adc6009e65d3
+

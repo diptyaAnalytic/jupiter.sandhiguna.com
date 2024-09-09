@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Utility Registration APIs &#8212; zope.component 4.3.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/alabaster.css" />
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Adapter Registration APIs" href="adapter.html" />
+    <link rel="prev" title="Site Manager APIs" href="sitemanager.html" />
+   
+  <link rel="stylesheet" href="../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="utility-registration-apis">
+<h1>Utility Registration APIs<a class="headerlink" href="#utility-registration-apis" title="Permalink to this headline">¶</a></h1>
+<p>Utilities are components that simply provide an interface. They are
+instantiated at the time or before they are registered. Here we test the
+simple query interface.</p>
+<p>Before we register any utility, there is no utility available, of
+course. The pure instatiation of an object does not make it a utility. If
+you do not specify a default, you get a <cite>ComponentLookupError</cite>.</p>
+<p>Otherwise, you get the default:</p>
+<p>Now we declare <cite>ob</cite> to be the utility providing <cite>I1</cite>:</p>
+<p>Now the component is available:</p>
+<div class="section" id="named-utilities">
+<h2>Named Utilities<a class="headerlink" href="#named-utilities" title="Permalink to this headline">¶</a></h2>
+<p>Registering a utility without a name does not mean that it is available
+when looking for the utility with a name:</p>
+<p>Registering the utility under the correct name makes it available:</p>
+</div>
+<div class="section" id="querying-multiple-utilities">
+<h2>Querying Multiple Utilities<a class="headerlink" href="#querying-multiple-utilities" title="Permalink to this headline">¶</a></h2>
+<p>Sometimes it may be useful to query all utilities, both anonymous and named
+for a given interface.  The <code class="xref py py-func docutils literal notranslate"><span class="pre">getUtilitiesFor()</span></code> API
+returns a sequence of <code class="docutils literal notranslate"><span class="pre">(name,</span> <span class="pre">utility)</span></code> tuples, where <code class="docutils literal notranslate"><span class="pre">name</span></code> is the
+empty string for the anonymous utility:</p>
+<p>The <code class="xref py py-func docutils literal notranslate"><span class="pre">getAllUtilitiesRegisteredFor()</span></code> API returns
+utilities that have been registered for a particular interface. Utilities
+providing a derived interface are also listed.</p>
+<p>Now we register the new utilities:</p>
+<p>We can now get all the utilities that provide interface <cite>I1</cite>:</p>
+<p>Note that <cite>getAllUtilitiesRegisteredFor()</cite> does not return the names of
+the utilities.</p>
+</div>
+<div class="section" id="delegated-utility-lookup">
+<h2>Delegated Utility Lookup<a class="headerlink" href="#delegated-utility-lookup" title="Permalink to this headline">¶</a></h2>
+<p>It is common for a utility to delegate its answer to a utility
+providing the same interface in one of the component registry’s
+bases. Let’s first create a global utility:</p>
+<p>Now, let’s create two registries and set up the bases hierarchy:</p>
+<p>Now we create two utilities and insert them in our folder hierarchy:</p>
+<p>Now, if we ask <cite>util1_1</cite> for its next available utility we get the
+<code class="docutils literal notranslate"><span class="pre">one</span></code> utility:</p>
+<p>Next we ask <cite>util1</cite> for its next utility and we should get the global version:</p>
+<p>However, if we ask the global utility for the next one, an error is raised</p>
+<p>You can also use <cite>queryNextUtility</cite> and specify a default:</p>
+<p>Let’s now ensure that the function also works with multiple registries. First
+we create another base registry:</p>
+<p>We now set up another utility into that registry:</p>
+<p>We add it as a base to the local site manager:</p>
+<p>Both the <code class="docutils literal notranslate"><span class="pre">myregistry</span></code> and global utilities should be available:</p>
+<p>Note, if the context cannot be converted to a site manager, the default is
+retruned:</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../index.html">zope.component</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../narr.html">Zope Component Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../socketexample.html">The Zope 3 Component Architecture (Socket Example)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../event.html">Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../factory.html">Factories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../persistentregistry.html">Persistent Component Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../zcml.html">ZCML directives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../configure.html">Package configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hooks.html">The current component registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../testlayer.html">Layers</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code> API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="interfaces.html">Interface Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="sitemanager.html">Site Manager APIs</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Utility Registration APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adapter.html">Adapter Registration APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="factory.html">Factory APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="interface.html">Interface Registration APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="security.html">Security APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="persistent.html">Persistent Registries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../hacking.html">Hacking on <code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code></a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="../api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code> API Reference</a><ul>
+      <li>Previous: <a href="sitemanager.html" title="previous chapter">Site Manager APIs</a></li>
+      <li>Next: <a href="adapter.html" title="next chapter">Adapter Registration APIs</a></li>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;Zope Foundation and Contributors.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../_sources/api/utility.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

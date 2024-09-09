@@ -1,0 +1,142 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The current component registry &#8212; zope.component 4.3.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Layers" href="testlayer.html" />
+    <link rel="prev" title="Package configuration" href="configure.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="the-current-component-registry">
+<h1>The current component registry<a class="headerlink" href="#the-current-component-registry" title="Permalink to this headline">¶</a></h1>
+<p>There can be any number of component registries in an application. One of them
+is the global component registry, and there is also the concept of a currently
+used component registry. Component registries other than the global one are
+associated with objects called sites. The <code class="docutils literal notranslate"><span class="pre">zope.component.hooks</span></code> module
+provides an API to set and access the current site as well as manipulate the
+adapter hook associated with it.</p>
+<p>As long as we haven’t set a site, none is being considered current:</p>
+<p>We can also ask for the current component registry (aka site manager
+historically); it will return the global one if no current site is set:</p>
+<p>Let’s set a site now. A site has to be an object that provides the
+<code class="docutils literal notranslate"><span class="pre">getSiteManager</span></code> method, which is specified by
+<code class="docutils literal notranslate"><span class="pre">zope.component.interfaces.IPossibleSite</span></code>:</p>
+<p>After this, the newly set site is considered the currently active one:</p>
+<p>If we set another site, that one will be considered current:</p>
+<p>Finally we can unset the site and the global component registry is used again:</p>
+<div class="section" id="context-manager">
+<h2>Context manager<a class="headerlink" href="#context-manager" title="Permalink to this headline">¶</a></h2>
+<p>There also is a context manager for setting the site, which is especially
+useful when writing tests:</p>
+<p>The site is properly restored even if the body of the with statement
+raises an exception:</p>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">zope.component</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="narr.html">Zope Component Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="socketexample.html">The Zope 3 Component Architecture (Socket Example)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event.html">Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="factory.html">Factories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistentregistry.html">Persistent Component Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zcml.html">ZCML directives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure.html">Package configuration</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">The current component registry</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#context-manager">Context manager</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="testlayer.html">Layers</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api.html"><code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code> API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on <code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code></a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="configure.html" title="previous chapter">Package configuration</a></li>
+      <li>Next: <a href="testlayer.html" title="next chapter">Layers</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;Zope Foundation and Contributors.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/hooks.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

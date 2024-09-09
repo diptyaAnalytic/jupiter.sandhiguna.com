@@ -1,0 +1,683 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>systemd.journal &#8212; python-systemd 234 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/classic.css" />
+    
+    <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+  </head><body>
+  <a href="index.html">python-systemd </a>·
+  <a href="http://www.freedesktop.org/software/systemd/man/index.html">man pages </a>·
+  <a href="http://www.freedesktop.org/software/systemd/man/systemd.directives.html">directives </a>
+
+  <span style="float:right">python-systemd 234</span>
+  <hr />
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for systemd.journal</h1><div class="highlight"><pre>
+<span></span><span class="c1">#  -*- Mode: python; coding:utf-8; indent-tabs-mode: nil -*- */</span>
+<span class="c1">#</span>
+<span class="c1">#</span>
+<span class="c1">#  Copyright 2012 David Strauss &lt;david@davidstrauss.net&gt;</span>
+<span class="c1">#  Copyright 2012 Zbigniew Jędrzejewski-Szmek &lt;zbyszek@in.waw.pl&gt;</span>
+<span class="c1">#  Copyright 2012 Marti Raudsepp &lt;marti@juffo.org&gt;</span>
+<span class="c1">#</span>
+<span class="c1">#  python-systemd is free software; you can redistribute it and/or modify it</span>
+<span class="c1">#  under the terms of the GNU Lesser General Public License as published by</span>
+<span class="c1">#  the Free Software Foundation; either version 2.1 of the License, or</span>
+<span class="c1">#  (at your option) any later version.</span>
+<span class="c1">#</span>
+<span class="c1">#  python-systemd is distributed in the hope that it will be useful, but</span>
+<span class="c1">#  WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="c1">#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU</span>
+<span class="c1">#  Lesser General Public License for more details.</span>
+<span class="c1">#</span>
+<span class="c1">#  You should have received a copy of the GNU Lesser General Public License</span>
+<span class="c1">#  along with python-systemd; If not, see &lt;http://www.gnu.org/licenses/&gt;.</span>
+
+<span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
+
+<span class="kn">import</span> <span class="nn">sys</span> <span class="k">as</span> <span class="nn">_sys</span>
+<span class="kn">import</span> <span class="nn">datetime</span> <span class="k">as</span> <span class="nn">_datetime</span>
+<span class="kn">import</span> <span class="nn">uuid</span> <span class="k">as</span> <span class="nn">_uuid</span>
+<span class="kn">import</span> <span class="nn">traceback</span> <span class="k">as</span> <span class="nn">_traceback</span>
+<span class="kn">import</span> <span class="nn">os</span> <span class="k">as</span> <span class="nn">_os</span>
+<span class="kn">import</span> <span class="nn">logging</span> <span class="k">as</span> <span class="nn">_logging</span>
+<span class="kn">from</span> <span class="nn">syslog</span> <span class="kn">import</span> <span class="p">(</span><span class="n">LOG_EMERG</span><span class="p">,</span> <span class="n">LOG_ALERT</span><span class="p">,</span> <span class="n">LOG_CRIT</span><span class="p">,</span> <span class="n">LOG_ERR</span><span class="p">,</span>
+                    <span class="n">LOG_WARNING</span><span class="p">,</span> <span class="n">LOG_NOTICE</span><span class="p">,</span> <span class="n">LOG_INFO</span><span class="p">,</span> <span class="n">LOG_DEBUG</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">_sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">ChainMap</span> <span class="k">as</span> <span class="n">_ChainMap</span>
+
+<span class="kn">from</span> <span class="nn">._journal</span> <span class="kn">import</span> <span class="n">__version__</span><span class="p">,</span> <span class="n">sendv</span><span class="p">,</span> <span class="n">stream_fd</span>
+<span class="kn">from</span> <span class="nn">._reader</span> <span class="kn">import</span> <span class="p">(</span><span class="n">_Reader</span><span class="p">,</span> <span class="n">NOP</span><span class="p">,</span> <span class="n">APPEND</span><span class="p">,</span> <span class="n">INVALIDATE</span><span class="p">,</span>
+                      <span class="n">LOCAL_ONLY</span><span class="p">,</span> <span class="n">RUNTIME_ONLY</span><span class="p">,</span>
+                      <span class="n">SYSTEM</span><span class="p">,</span> <span class="n">SYSTEM_ONLY</span><span class="p">,</span> <span class="n">CURRENT_USER</span><span class="p">,</span>
+                      <span class="n">OS_ROOT</span><span class="p">,</span>
+                      <span class="n">_get_catalog</span><span class="p">)</span>
+<span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">id128</span> <span class="k">as</span> <span class="n">_id128</span>
+
+<span class="k">if</span> <span class="n">_sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,):</span>
+    <span class="kn">from</span> <span class="nn">._reader</span> <span class="kn">import</span> <span class="n">Monotonic</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">Monotonic</span> <span class="o">=</span> <span class="nb">tuple</span>
+
+
+<span class="k">def</span> <span class="nf">_convert_monotonic</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">Monotonic</span><span class="p">((</span><span class="n">_datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">microseconds</span><span class="o">=</span><span class="n">m</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+                      <span class="n">_uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="nb">bytes</span><span class="o">=</span><span class="n">m</span><span class="p">[</span><span class="mi">1</span><span class="p">])))</span>
+
+
+<span class="k">def</span> <span class="nf">_convert_source_monotonic</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">(</span><span class="n">microseconds</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+
+
+<span class="k">def</span> <span class="nf">_convert_realtime</span><span class="p">(</span><span class="n">t</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="mi">1000000</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_convert_timestamp</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">_datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">/</span> <span class="mi">1000000</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_convert_trivial</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span>
+
+<span class="k">if</span> <span class="n">_sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,):</span>
+    <span class="k">def</span> <span class="nf">_convert_uuid</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">_uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">decode</span><span class="p">())</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="n">_convert_uuid</span> <span class="o">=</span> <span class="n">_uuid</span><span class="o">.</span><span class="n">UUID</span>
+
+<span class="n">DEFAULT_CONVERTERS</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;MESSAGE_ID&#39;</span><span class="p">:</span> <span class="n">_convert_uuid</span><span class="p">,</span>
+    <span class="s1">&#39;_MACHINE_ID&#39;</span><span class="p">:</span> <span class="n">_convert_uuid</span><span class="p">,</span>
+    <span class="s1">&#39;_BOOT_ID&#39;</span><span class="p">:</span> <span class="n">_convert_uuid</span><span class="p">,</span>
+    <span class="s1">&#39;PRIORITY&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;LEADER&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;SESSION_ID&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;USERSPACE_USEC&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;INITRD_USEC&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;KERNEL_USEC&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;_UID&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;_GID&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;_PID&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;SYSLOG_FACILITY&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;SYSLOG_PID&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;_AUDIT_SESSION&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;_AUDIT_LOGINUID&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;_SYSTEMD_SESSION&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;_SYSTEMD_OWNER_UID&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;CODE_LINE&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;ERRNO&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;EXIT_STATUS&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;_SOURCE_REALTIME_TIMESTAMP&#39;</span><span class="p">:</span> <span class="n">_convert_timestamp</span><span class="p">,</span>
+    <span class="s1">&#39;__REALTIME_TIMESTAMP&#39;</span><span class="p">:</span> <span class="n">_convert_realtime</span><span class="p">,</span>
+    <span class="s1">&#39;_SOURCE_MONOTONIC_TIMESTAMP&#39;</span><span class="p">:</span> <span class="n">_convert_source_monotonic</span><span class="p">,</span>
+    <span class="s1">&#39;__MONOTONIC_TIMESTAMP&#39;</span><span class="p">:</span> <span class="n">_convert_monotonic</span><span class="p">,</span>
+    <span class="s1">&#39;__CURSOR&#39;</span><span class="p">:</span> <span class="n">_convert_trivial</span><span class="p">,</span>
+    <span class="s1">&#39;COREDUMP&#39;</span><span class="p">:</span> <span class="nb">bytes</span><span class="p">,</span>
+    <span class="s1">&#39;COREDUMP_PID&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;COREDUMP_UID&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;COREDUMP_GID&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;COREDUMP_SESSION&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;COREDUMP_SIGNAL&#39;</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="s1">&#39;COREDUMP_TIMESTAMP&#39;</span><span class="p">:</span> <span class="n">_convert_timestamp</span><span class="p">,</span>
+<span class="p">}</span>
+
+<span class="n">_IDENT_CHARACTER</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="s1">&#39;ABCDEFGHIJKLMNOPQRTSUVWXYZ_0123456789&#39;</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">_valid_field_name</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="k">return</span> <span class="ow">not</span> <span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">-</span> <span class="n">_IDENT_CHARACTER</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="Reader"><a class="viewcode-back" href="../../journal.html#systemd.journal.Reader">[docs]</a><span class="k">class</span> <span class="nc">Reader</span><span class="p">(</span><span class="n">_Reader</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Access systemd journal entries.</span>
+
+<span class="sd">    Entries are subject to filtering and limits, see `add_match`, `this_boot`,</span>
+<span class="sd">    `this_machine` functions and the `data_treshold` attribute.</span>
+
+<span class="sd">    Note that in order to access the system journal, a non-root user must have</span>
+<span class="sd">    the necessary privileges, see journalctl(1) for details.  Unprivileged users</span>
+<span class="sd">    can access only their own journal.</span>
+
+<span class="sd">    Example usage to print out all informational or higher level messages for</span>
+<span class="sd">    systemd-udevd for this boot:</span>
+
+<span class="sd">    &gt;&gt;&gt; from systemd import journal</span>
+<span class="sd">    &gt;&gt;&gt; j = journal.Reader()</span>
+<span class="sd">    &gt;&gt;&gt; j.this_boot()</span>
+<span class="sd">    &gt;&gt;&gt; j.log_level(journal.LOG_INFO)</span>
+<span class="sd">    &gt;&gt;&gt; j.add_match(_SYSTEMD_UNIT=&quot;systemd-udevd.service&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; for entry in j:                                 # doctest: +SKIP</span>
+<span class="sd">    ...    print(entry[&#39;MESSAGE&#39;])</span>
+<span class="sd">    starting version ...</span>
+
+<span class="sd">    See systemd.journal-fields(7) for more info on typical fields found in the</span>
+<span class="sd">    journal.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="Reader.__init__"><a class="viewcode-back" href="../../journal.html#systemd.journal.Reader.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">flags</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">files</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">converters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">namespace</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create a new Reader.</span>
+
+<span class="sd">        Argument `flags` defines the open flags of the journal, which can be one</span>
+<span class="sd">        of, or ORed combination of constants: LOCAL_ONLY (default) opens journal</span>
+<span class="sd">        on local machine only; RUNTIME_ONLY opens only volatile journal files;</span>
+<span class="sd">        and SYSTEM_ONLY opens only journal files of system services and the kernel.</span>
+
+<span class="sd">        Argument `path` is the directory of journal files, either a file system</span>
+<span class="sd">        path or a file descriptor. Specify `namespace` to read from specific journal</span>
+<span class="sd">        namespace. Note that `flags`, `path`, `files` and `namespace` are exclusive.</span>
+
+<span class="sd">        Argument `converters` is a dictionary which updates the</span>
+<span class="sd">        DEFAULT_CONVERTERS to convert journal field values. Field names are used</span>
+<span class="sd">        as keys into this dictionary. The values must be single argument</span>
+<span class="sd">        functions, which take a `bytes` object and return a converted</span>
+<span class="sd">        value. When there&#39;s no entry for a field name, then the default UTF-8</span>
+<span class="sd">        decoding will be attempted. If the conversion fails with a ValueError,</span>
+<span class="sd">        unconverted bytes object will be returned. (Note that ValueEror is a</span>
+<span class="sd">        superclass of UnicodeDecodeError).</span>
+
+<span class="sd">        Reader implements the context manager protocol: the journal will be</span>
+<span class="sd">        closed when exiting the block.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">flags</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">path</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">files</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># This mimics journalctl behaviour of default to local journal only</span>
+                <span class="n">flags</span> <span class="o">=</span> <span class="n">LOCAL_ONLY</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">flags</span> <span class="o">=</span> <span class="mi">0</span>
+
+        <span class="nb">super</span><span class="p">(</span><span class="n">Reader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">flags</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">files</span><span class="p">,</span> <span class="n">namespace</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">_sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&gt;=</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">converters</span> <span class="o">=</span> <span class="n">_ChainMap</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">converters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">converters</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">converters</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">converters</span><span class="o">.</span><span class="n">maps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DEFAULT_CONVERTERS</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">converters</span> <span class="o">=</span> <span class="n">DEFAULT_CONVERTERS</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">converters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">converters</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">converters</span><span class="p">)</span></div>
+
+    <span class="k">def</span> <span class="nf">_convert_field</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert value using self.converters[key].</span>
+
+<span class="sd">        If `key` is not present in self.converters, a standard unicode decoding</span>
+<span class="sd">        will be attempted.  If the conversion (either key-specific or the</span>
+<span class="sd">        default one) fails with a ValueError, the original bytes object will be</span>
+<span class="sd">        returned.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">convert</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">converters</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">bytes</span><span class="o">.</span><span class="n">decode</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">convert</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="c1"># Leave in default bytes</span>
+            <span class="k">return</span> <span class="n">value</span>
+
+    <span class="k">def</span> <span class="nf">_convert_entry</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">entry</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Convert entire journal entry utilising _convert_field.&quot;&quot;&quot;</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">entry</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert_field</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">value</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">result</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_field</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+
+    <span class="k">def</span> <span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return self.</span>
+
+<span class="sd">        Part of the iterator protocol.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span> <span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return the next entry in the journal.</span>
+
+<span class="sd">        Returns self.get_next() or raises StopIteration.</span>
+
+<span class="sd">        Part of the iterator protocol.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ans</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_next</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">ans</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">ans</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">_sys</span><span class="o">.</span><span class="n">version_info</span> <span class="o">&lt;</span> <span class="p">(</span><span class="mi">3</span><span class="p">,):</span>
+        <span class="nb">next</span> <span class="o">=</span> <span class="fm">__next__</span>
+
+<div class="viewcode-block" id="Reader.add_match"><a class="viewcode-back" href="../../journal.html#systemd.journal.Reader.add_match">[docs]</a>    <span class="k">def</span> <span class="nf">add_match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add one or more matches to the filter journal log entries.</span>
+
+<span class="sd">        All matches of different field are combined with logical AND, and</span>
+<span class="sd">        matches of the same field are automatically combined with logical OR.</span>
+<span class="sd">        Matches can be passed as strings of form &quot;FIELD=value&quot;, or keyword</span>
+<span class="sd">        arguments FIELD=&quot;value&quot;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">args</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_make_line</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+        <span class="k">for</span> <span class="n">arg</span> <span class="ow">in</span> <span class="n">args</span><span class="p">:</span>
+            <span class="nb">super</span><span class="p">(</span><span class="n">Reader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">add_match</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Reader.get_next"><a class="viewcode-back" href="../../journal.html#systemd.journal.Reader.get_next">[docs]</a>    <span class="k">def</span> <span class="nf">get_next</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the next log entry as a dictionary.</span>
+
+<span class="sd">        Entries will be processed with converters specified during Reader</span>
+<span class="sd">        creation.</span>
+
+<span class="sd">        Optional `skip` value will return the `skip`-th log entry.</span>
+
+<span class="sd">        Currently a standard dictionary of fields is returned, but in the</span>
+<span class="sd">        future this might be changed to a different mapping type, so the</span>
+<span class="sd">        calling code should not make assumptions about a specific type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">super</span><span class="p">(</span><span class="n">Reader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_next</span><span class="p">(</span><span class="n">skip</span><span class="p">):</span>
+            <span class="n">entry</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">Reader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">_get_all</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">entry</span><span class="p">:</span>
+                <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;__REALTIME_TIMESTAMP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_realtime</span><span class="p">()</span>
+                <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;__MONOTONIC_TIMESTAMP&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_monotonic</span><span class="p">()</span>
+                <span class="n">entry</span><span class="p">[</span><span class="s1">&#39;__CURSOR&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_cursor</span><span class="p">()</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_convert_entry</span><span class="p">(</span><span class="n">entry</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">dict</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Reader.get_previous"><a class="viewcode-back" href="../../journal.html#systemd.journal.Reader.get_previous">[docs]</a>    <span class="k">def</span> <span class="nf">get_previous</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">skip</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return the previous log entry.</span>
+
+<span class="sd">        Equivalent to get_next(-skip).</span>
+
+<span class="sd">        Optional `skip` value will return the -`skip`-th log entry.</span>
+
+<span class="sd">        Entries will be processed with converters specified during Reader</span>
+<span class="sd">        creation.</span>
+
+<span class="sd">        Currently a standard dictionary of fields is returned, but in the</span>
+<span class="sd">        future this might be changed to a different mapping type, so the</span>
+<span class="sd">        calling code should not make assumptions about a specific type.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_next</span><span class="p">(</span><span class="o">-</span><span class="n">skip</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Reader.query_unique"><a class="viewcode-back" href="../../journal.html#systemd.journal.Reader.query_unique">[docs]</a>    <span class="k">def</span> <span class="nf">query_unique</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">field</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Return a list of unique values appearing in the journal for the given</span>
+<span class="sd">        `field`.</span>
+
+<span class="sd">        Note this does not respect any journal matches.</span>
+
+<span class="sd">        Entries will be processed with converters specified during</span>
+<span class="sd">        Reader creation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_convert_field</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+                   <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">super</span><span class="p">(</span><span class="n">Reader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">query_unique</span><span class="p">(</span><span class="n">field</span><span class="p">))</span></div>
+
+<div class="viewcode-block" id="Reader.wait"><a class="viewcode-back" href="../../journal.html#systemd.journal.Reader.wait">[docs]</a>    <span class="k">def</span> <span class="nf">wait</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Wait for a change in the journal.</span>
+
+<span class="sd">        `timeout` is the maximum time in seconds to wait, or None which</span>
+<span class="sd">        means to wait forever.</span>
+
+<span class="sd">        Returns one of NOP (no change), APPEND (new entries have been added to</span>
+<span class="sd">        the end of the journal), or INVALIDATE (journal files have been added or</span>
+<span class="sd">        removed).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">us</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span> <span class="k">if</span> <span class="n">timeout</span> <span class="ow">is</span> <span class="kc">None</span> <span class="k">else</span> <span class="nb">int</span><span class="p">(</span><span class="n">timeout</span> <span class="o">*</span> <span class="mi">1000000</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Reader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">wait</span><span class="p">(</span><span class="n">us</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Reader.seek_realtime"><a class="viewcode-back" href="../../journal.html#systemd.journal.Reader.seek_realtime">[docs]</a>    <span class="k">def</span> <span class="nf">seek_realtime</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">realtime</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Seek to a matching journal entry nearest to `timestamp` time.</span>
+
+<span class="sd">        Argument `realtime` must be either an integer UNIX timestamp (in</span>
+<span class="sd">        microseconds since the beginning of the UNIX epoch), or an float UNIX</span>
+<span class="sd">        timestamp (in seconds since the beginning of the UNIX epoch), or a</span>
+<span class="sd">        datetime.datetime instance. The integer form is deprecated.</span>
+
+<span class="sd">        &gt;&gt;&gt; import time</span>
+<span class="sd">        &gt;&gt;&gt; from systemd import journal</span>
+
+<span class="sd">        &gt;&gt;&gt; yesterday = time.time() - 24 * 60**2</span>
+<span class="sd">        &gt;&gt;&gt; j = journal.Reader()</span>
+<span class="sd">        &gt;&gt;&gt; j.seek_realtime(yesterday)</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">realtime</span><span class="p">,</span> <span class="n">_datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">):</span>
+            <span class="n">realtime</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">realtime</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">.</span><span class="si">%f</span><span class="s2">&quot;</span><span class="p">))</span> <span class="o">*</span> <span class="mi">1000000</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">realtime</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">realtime</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">realtime</span> <span class="o">*</span> <span class="mi">1000000</span><span class="p">)</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Reader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">seek_realtime</span><span class="p">(</span><span class="n">realtime</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Reader.seek_monotonic"><a class="viewcode-back" href="../../journal.html#systemd.journal.Reader.seek_monotonic">[docs]</a>    <span class="k">def</span> <span class="nf">seek_monotonic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">monotonic</span><span class="p">,</span> <span class="n">bootid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Seek to a matching journal entry nearest to `monotonic` time.</span>
+
+<span class="sd">        Argument `monotonic` is a timestamp from boot in either seconds or a</span>
+<span class="sd">        datetime.timedelta instance. Argument `bootid` is a string or UUID</span>
+<span class="sd">        representing which boot the monotonic time is reference to. Defaults to</span>
+<span class="sd">        current bootid.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">monotonic</span><span class="p">,</span> <span class="n">_datetime</span><span class="o">.</span><span class="n">timedelta</span><span class="p">):</span>
+            <span class="n">monotonic</span> <span class="o">=</span> <span class="n">monotonic</span><span class="o">.</span><span class="n">total_seconds</span><span class="p">()</span>
+        <span class="n">monotonic</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">monotonic</span> <span class="o">*</span> <span class="mi">1000000</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">bootid</span><span class="p">,</span> <span class="n">_uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">):</span>
+            <span class="n">bootid</span> <span class="o">=</span> <span class="n">bootid</span><span class="o">.</span><span class="n">hex</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">(</span><span class="n">Reader</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">seek_monotonic</span><span class="p">(</span><span class="n">monotonic</span><span class="p">,</span> <span class="n">bootid</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Reader.log_level"><a class="viewcode-back" href="../../journal.html#systemd.journal.Reader.log_level">[docs]</a>    <span class="k">def</span> <span class="nf">log_level</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Set maximum log `level` by setting matches for PRIORITY.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">level</span> <span class="o">&lt;=</span> <span class="mi">7</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">level</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">add_match</span><span class="p">(</span><span class="n">PRIORITY</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">i</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Log level must be 0 &lt;= level &lt;= 7&quot;</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Reader.messageid_match"><a class="viewcode-back" href="../../journal.html#systemd.journal.Reader.messageid_match">[docs]</a>    <span class="k">def</span> <span class="nf">messageid_match</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">messageid</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add match for log entries with specified `messageid`.</span>
+
+<span class="sd">        `messageid` can be string of hexadicimal digits or a UUID</span>
+<span class="sd">        instance. Standard message IDs can be found in systemd.id128.</span>
+
+<span class="sd">        Equivalent to add_match(MESSAGE_ID=`messageid`).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">messageid</span><span class="p">,</span> <span class="n">_uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">):</span>
+            <span class="n">messageid</span> <span class="o">=</span> <span class="n">messageid</span><span class="o">.</span><span class="n">hex</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_match</span><span class="p">(</span><span class="n">MESSAGE_ID</span><span class="o">=</span><span class="n">messageid</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Reader.this_boot"><a class="viewcode-back" href="../../journal.html#systemd.journal.Reader.this_boot">[docs]</a>    <span class="k">def</span> <span class="nf">this_boot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">bootid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add match for _BOOT_ID for current boot or the specified boot ID.</span>
+
+<span class="sd">        If specified, bootid should be either a UUID or a 32 digit hex number.</span>
+
+<span class="sd">        Equivalent to add_match(_BOOT_ID=&#39;bootid&#39;).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">bootid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">bootid</span> <span class="o">=</span> <span class="n">_id128</span><span class="o">.</span><span class="n">get_boot</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">bootid</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">bootid</span><span class="p">,</span> <span class="s1">&#39;hex&#39;</span><span class="p">,</span> <span class="n">bootid</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_match</span><span class="p">(</span><span class="n">_BOOT_ID</span><span class="o">=</span><span class="n">bootid</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Reader.this_machine"><a class="viewcode-back" href="../../journal.html#systemd.journal.Reader.this_machine">[docs]</a>    <span class="k">def</span> <span class="nf">this_machine</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">machineid</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Add match for _MACHINE_ID equal to the ID of this machine.</span>
+
+<span class="sd">        If specified, machineid should be either a UUID or a 32 digit hex</span>
+<span class="sd">        number.</span>
+
+<span class="sd">        Equivalent to add_match(_MACHINE_ID=&#39;machineid&#39;).</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">machineid</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">machineid</span> <span class="o">=</span> <span class="n">_id128</span><span class="o">.</span><span class="n">get_machine</span><span class="p">()</span><span class="o">.</span><span class="n">hex</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">machineid</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">machineid</span><span class="p">,</span> <span class="s1">&#39;hex&#39;</span><span class="p">,</span> <span class="n">machineid</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">add_match</span><span class="p">(</span><span class="n">_MACHINE_ID</span><span class="o">=</span><span class="n">machineid</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="get_catalog"><a class="viewcode-back" href="../../journal.html#systemd.journal.get_catalog">[docs]</a><span class="k">def</span> <span class="nf">get_catalog</span><span class="p">(</span><span class="n">mid</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Return catalog entry for the specified ID.</span>
+
+<span class="sd">    `mid` should be either a UUID or a 32 digit hex number.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">_uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">):</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="n">mid</span><span class="o">.</span><span class="n">hex</span>
+    <span class="k">return</span> <span class="n">_get_catalog</span><span class="p">(</span><span class="n">mid</span><span class="p">)</span></div>
+
+
+<span class="k">def</span> <span class="nf">_make_line</span><span class="p">(</span><span class="n">field</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">field</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="sa">b</span><span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="n">value</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">field</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="n">value</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">field</span> <span class="o">+</span> <span class="s1">&#39;=&#39;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+
+
+<div class="viewcode-block" id="send"><a class="viewcode-back" href="../../journal.html#systemd.journal.send">[docs]</a><span class="k">def</span> <span class="nf">send</span><span class="p">(</span><span class="n">MESSAGE</span><span class="p">,</span> <span class="n">MESSAGE_ID</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+         <span class="n">CODE_FILE</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">CODE_LINE</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">CODE_FUNC</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+         <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Send a message to the journal.</span>
+
+<span class="sd">    &gt;&gt;&gt; from systemd import journal</span>
+<span class="sd">    &gt;&gt;&gt; journal.send(&#39;Hello world&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; journal.send(&#39;Hello, again, world&#39;, FIELD2=&#39;Greetings!&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; journal.send(&#39;Binary message&#39;, BINARY=b&#39;\xde\xad\xbe\xef&#39;)</span>
+
+<span class="sd">    Value of the MESSAGE argument will be used for the MESSAGE= field. MESSAGE</span>
+<span class="sd">    must be a string and will be sent as UTF-8 to the journal.</span>
+
+<span class="sd">    MESSAGE_ID can be given to uniquely identify the type of message. It must be</span>
+<span class="sd">    a string or a uuid.UUID object.</span>
+
+<span class="sd">    CODE_LINE, CODE_FILE, and CODE_FUNC can be specified to identify the caller.</span>
+<span class="sd">    Unless at least on of the three is given, values are extracted from the</span>
+<span class="sd">    stack frame of the caller of send(). CODE_FILE and CODE_FUNC must be</span>
+<span class="sd">    strings, CODE_LINE must be an integer.</span>
+
+<span class="sd">    Additional fields for the journal entry can only be specified as keyword</span>
+<span class="sd">    arguments. The payload can be either a string or bytes. A string will be</span>
+<span class="sd">    sent as UTF-8, and bytes will be sent as-is to the journal.</span>
+
+<span class="sd">    Other useful fields include PRIORITY, SYSLOG_FACILITY, SYSLOG_IDENTIFIER,</span>
+<span class="sd">    SYSLOG_PID.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">args</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;MESSAGE=&#39;</span> <span class="o">+</span> <span class="n">MESSAGE</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">MESSAGE_ID</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">id</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">MESSAGE_ID</span><span class="p">,</span> <span class="s1">&#39;hex&#39;</span><span class="p">,</span> <span class="n">MESSAGE_ID</span><span class="p">)</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;MESSAGE_ID=&#39;</span> <span class="o">+</span> <span class="nb">id</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">CODE_LINE</span> <span class="ow">is</span> <span class="n">CODE_FILE</span> <span class="ow">is</span> <span class="n">CODE_FUNC</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">CODE_FILE</span><span class="p">,</span> <span class="n">CODE_LINE</span><span class="p">,</span> <span class="n">CODE_FUNC</span> <span class="o">=</span> <span class="n">_traceback</span><span class="o">.</span><span class="n">extract_stack</span><span class="p">(</span><span class="n">limit</span><span class="o">=</span><span class="mi">2</span><span class="p">)[</span><span class="mi">0</span><span class="p">][:</span><span class="mi">3</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">CODE_FILE</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;CODE_FILE=&#39;</span> <span class="o">+</span> <span class="n">CODE_FILE</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">CODE_LINE</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;CODE_LINE=</span><span class="si">{:d}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">CODE_LINE</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">CODE_FUNC</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">args</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;CODE_FUNC=&#39;</span> <span class="o">+</span> <span class="n">CODE_FUNC</span><span class="p">)</span>
+
+    <span class="n">args</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_make_line</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">val</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+    <span class="k">return</span> <span class="n">sendv</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="stream"><a class="viewcode-back" href="../../journal.html#systemd.journal.stream">[docs]</a><span class="k">def</span> <span class="nf">stream</span><span class="p">(</span><span class="n">identifier</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="n">LOG_INFO</span><span class="p">,</span> <span class="n">level_prefix</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Return a file object wrapping a stream to journal.</span>
+
+<span class="sd">    Log messages written to this file as simple newline sepearted text strings</span>
+<span class="sd">    are written to the journal.</span>
+
+<span class="sd">    The file will be line buffered, so messages are actually sent after a</span>
+<span class="sd">    newline character is written.</span>
+
+<span class="sd">    &gt;&gt;&gt; from systemd import journal</span>
+<span class="sd">    &gt;&gt;&gt; stream = journal.stream(&#39;myapp&#39;)                       # doctest: +SKIP</span>
+<span class="sd">    &gt;&gt;&gt; res = stream.write(&#39;message...\n&#39;)                     # doctest: +SKIP</span>
+
+<span class="sd">    will produce the following message in the journal::</span>
+
+<span class="sd">      PRIORITY=7</span>
+<span class="sd">      SYSLOG_IDENTIFIER=myapp</span>
+<span class="sd">      MESSAGE=message...</span>
+
+<span class="sd">    If identifier is None, a suitable default based on sys.argv[0] will be used.</span>
+
+<span class="sd">    This interface can be used conveniently with the print function:</span>
+
+<span class="sd">    &gt;&gt;&gt; from __future__ import print_function</span>
+<span class="sd">    &gt;&gt;&gt; stream = journal.stream()                              # doctest: +SKIP</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;message...&#39;, file=stream)                       # doctest: +SKIP</span>
+
+<span class="sd">    priority is the syslog priority, one of `LOG_EMERG`, `LOG_ALERT`,</span>
+<span class="sd">    `LOG_CRIT`, `LOG_ERR`, `LOG_WARNING`, `LOG_NOTICE`, `LOG_INFO`, `LOG_DEBUG`.</span>
+
+<span class="sd">    level_prefix is a boolean. If true, kernel-style log priority level prefixes</span>
+<span class="sd">    (such as &#39;&lt;1&gt;&#39;) are interpreted. See sd-daemon(3) for more information.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">identifier</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">_sys</span><span class="o">.</span><span class="n">argv</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">_sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">_sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-c&#39;</span><span class="p">:</span>
+            <span class="n">identifier</span> <span class="o">=</span> <span class="s1">&#39;python&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">identifier</span> <span class="o">=</span> <span class="n">_sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+    <span class="n">fd</span> <span class="o">=</span> <span class="n">stream_fd</span><span class="p">(</span><span class="n">identifier</span><span class="p">,</span> <span class="n">priority</span><span class="p">,</span> <span class="n">level_prefix</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">_os</span><span class="o">.</span><span class="n">fdopen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="JournalHandler"><a class="viewcode-back" href="../../journal.html#systemd.journal.JournalHandler">[docs]</a><span class="k">class</span> <span class="nc">JournalHandler</span><span class="p">(</span><span class="n">_logging</span><span class="o">.</span><span class="n">Handler</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Journal handler class for the Python logging framework.</span>
+
+<span class="sd">    Please see the Python logging module documentation for an overview:</span>
+<span class="sd">    http://docs.python.org/library/logging.html.</span>
+
+<span class="sd">    To create a custom logger whose messages go only to journal:</span>
+
+<span class="sd">    &gt;&gt;&gt; import logging</span>
+<span class="sd">    &gt;&gt;&gt; log = logging.getLogger(&#39;custom_logger_name&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; log.propagate = False</span>
+<span class="sd">    &gt;&gt;&gt; log.addHandler(JournalHandler())</span>
+<span class="sd">    &gt;&gt;&gt; log.warning(&quot;Some message: %s&quot;, &#39;detail&#39;)</span>
+
+<span class="sd">    Note that by default, message levels `INFO` and `DEBUG` are ignored by the</span>
+<span class="sd">    logging framework. To enable those log levels:</span>
+
+<span class="sd">    &gt;&gt;&gt; log.setLevel(logging.DEBUG)</span>
+
+<span class="sd">    To redirect all logging messages to journal regardless of where they come</span>
+<span class="sd">    from, attach it to the root logger:</span>
+
+<span class="sd">    &gt;&gt;&gt; logging.root.addHandler(JournalHandler())</span>
+
+<span class="sd">    For more complex configurations when using `dictConfig` or `fileConfig`,</span>
+<span class="sd">    specify `systemd.journal.JournalHandler` as the handler class.  Only</span>
+<span class="sd">    standard handler configuration options are supported: `level`, `formatter`,</span>
+<span class="sd">    `filters`.</span>
+
+<span class="sd">    To attach journal MESSAGE_ID, an extra field is supported:</span>
+
+<span class="sd">    &gt;&gt;&gt; import uuid</span>
+<span class="sd">    &gt;&gt;&gt; mid = uuid.UUID(&#39;0123456789ABCDEF0123456789ABCDEF&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; log.warning(&quot;Message with ID&quot;, extra={&#39;MESSAGE_ID&#39;: mid})</span>
+
+<span class="sd">    Fields to be attached to all messages sent through this handler can be</span>
+<span class="sd">    specified as keyword arguments. This probably makes sense only for</span>
+<span class="sd">    SYSLOG_IDENTIFIER and similar fields which are constant for the whole</span>
+<span class="sd">    program:</span>
+
+<span class="sd">    &gt;&gt;&gt; JournalHandler(SYSLOG_IDENTIFIER=&#39;my-cool-app&#39;)</span>
+<span class="sd">    &lt;...JournalHandler ...&gt;</span>
+
+<span class="sd">    The following journal fields will be sent: `MESSAGE`, `PRIORITY`,</span>
+<span class="sd">    `THREAD_NAME`, `CODE_FILE`, `CODE_LINE`, `CODE_FUNC`, `LOGGER` (name as</span>
+<span class="sd">    supplied to getLogger call), `MESSAGE_ID` (optional, see above),</span>
+<span class="sd">    `SYSLOG_IDENTIFIER` (defaults to sys.argv[0]).</span>
+
+<span class="sd">    The function used to actually send messages can be overridden using</span>
+<span class="sd">    the `sender_function` parameter.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">level</span><span class="o">=</span><span class="n">_logging</span><span class="o">.</span><span class="n">NOTSET</span><span class="p">,</span> <span class="n">sender_function</span><span class="o">=</span><span class="n">send</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">JournalHandler</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">level</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">_valid_field_name</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Invalid field name: &#39;</span> <span class="o">+</span> <span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;SYSLOG_IDENTIFIER&#39;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;SYSLOG_IDENTIFIER&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">_sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">send</span> <span class="o">=</span> <span class="n">sender_function</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_extra</span> <span class="o">=</span> <span class="n">kwargs</span>
+
+    <span class="k">def</span> <span class="nf">emit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">record</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Write `record` as a journal event.</span>
+
+<span class="sd">        MESSAGE is taken from the message provided by the user, and PRIORITY,</span>
+<span class="sd">        LOGGER, THREAD_NAME, CODE_{FILE,LINE,FUNC} fields are appended</span>
+<span class="sd">        automatically. In addition, record.MESSAGE_ID will be used if present.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">msg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+            <span class="n">pri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">map_priority</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">levelno</span><span class="p">)</span>
+            <span class="c1"># defaults</span>
+            <span class="n">extras</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_extra</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+            <span class="c1"># higher priority</span>
+            <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">exc_text</span><span class="p">:</span>
+                <span class="n">extras</span><span class="p">[</span><span class="s1">&#39;EXCEPTION_TEXT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">exc_text</span>
+
+            <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">exc_info</span><span class="p">:</span>
+                <span class="n">extras</span><span class="p">[</span><span class="s1">&#39;EXCEPTION_INFO&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">exc_info</span>
+
+            <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">args</span><span class="p">:</span>
+                <span class="n">extras</span><span class="p">[</span><span class="s1">&#39;CODE_ARGS&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">args</span><span class="p">)</span>
+
+            <span class="c1"># explicit arguments — highest priority</span>
+            <span class="n">extras</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
+
+            <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">,</span>
+                      <span class="n">PRIORITY</span><span class="o">=</span><span class="nb">format</span><span class="p">(</span><span class="n">pri</span><span class="p">),</span>
+                      <span class="n">LOGGER</span><span class="o">=</span><span class="n">record</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                      <span class="n">THREAD_NAME</span><span class="o">=</span><span class="n">record</span><span class="o">.</span><span class="n">threadName</span><span class="p">,</span>
+                      <span class="n">PROCESS_NAME</span><span class="o">=</span><span class="n">record</span><span class="o">.</span><span class="n">processName</span><span class="p">,</span>
+                      <span class="n">CODE_FILE</span><span class="o">=</span><span class="n">record</span><span class="o">.</span><span class="n">pathname</span><span class="p">,</span>
+                      <span class="n">CODE_LINE</span><span class="o">=</span><span class="n">record</span><span class="o">.</span><span class="n">lineno</span><span class="p">,</span>
+                      <span class="n">CODE_FUNC</span><span class="o">=</span><span class="n">record</span><span class="o">.</span><span class="n">funcName</span><span class="p">,</span>
+                      <span class="o">**</span><span class="n">extras</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">handleError</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">map_priority</span><span class="p">(</span><span class="n">levelno</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Map logging levels to journald priorities.</span>
+
+<span class="sd">        Since Python log level numbers are &quot;sparse&quot;, we have to map numbers in</span>
+<span class="sd">        between the standard levels too.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">levelno</span> <span class="o">&lt;=</span> <span class="n">_logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">LOG_DEBUG</span>
+        <span class="k">elif</span> <span class="n">levelno</span> <span class="o">&lt;=</span> <span class="n">_logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">LOG_INFO</span>
+        <span class="k">elif</span> <span class="n">levelno</span> <span class="o">&lt;=</span> <span class="n">_logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">LOG_WARNING</span>
+        <span class="k">elif</span> <span class="n">levelno</span> <span class="o">&lt;=</span> <span class="n">_logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">LOG_ERR</span>
+        <span class="k">elif</span> <span class="n">levelno</span> <span class="o">&lt;=</span> <span class="n">_logging</span><span class="o">.</span><span class="n">CRITICAL</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">LOG_CRIT</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">LOG_ALERT</span>
+
+    <span class="n">mapPriority</span> <span class="o">=</span> <span class="n">map_priority</span></div>
+</pre></div>
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>  
+  </body>
+</html>

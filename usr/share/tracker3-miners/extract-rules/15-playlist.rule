@@ -1,0 +1,7 @@
+[ExtractorRule]
+ModulePath=libextract-playlist.so
+MimeTypes=audio/x-mpegurl;audio/mpegurl;audio/x-scpls;audio/x-pn-realaudio;application/ram;application/vnd.ms-wpl;application/smil;audio/x-ms-asx;
+FallbackRdfTypes=nmm:Playlist;nfo:MediaList;
+Graph=tracker:Audio
+Hash=19643ec3e687c07975b0e84bccc940b6ded32832620830eb259dc44d8cd2d465
+

@@ -1,0 +1,6 @@
+#!/usr/bin/sh
+
+# Legacy action script for "service postgresql --upgrade"
+cmd="/usr/bin/postgresql-setup --upgrade --unit postgresql"
+echo "Hint: the preferred way to do this is now \"$cmd\"" >&2
+$cmd

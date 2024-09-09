@@ -1,0 +1,7 @@
+[ExtractorRule]
+ModulePath=libextract-epub.so
+MimeTypes=application/epub+zip
+FallbackRdfTypes=nfo:EBook;nfo:TextDocument;
+Graph=tracker:Documents
+Hash=3af20b1818ca0a3102d6300103412ea201589b8ed41aa2360bdf6cc36666044f
+

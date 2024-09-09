@@ -1,0 +1,905 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>systemd.journal module &#8212; python-systemd 234 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="systemd.id128 module" href="id128.html" />
+    <link rel="prev" title="python-systemd package" href="index.html" /> 
+  </head><body>
+  <a href="index.html">python-systemd </a>·
+  <a href="http://www.freedesktop.org/software/systemd/man/index.html">man pages </a>·
+  <a href="http://www.freedesktop.org/software/systemd/man/systemd.directives.html">directives </a>
+
+  <span style="float:right">python-systemd 234</span>
+  <hr />
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-systemd.journal">
+<span id="systemd-journal-module"></span><h1><cite>systemd.journal</cite> module<a class="headerlink" href="#module-systemd.journal" title="Permalink to this headline">¶</a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="systemd.journal.send">
+<span class="sig-prename descclassname"><span class="pre">systemd.journal.</span></span><span class="sig-name descname"><span class="pre">send</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">MESSAGE</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MESSAGE_ID</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CODE_FILE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CODE_LINE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CODE_FUNC</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#send"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.send" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send a message to the journal.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">systemd</span> <span class="kn">import</span> <span class="n">journal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">journal</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;Hello world&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">journal</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;Hello, again, world&#39;</span><span class="p">,</span> <span class="n">FIELD2</span><span class="o">=</span><span class="s1">&#39;Greetings!&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">journal</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;Binary message&#39;</span><span class="p">,</span> <span class="n">BINARY</span><span class="o">=</span><span class="sa">b</span><span class="s1">&#39;</span><span class="se">\xde\xad\xbe\xef</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Value of the MESSAGE argument will be used for the MESSAGE= field. MESSAGE
+must be a string and will be sent as UTF-8 to the journal.</p>
+<p>MESSAGE_ID can be given to uniquely identify the type of message. It must be
+a string or a uuid.UUID object.</p>
+<p>CODE_LINE, CODE_FILE, and CODE_FUNC can be specified to identify the caller.
+Unless at least on of the three is given, values are extracted from the
+stack frame of the caller of send(). CODE_FILE and CODE_FUNC must be
+strings, CODE_LINE must be an integer.</p>
+<p>Additional fields for the journal entry can only be specified as keyword
+arguments. The payload can be either a string or bytes. A string will be
+sent as UTF-8, and bytes will be sent as-is to the journal.</p>
+<p>Other useful fields include PRIORITY, SYSLOG_FACILITY, SYSLOG_IDENTIFIER,
+SYSLOG_PID.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systemd.journal.sendv">
+<span class="sig-prename descclassname"><span class="pre">systemd.journal.</span></span><span class="sig-name descname"><span class="pre">sendv</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">'FIELD=value'</span></em>, <em class="sig-param"><span class="pre">'FIELD=value'</span></em>, <em class="sig-param"><span class="pre">...</span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal.sendv" title="Permalink to this definition">¶</a></dt>
+<dd><p>Send an entry to the journal.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systemd.journal.stream">
+<span class="sig-prename descclassname"><span class="pre">systemd.journal.</span></span><span class="sig-name descname"><span class="pre">stream</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">6</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level_prefix</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#stream"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.stream" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a file object wrapping a stream to journal.</p>
+<p>Log messages written to this file as simple newline sepearted text strings
+are written to the journal.</p>
+<p>The file will be line buffered, so messages are actually sent after a
+newline character is written.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">systemd</span> <span class="kn">import</span> <span class="n">journal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span> <span class="o">=</span> <span class="n">journal</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="s1">&#39;myapp&#39;</span><span class="p">)</span>                       
+<span class="gp">&gt;&gt;&gt; </span><span class="n">res</span> <span class="o">=</span> <span class="n">stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;message...</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>                     
+</pre></div>
+</div>
+<p>will produce the following message in the journal:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">PRIORITY</span><span class="o">=</span><span class="mi">7</span>
+<span class="n">SYSLOG_IDENTIFIER</span><span class="o">=</span><span class="n">myapp</span>
+<span class="n">MESSAGE</span><span class="o">=</span><span class="n">message</span><span class="o">...</span>
+</pre></div>
+</div>
+<p>If identifier is None, a suitable default based on sys.argv[0] will be used.</p>
+<p>This interface can be used conveniently with the print function:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">print_function</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">stream</span> <span class="o">=</span> <span class="n">journal</span><span class="o">.</span><span class="n">stream</span><span class="p">()</span>                              
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;message...&#39;</span><span class="p">,</span> <span class="n">file</span><span class="o">=</span><span class="n">stream</span><span class="p">)</span>                       
+</pre></div>
+</div>
+<p>priority is the syslog priority, one of <cite>LOG_EMERG</cite>, <cite>LOG_ALERT</cite>,
+<cite>LOG_CRIT</cite>, <cite>LOG_ERR</cite>, <cite>LOG_WARNING</cite>, <cite>LOG_NOTICE</cite>, <cite>LOG_INFO</cite>, <cite>LOG_DEBUG</cite>.</p>
+<p>level_prefix is a boolean. If true, kernel-style log priority level prefixes
+(such as ‘&lt;1&gt;’) are interpreted. See sd-daemon(3) for more information.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systemd.journal.stream_fd">
+<span class="sig-prename descclassname"><span class="pre">systemd.journal.</span></span><span class="sig-name descname"><span class="pre">stream_fd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">identifier</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">priority</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">level_prefix</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">fd</span></span></span><a class="headerlink" href="#systemd.journal.stream_fd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Open a stream to journal by calling sd_journal_stream_fd(3).</p>
+</dd></dl>
+
+<div class="section" id="journalhandler-class">
+<h2><cite>JournalHandler</cite> class<a class="headerlink" href="#journalhandler-class" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="systemd.journal.JournalHandler">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">systemd.journal.</span></span><span class="sig-name descname"><span class="pre">JournalHandler</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">level=0</span></em>, <em class="sig-param"><span class="pre">sender_function=&lt;function</span> <span class="pre">send&gt;</span></em>, <em class="sig-param"><span class="pre">**kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#JournalHandler"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.JournalHandler" title="Permalink to this definition">¶</a></dt>
+<dd><p>Journal handler class for the Python logging framework.</p>
+<p>Please see the Python logging module documentation for an overview:
+<a class="reference external" href="http://docs.python.org/library/logging.html">http://docs.python.org/library/logging.html</a>.</p>
+<p>To create a custom logger whose messages go only to journal:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">&#39;custom_logger_name&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log</span><span class="o">.</span><span class="n">propagate</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">JournalHandler</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Some message: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s1">&#39;detail&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Note that by default, message levels <cite>INFO</cite> and <cite>DEBUG</cite> are ignored by the
+logging framework. To enable those log levels:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">log</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To redirect all logging messages to journal regardless of where they come
+from, attach it to the root logger:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">logging</span><span class="o">.</span><span class="n">root</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">JournalHandler</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>For more complex configurations when using <cite>dictConfig</cite> or <cite>fileConfig</cite>,
+specify <cite>systemd.journal.JournalHandler</cite> as the handler class.  Only
+standard handler configuration options are supported: <cite>level</cite>, <cite>formatter</cite>,
+<cite>filters</cite>.</p>
+<p>To attach journal MESSAGE_ID, an extra field is supported:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">uuid</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">mid</span> <span class="o">=</span> <span class="n">uuid</span><span class="o">.</span><span class="n">UUID</span><span class="p">(</span><span class="s1">&#39;0123456789ABCDEF0123456789ABCDEF&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">log</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;Message with ID&quot;</span><span class="p">,</span> <span class="n">extra</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;MESSAGE_ID&#39;</span><span class="p">:</span> <span class="n">mid</span><span class="p">})</span>
+</pre></div>
+</div>
+<p>Fields to be attached to all messages sent through this handler can be
+specified as keyword arguments. This probably makes sense only for
+SYSLOG_IDENTIFIER and similar fields which are constant for the whole
+program:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">JournalHandler</span><span class="p">(</span><span class="n">SYSLOG_IDENTIFIER</span><span class="o">=</span><span class="s1">&#39;my-cool-app&#39;</span><span class="p">)</span>
+<span class="go">&lt;...JournalHandler ...&gt;</span>
+</pre></div>
+</div>
+<p>The following journal fields will be sent: <cite>MESSAGE</cite>, <cite>PRIORITY</cite>,
+<cite>THREAD_NAME</cite>, <cite>CODE_FILE</cite>, <cite>CODE_LINE</cite>, <cite>CODE_FUNC</cite>, <cite>LOGGER</cite> (name as
+supplied to getLogger call), <cite>MESSAGE_ID</cite> (optional, see above),
+<cite>SYSLOG_IDENTIFIER</cite> (defaults to sys.argv[0]).</p>
+<p>The function used to actually send messages can be overridden using
+the <cite>sender_function</cite> parameter.</p>
+</dd></dl>
+
+</div>
+<div class="section" id="accessing-the-journal">
+<h2>Accessing the Journal<a class="headerlink" href="#accessing-the-journal" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="systemd.journal._Reader">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">systemd.journal.</span></span><span class="sig-name descname"><span class="pre">_Reader</span></span><span class="sig-paren">(</span><span class="optional">[</span><em class="sig-param"><span class="pre">flags</span> <span class="pre">|</span> <span class="pre">path</span> <span class="pre">|</span> <span class="pre">files</span> <span class="pre">|</span> <span class="pre">namespace</span></em><span class="optional">]</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="p"><span class="pre">...</span></span></span></span><a class="headerlink" href="#systemd.journal._Reader" title="Permalink to this definition">¶</a></dt>
+<dd><p>_Reader allows filtering and retrieval of Journal entries.
+Note: this is a low-level interface, and probably not what you
+want, use systemd.journal.Reader instead.</p>
+<p>Argument <cite>flags</cite> sets open flags of the journal, which can be one of, or an ORed
+combination of constants: LOCAL_ONLY (default) opens journal on local machine only;
+RUNTIME_ONLY opens only volatile journal files; and SYSTEM opens journal files of
+system services and the kernel, CURRENT_USER opens files of the current user; and
+OS_ROOT is used to open the journal from directories relative to the specified
+directory path or file descriptor.</p>
+<p>If <cite>namespace</cite> argument is specified, the specific journal namespace will be open
+(supported since systemd v245). Instead of opening the system journal, argument
+<cite>path</cite> may specify a directory which contains the journal. It maybe be either
+a file system path (a string), or a file descriptor (an integer). Alternatively,
+argument <cite>files</cite> may specify a list of journal file names. Note that <cite>flags</cite>, <cite>path</cite>,
+<cite>files</cite>, <cite>directory_fd</cite>, <cite>namespace</cite> are exclusive.</p>
+<p>_Reader implements the context manager protocol: the journal will be closed when
+exiting the block.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.add_conjunction">
+<span class="sig-name descname"><span class="pre">add_conjunction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal._Reader.add_conjunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts a logical AND between matches added since previous
+add_disjunction() or add_conjunction() and the next
+add_disjunction() or add_conjunction().</p>
+<p>See man:sd_journal_add_disjunction(3) for explanation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.add_disjunction">
+<span class="sig-name descname"><span class="pre">add_disjunction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal._Reader.add_disjunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts a logical OR between matches added since previous
+add_disjunction() or add_conjunction() and the next
+add_disjunction() or add_conjunction().</p>
+<p>See man:sd_journal_add_disjunction(3) for explanation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.add_match">
+<span class="sig-name descname"><span class="pre">add_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">match</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal._Reader.add_match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add a match to filter journal log entries. All matches of different
+fields are combined with logical AND, and matches of the same field
+are automatically combined with logical OR.
+Match is a string of the form “FIELD=value”.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal._Reader.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Free resources allocated by this Reader object.
+This method invokes sd_journal_close().
+See man:sd_journal_close(3).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.journal._Reader.closed">
+<span class="sig-name descname"><span class="pre">closed</span></span><a class="headerlink" href="#systemd.journal._Reader.closed" title="Permalink to this definition">¶</a></dt>
+<dd><p>True iff journal is closed</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.journal._Reader.data_threshold">
+<span class="sig-name descname"><span class="pre">data_threshold</span></span><a class="headerlink" href="#systemd.journal._Reader.data_threshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Threshold for field size truncation in bytes.</p>
+<p>Fields longer than this will be truncated to the threshold size.
+Defaults to 64Kb.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.enumerate_fields">
+<span class="sig-name descname"><span class="pre">enumerate_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">a</span> <span class="pre">set</span> <span class="pre">of</span> <span class="pre">values</span></span></span><a class="headerlink" href="#systemd.journal._Reader.enumerate_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a set of field names appearing in the journal.
+See sd_journal_enumerate_fields(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.fileno">
+<span class="sig-name descname"><span class="pre">fileno</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#systemd.journal._Reader.fileno" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a file descriptor to poll for changes in the journal.
+This method invokes sd_journal_get_fd().
+See man:sd_journal_get_fd(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.flush_matches">
+<span class="sig-name descname"><span class="pre">flush_matches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal._Reader.flush_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear all current match filters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.get_catalog">
+<span class="sig-name descname"><span class="pre">get_catalog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#systemd.journal._Reader.get_catalog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a message catalog entry for the current journal entry.
+Will throw IndexError if the entry has no MESSAGE_ID
+and KeyError is the id is specified, but hasn’t been found
+in the catalog.</p>
+<p>Wraps man:sd_journal_get_catalog(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.get_events">
+<span class="sig-name descname"><span class="pre">get_events</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#systemd.journal._Reader.get_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a mask of poll() events to wait for on the file
+descriptor returned by .fileno().</p>
+<p>See man:sd_journal_get_events(3) for further discussion.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.get_timeout">
+<span class="sig-name descname"><span class="pre">get_timeout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span> <span class="pre">or</span> <span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal._Reader.get_timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a timeout value for usage in poll(), the time since the
+epoch of clock_gettime(2) in microseconds, or None if no timeout
+is necessary.</p>
+<p>The return value must be converted to a relative timeout in
+milliseconds if it is to be used as an argument for poll().
+See man:sd_journal_get_timeout(3) for further discussion.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.get_timeout_ms">
+<span class="sig-name descname"><span class="pre">get_timeout_ms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#systemd.journal._Reader.get_timeout_ms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a timeout value suitable for usage in poll(), the value
+returned by .get_timeout() converted to relative ms, or -1 if
+no timeout is necessary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.get_usage">
+<span class="sig-name descname"><span class="pre">get_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#systemd.journal._Reader.get_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the total disk space currently used by journal
+files (in bytes). If <cite>SD_JOURNAL_LOCAL_ONLY</cite> was
+passed when opening the journal this value will only reflect
+the size of journal files of the local host, otherwise
+of all hosts.</p>
+<p>This method invokes sd_journal_get_usage().
+See man:sd_journal_get_usage(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.has_persistent_files">
+<span class="sig-name descname"><span class="pre">has_persistent_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#systemd.journal._Reader.has_persistent_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if persistent journal files have been found.</p>
+<p>See man:sd_journal_test_cursor(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.has_runtime_files">
+<span class="sig-name descname"><span class="pre">has_runtime_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#systemd.journal._Reader.has_runtime_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if runtime journal files have been found.</p>
+<p>See man:sd_journal_test_cursor(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">)</span> <span class="pre">-&gt;</span> <span class="pre">state</span> <span class="pre">change</span> <span class="pre">(integer</span></em><span class="sig-paren">)</span><a class="headerlink" href="#systemd.journal._Reader.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process events and reset the readable state of the file
+descriptor returned by .fileno().</p>
+<p>Will return constants: NOP if no change; APPEND if new
+entries have been added to the end of the journal; and
+INVALIDATE if journal files have been added or removed.</p>
+<p>See man:sd_journal_process(3) for further discussion.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.query_unique">
+<span class="sig-name descname"><span class="pre">query_unique</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">a</span> <span class="pre">set</span> <span class="pre">of</span> <span class="pre">values</span></span></span><a class="headerlink" href="#systemd.journal._Reader.query_unique" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a set of unique values appearing in journal for the
+given <cite>field</cite>. Note this does not respect any journal matches.
+See sd_journal_query_unique(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.reliable_fd">
+<span class="sig-name descname"><span class="pre">reliable_fd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#systemd.journal._Reader.reliable_fd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True iff the journal can be polled reliably.
+This method invokes sd_journal_reliable_fd().
+See man:sd_journal_reliable_fd(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.seek_cursor">
+<span class="sig-name descname"><span class="pre">seek_cursor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal._Reader.seek_cursor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seek to journal entry by given unique reference <cite>cursor</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.seek_head">
+<span class="sig-name descname"><span class="pre">seek_head</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal._Reader.seek_head" title="Permalink to this definition">¶</a></dt>
+<dd><p>Jump to the beginning of the journal.
+This method invokes sd_journal_seek_head().
+See man:sd_journal_seek_head(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.seek_monotonic">
+<span class="sig-name descname"><span class="pre">seek_monotonic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">monotonic</span></em><span class="optional">[</span>, <em class="sig-param"><span class="pre">bootid</span></em><span class="optional">]</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal._Reader.seek_monotonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seek to nearest matching journal entry to <cite>monotonic</cite>. Argument
+<cite>monotonic</cite> is an timestamp from boot in microseconds.
+Argument <cite>bootid</cite> is a string representing which boot the
+monotonic time is reference to. Defaults to current bootid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.seek_realtime">
+<span class="sig-name descname"><span class="pre">seek_realtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">realtime</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal._Reader.seek_realtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seek to nearest matching journal entry to <cite>realtime</cite>. Argument
+<cite>realtime</cite> in specified in seconds.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.seek_tail">
+<span class="sig-name descname"><span class="pre">seek_tail</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal._Reader.seek_tail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Jump to the end of the journal.
+This method invokes sd_journal_seek_tail().
+See man:sd_journal_seek_tail(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.test_cursor">
+<span class="sig-name descname"><span class="pre">test_cursor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#systemd.journal._Reader.test_cursor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether the cursor string matches current journal entry.</p>
+<p>Wraps sd_journal_test_cursor(). See man:sd_journal_test_cursor(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal._Reader.wait">
+<span class="sig-name descname"><span class="pre">wait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">[timeout])</span> <span class="pre">-&gt;</span> <span class="pre">state</span> <span class="pre">change</span> <span class="pre">(integer</span></em><span class="sig-paren">)</span><a class="headerlink" href="#systemd.journal._Reader.wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait for a change in the journal. Argument <cite>timeout</cite> specifies
+the maximum number of microseconds to wait before returning
+regardless of whether the journal has changed. If <cite>timeout</cite> is -1,
+then block forever.</p>
+<p>Will return constants: NOP if no change; APPEND if new
+entries have been added to the end of the journal; and
+INVALIDATE if journal files have been added or removed.</p>
+<p>See man:sd_journal_wait(3) for further discussion.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="systemd.journal.Reader">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">systemd.journal.</span></span><span class="sig-name descname"><span class="pre">Reader</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#Reader"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.Reader" title="Permalink to this definition">¶</a></dt>
+<dd><p>Access systemd journal entries.</p>
+<p>Entries are subject to filtering and limits, see <cite>add_match</cite>, <cite>this_boot</cite>,
+<cite>this_machine</cite> functions and the <cite>data_treshold</cite> attribute.</p>
+<p>Note that in order to access the system journal, a non-root user must have
+the necessary privileges, see journalctl(1) for details.  Unprivileged users
+can access only their own journal.</p>
+<p>Example usage to print out all informational or higher level messages for
+systemd-udevd for this boot:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">systemd</span> <span class="kn">import</span> <span class="n">journal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span> <span class="o">=</span> <span class="n">journal</span><span class="o">.</span><span class="n">Reader</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span><span class="o">.</span><span class="n">this_boot</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span><span class="o">.</span><span class="n">log_level</span><span class="p">(</span><span class="n">journal</span><span class="o">.</span><span class="n">LOG_INFO</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span><span class="o">.</span><span class="n">add_match</span><span class="p">(</span><span class="n">_SYSTEMD_UNIT</span><span class="o">=</span><span class="s2">&quot;systemd-udevd.service&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">j</span><span class="p">:</span>                                 
+<span class="gp">... </span>   <span class="nb">print</span><span class="p">(</span><span class="n">entry</span><span class="p">[</span><span class="s1">&#39;MESSAGE&#39;</span><span class="p">])</span>
+<span class="go">starting version ...</span>
+</pre></div>
+</div>
+<p>See systemd.journal-fields(7) for more info on typical fields found in the
+journal.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">flags</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">files</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">converters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#Reader.__init__"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.Reader.__init__" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create a new Reader.</p>
+<p>Argument <cite>flags</cite> defines the open flags of the journal, which can be one
+of, or ORed combination of constants: LOCAL_ONLY (default) opens journal
+on local machine only; RUNTIME_ONLY opens only volatile journal files;
+and SYSTEM_ONLY opens only journal files of system services and the kernel.</p>
+<p>Argument <cite>path</cite> is the directory of journal files, either a file system
+path or a file descriptor. Specify <cite>namespace</cite> to read from specific journal
+namespace. Note that <cite>flags</cite>, <cite>path</cite>, <cite>files</cite> and <cite>namespace</cite> are exclusive.</p>
+<p>Argument <cite>converters</cite> is a dictionary which updates the
+DEFAULT_CONVERTERS to convert journal field values. Field names are used
+as keys into this dictionary. The values must be single argument
+functions, which take a <cite>bytes</cite> object and return a converted
+value. When there’s no entry for a field name, then the default UTF-8
+decoding will be attempted. If the conversion fails with a ValueError,
+unconverted bytes object will be returned. (Note that ValueEror is a
+superclass of UnicodeDecodeError).</p>
+<p>Reader implements the context manager protocol: the journal will be
+closed when exiting the block.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.add_conjunction">
+<span class="sig-name descname"><span class="pre">add_conjunction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal.Reader.add_conjunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts a logical AND between matches added since previous
+add_disjunction() or add_conjunction() and the next
+add_disjunction() or add_conjunction().</p>
+<p>See man:sd_journal_add_disjunction(3) for explanation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.add_disjunction">
+<span class="sig-name descname"><span class="pre">add_disjunction</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal.Reader.add_disjunction" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts a logical OR between matches added since previous
+add_disjunction() or add_conjunction() and the next
+add_disjunction() or add_conjunction().</p>
+<p>See man:sd_journal_add_disjunction(3) for explanation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.add_match">
+<span class="sig-name descname"><span class="pre">add_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="o"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#Reader.add_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.Reader.add_match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add one or more matches to the filter journal log entries.</p>
+<p>All matches of different field are combined with logical AND, and
+matches of the same field are automatically combined with logical OR.
+Matches can be passed as strings of form “FIELD=value”, or keyword
+arguments FIELD=”value”.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.close">
+<span class="sig-name descname"><span class="pre">close</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal.Reader.close" title="Permalink to this definition">¶</a></dt>
+<dd><p>Free resources allocated by this Reader object.
+This method invokes sd_journal_close().
+See man:sd_journal_close(3).</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.journal.Reader.closed">
+<span class="sig-name descname"><span class="pre">closed</span></span><a class="headerlink" href="#systemd.journal.Reader.closed" title="Permalink to this definition">¶</a></dt>
+<dd><p>True iff journal is closed</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.journal.Reader.data_threshold">
+<span class="sig-name descname"><span class="pre">data_threshold</span></span><a class="headerlink" href="#systemd.journal.Reader.data_threshold" title="Permalink to this definition">¶</a></dt>
+<dd><p>Threshold for field size truncation in bytes.</p>
+<p>Fields longer than this will be truncated to the threshold size.
+Defaults to 64Kb.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.enumerate_fields">
+<span class="sig-name descname"><span class="pre">enumerate_fields</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">a</span> <span class="pre">set</span> <span class="pre">of</span> <span class="pre">values</span></span></span><a class="headerlink" href="#systemd.journal.Reader.enumerate_fields" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a set of field names appearing in the journal.
+See sd_journal_enumerate_fields(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.fileno">
+<span class="sig-name descname"><span class="pre">fileno</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#systemd.journal.Reader.fileno" title="Permalink to this definition">¶</a></dt>
+<dd><p>Get a file descriptor to poll for changes in the journal.
+This method invokes sd_journal_get_fd().
+See man:sd_journal_get_fd(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.flush_matches">
+<span class="sig-name descname"><span class="pre">flush_matches</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal.Reader.flush_matches" title="Permalink to this definition">¶</a></dt>
+<dd><p>Clear all current match filters.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.get_catalog">
+<span class="sig-name descname"><span class="pre">get_catalog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#systemd.journal.Reader.get_catalog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Retrieve a message catalog entry for the current journal entry.
+Will throw IndexError if the entry has no MESSAGE_ID
+and KeyError is the id is specified, but hasn’t been found
+in the catalog.</p>
+<p>Wraps man:sd_journal_get_catalog(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.get_events">
+<span class="sig-name descname"><span class="pre">get_events</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#systemd.journal.Reader.get_events" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a mask of poll() events to wait for on the file
+descriptor returned by .fileno().</p>
+<p>See man:sd_journal_get_events(3) for further discussion.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.get_next">
+<span class="sig-name descname"><span class="pre">get_next</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#Reader.get_next"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.Reader.get_next" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the next log entry as a dictionary.</p>
+<p>Entries will be processed with converters specified during Reader
+creation.</p>
+<p>Optional <cite>skip</cite> value will return the <cite>skip</cite>-th log entry.</p>
+<p>Currently a standard dictionary of fields is returned, but in the
+future this might be changed to a different mapping type, so the
+calling code should not make assumptions about a specific type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.get_previous">
+<span class="sig-name descname"><span class="pre">get_previous</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">skip</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#Reader.get_previous"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.Reader.get_previous" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return the previous log entry.</p>
+<p>Equivalent to get_next(-skip).</p>
+<p>Optional <cite>skip</cite> value will return the -<cite>skip</cite>-th log entry.</p>
+<p>Entries will be processed with converters specified during Reader
+creation.</p>
+<p>Currently a standard dictionary of fields is returned, but in the
+future this might be changed to a different mapping type, so the
+calling code should not make assumptions about a specific type.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.get_timeout">
+<span class="sig-name descname"><span class="pre">get_timeout</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span> <span class="pre">or</span> <span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal.Reader.get_timeout" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a timeout value for usage in poll(), the time since the
+epoch of clock_gettime(2) in microseconds, or None if no timeout
+is necessary.</p>
+<p>The return value must be converted to a relative timeout in
+milliseconds if it is to be used as an argument for poll().
+See man:sd_journal_get_timeout(3) for further discussion.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.get_timeout_ms">
+<span class="sig-name descname"><span class="pre">get_timeout_ms</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#systemd.journal.Reader.get_timeout_ms" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns a timeout value suitable for usage in poll(), the value
+returned by .get_timeout() converted to relative ms, or -1 if
+no timeout is necessary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.get_usage">
+<span class="sig-name descname"><span class="pre">get_usage</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span><a class="headerlink" href="#systemd.journal.Reader.get_usage" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the total disk space currently used by journal
+files (in bytes). If <cite>SD_JOURNAL_LOCAL_ONLY</cite> was
+passed when opening the journal this value will only reflect
+the size of journal files of the local host, otherwise
+of all hosts.</p>
+<p>This method invokes sd_journal_get_usage().
+See man:sd_journal_get_usage(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.has_persistent_files">
+<span class="sig-name descname"><span class="pre">has_persistent_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#systemd.journal.Reader.has_persistent_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if persistent journal files have been found.</p>
+<p>See man:sd_journal_test_cursor(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.has_runtime_files">
+<span class="sig-name descname"><span class="pre">has_runtime_files</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#systemd.journal.Reader.has_runtime_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns true if runtime journal files have been found.</p>
+<p>See man:sd_journal_test_cursor(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.log_level">
+<span class="sig-name descname"><span class="pre">log_level</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">level</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#Reader.log_level"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.Reader.log_level" title="Permalink to this definition">¶</a></dt>
+<dd><p>Set maximum log <cite>level</cite> by setting matches for PRIORITY.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.messageid_match">
+<span class="sig-name descname"><span class="pre">messageid_match</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">messageid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#Reader.messageid_match"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.Reader.messageid_match" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add match for log entries with specified <cite>messageid</cite>.</p>
+<p><cite>messageid</cite> can be string of hexadicimal digits or a UUID
+instance. Standard message IDs can be found in systemd.id128.</p>
+<p>Equivalent to add_match(MESSAGE_ID=`messageid`).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.process">
+<span class="sig-name descname"><span class="pre">process</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="pre">)</span> <span class="pre">-&gt;</span> <span class="pre">state</span> <span class="pre">change</span> <span class="pre">(integer</span></em><span class="sig-paren">)</span><a class="headerlink" href="#systemd.journal.Reader.process" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process events and reset the readable state of the file
+descriptor returned by .fileno().</p>
+<p>Will return constants: NOP if no change; APPEND if new
+entries have been added to the end of the journal; and
+INVALIDATE if journal files have been added or removed.</p>
+<p>See man:sd_journal_process(3) for further discussion.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.query_unique">
+<span class="sig-name descname"><span class="pre">query_unique</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#Reader.query_unique"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.Reader.query_unique" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a list of unique values appearing in the journal for the given
+<cite>field</cite>.</p>
+<p>Note this does not respect any journal matches.</p>
+<p>Entries will be processed with converters specified during
+Reader creation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.reliable_fd">
+<span class="sig-name descname"><span class="pre">reliable_fd</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#systemd.journal.Reader.reliable_fd" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns True iff the journal can be polled reliably.
+This method invokes sd_journal_reliable_fd().
+See man:sd_journal_reliable_fd(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.seek_cursor">
+<span class="sig-name descname"><span class="pre">seek_cursor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cursor</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal.Reader.seek_cursor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seek to journal entry by given unique reference <cite>cursor</cite>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.seek_head">
+<span class="sig-name descname"><span class="pre">seek_head</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal.Reader.seek_head" title="Permalink to this definition">¶</a></dt>
+<dd><p>Jump to the beginning of the journal.
+This method invokes sd_journal_seek_head().
+See man:sd_journal_seek_head(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.seek_monotonic">
+<span class="sig-name descname"><span class="pre">seek_monotonic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">monotonic</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bootid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#Reader.seek_monotonic"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.Reader.seek_monotonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seek to a matching journal entry nearest to <cite>monotonic</cite> time.</p>
+<p>Argument <cite>monotonic</cite> is a timestamp from boot in either seconds or a
+datetime.timedelta instance. Argument <cite>bootid</cite> is a string or UUID
+representing which boot the monotonic time is reference to. Defaults to
+current bootid.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.seek_realtime">
+<span class="sig-name descname"><span class="pre">seek_realtime</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">realtime</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#Reader.seek_realtime"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.Reader.seek_realtime" title="Permalink to this definition">¶</a></dt>
+<dd><p>Seek to a matching journal entry nearest to <cite>timestamp</cite> time.</p>
+<p>Argument <cite>realtime</cite> must be either an integer UNIX timestamp (in
+microseconds since the beginning of the UNIX epoch), or an float UNIX
+timestamp (in seconds since the beginning of the UNIX epoch), or a
+datetime.datetime instance. The integer form is deprecated.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">time</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">systemd</span> <span class="kn">import</span> <span class="n">journal</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">yesterday</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="mi">24</span> <span class="o">*</span> <span class="mi">60</span><span class="o">**</span><span class="mi">2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span> <span class="o">=</span> <span class="n">journal</span><span class="o">.</span><span class="n">Reader</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span><span class="o">.</span><span class="n">seek_realtime</span><span class="p">(</span><span class="n">yesterday</span><span class="p">)</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.seek_tail">
+<span class="sig-name descname"><span class="pre">seek_tail</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#systemd.journal.Reader.seek_tail" title="Permalink to this definition">¶</a></dt>
+<dd><p>Jump to the end of the journal.
+This method invokes sd_journal_seek_tail().
+See man:sd_journal_seek_tail(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.test_cursor">
+<span class="sig-name descname"><span class="pre">test_cursor</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#systemd.journal.Reader.test_cursor" title="Permalink to this definition">¶</a></dt>
+<dd><p>Test whether the cursor string matches current journal entry.</p>
+<p>Wraps sd_journal_test_cursor(). See man:sd_journal_test_cursor(3).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.this_boot">
+<span class="sig-name descname"><span class="pre">this_boot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bootid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#Reader.this_boot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.Reader.this_boot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add match for _BOOT_ID for current boot or the specified boot ID.</p>
+<p>If specified, bootid should be either a UUID or a 32 digit hex number.</p>
+<p>Equivalent to add_match(_BOOT_ID=’bootid’).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.this_machine">
+<span class="sig-name descname"><span class="pre">this_machine</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">machineid</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#Reader.this_machine"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.Reader.this_machine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Add match for _MACHINE_ID equal to the ID of this machine.</p>
+<p>If specified, machineid should be either a UUID or a 32 digit hex
+number.</p>
+<p>Equivalent to add_match(_MACHINE_ID=’machineid’).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="systemd.journal.Reader.wait">
+<span class="sig-name descname"><span class="pre">wait</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">timeout</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#Reader.wait"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.Reader.wait" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wait for a change in the journal.</p>
+<p><cite>timeout</cite> is the maximum time in seconds to wait, or None which
+means to wait forever.</p>
+<p>Returns one of NOP (no change), APPEND (new entries have been added to
+the end of the journal), or INVALIDATE (journal files have been added or
+removed).</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systemd.journal._get_catalog">
+<span class="sig-prename descclassname"><span class="pre">systemd.journal.</span></span><span class="sig-name descname"><span class="pre">_get_catalog</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#systemd.journal._get_catalog" title="Permalink to this definition">¶</a></dt>
+<dd><p>get_catalog(id128) -&gt; str</p>
+<p>Retrieve a message catalog entry for the given id.
+Wraps man:sd_journal_get_catalog_for_message_id(3).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systemd.journal.get_catalog">
+<span class="sig-prename descclassname"><span class="pre">systemd.journal.</span></span><span class="sig-name descname"><span class="pre">get_catalog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">mid</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/systemd/journal.html#get_catalog"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#systemd.journal.get_catalog" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return catalog entry for the specified ID.</p>
+<p><cite>mid</cite> should be either a UUID or a 32 digit hex number.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="systemd.journal.Monotonic">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">systemd.journal.</span></span><span class="sig-name descname"><span class="pre">Monotonic</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">iterable</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">()</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">/</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#systemd.journal.Monotonic" title="Permalink to this definition">¶</a></dt>
+<dd><p>A tuple of (timestamp, bootid) for holding monotonic timestamps</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.journal.DEFAULT_CONVERTERS">
+<span class="sig-prename descclassname"><span class="pre">journal.</span></span><span class="sig-name descname"><span class="pre">DEFAULT_CONVERTERS</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{'CODE_LINE':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'COREDUMP':</span> <span class="pre">&lt;class</span> <span class="pre">'bytes'&gt;,</span> <span class="pre">'COREDUMP_GID':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'COREDUMP_PID':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'COREDUMP_SESSION':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'COREDUMP_SIGNAL':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'COREDUMP_TIMESTAMP':</span> <span class="pre">&lt;function</span> <span class="pre">_convert_timestamp&gt;,</span> <span class="pre">'COREDUMP_UID':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'ERRNO':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'EXIT_STATUS':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'INITRD_USEC':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'KERNEL_USEC':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'LEADER':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'MESSAGE_ID':</span> <span class="pre">&lt;function</span> <span class="pre">_convert_uuid&gt;,</span> <span class="pre">'PRIORITY':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'SESSION_ID':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'SYSLOG_FACILITY':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'SYSLOG_PID':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'USERSPACE_USEC':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'_AUDIT_LOGINUID':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'_AUDIT_SESSION':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'_BOOT_ID':</span> <span class="pre">&lt;function</span> <span class="pre">_convert_uuid&gt;,</span> <span class="pre">'_GID':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'_MACHINE_ID':</span> <span class="pre">&lt;function</span> <span class="pre">_convert_uuid&gt;,</span> <span class="pre">'_PID':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'_SOURCE_MONOTONIC_TIMESTAMP':</span> <span class="pre">&lt;function</span> <span class="pre">_convert_source_monotonic&gt;,</span> <span class="pre">'_SOURCE_REALTIME_TIMESTAMP':</span> <span class="pre">&lt;function</span> <span class="pre">_convert_timestamp&gt;,</span> <span class="pre">'_SYSTEMD_OWNER_UID':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'_SYSTEMD_SESSION':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'_UID':</span> <span class="pre">&lt;class</span> <span class="pre">'int'&gt;,</span> <span class="pre">'__CURSOR':</span> <span class="pre">&lt;function</span> <span class="pre">_convert_trivial&gt;,</span> <span class="pre">'__MONOTONIC_TIMESTAMP':</span> <span class="pre">&lt;function</span> <span class="pre">_convert_monotonic&gt;,</span> <span class="pre">'__REALTIME_TIMESTAMP':</span> <span class="pre">&lt;function</span> <span class="pre">_convert_realtime&gt;}</span></em><a class="headerlink" href="#systemd.journal.DEFAULT_CONVERTERS" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<div class="section" id="example-polling-for-journal-events">
+<h3>Example: polling for journal events<a class="headerlink" href="#example-polling-for-journal-events" title="Permalink to this headline">¶</a></h3>
+<p>This example shows that journal events can be waited for (using
+e.g. <cite>poll</cite>). This makes it easy to integrate Reader in an external
+event loop:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">select</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">systemd</span> <span class="kn">import</span> <span class="n">journal</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span> <span class="o">=</span> <span class="n">journal</span><span class="o">.</span><span class="n">Reader</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span><span class="o">.</span><span class="n">seek_tail</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">journal</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="s1">&#39;testing 1,2,3&#39;</span><span class="p">)</span>   <span class="c1"># make sure we have something to read</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span><span class="o">.</span><span class="n">add_match</span><span class="p">(</span><span class="s1">&#39;MESSAGE=testing 1,2,3&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span> <span class="o">=</span> <span class="n">select</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">j</span><span class="o">.</span><span class="n">get_events</span><span class="p">())</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="o">.</span><span class="n">poll</span><span class="p">()</span>                        
+<span class="go">[(3, 1)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">j</span><span class="o">.</span><span class="n">get_next</span><span class="p">()</span>                    
+<span class="go">{&#39;_AUDIT_LOGINUID&#39;: 1000,</span>
+<span class="go"> &#39;_CAP_EFFECTIVE&#39;: &#39;0&#39;,</span>
+<span class="go"> &#39;_SELINUX_CONTEXT&#39;: &#39;unconfined_u:unconfined_r:unconfined_t:s0-s0:c0.c1023&#39;,</span>
+<span class="go"> &#39;_GID&#39;: 1000,</span>
+<span class="go"> &#39;CODE_LINE&#39;: 1,</span>
+<span class="go"> &#39;_HOSTNAME&#39;: &#39;...&#39;,</span>
+<span class="go"> &#39;_SYSTEMD_SESSION&#39;: 52,</span>
+<span class="go"> &#39;_SYSTEMD_OWNER_UID&#39;: 1000,</span>
+<span class="go"> &#39;MESSAGE&#39;: &#39;testing 1,2,3&#39;,</span>
+<span class="go"> &#39;__MONOTONIC_TIMESTAMP&#39;:</span>
+<span class="go">    journal.Monotonic(timestamp=datetime.timedelta(2, 76200, 811585),</span>
+<span class="go">                      bootid=UUID(&#39;958b7e26-df4c-453a-a0f9-a8406cb508f2&#39;)),</span>
+<span class="go"> &#39;SYSLOG_IDENTIFIER&#39;: &#39;python3&#39;,</span>
+<span class="go"> &#39;_UID&#39;: 1000,</span>
+<span class="go"> &#39;_EXE&#39;: &#39;/usr/bin/python3&#39;,</span>
+<span class="go"> &#39;_PID&#39;: 7733,</span>
+<span class="go"> &#39;_COMM&#39;: &#39;...&#39;,</span>
+<span class="go"> &#39;CODE_FUNC&#39;: &#39;&lt;module&gt;&#39;,</span>
+<span class="go"> &#39;CODE_FILE&#39;: &#39;&lt;doctest journal.rst[4]&gt;&#39;,</span>
+<span class="go"> &#39;_SOURCE_REALTIME_TIMESTAMP&#39;:</span>
+<span class="go">     datetime.datetime(2015, 9, 5, 13, 17, 4, 944355),</span>
+<span class="go"> &#39;__CURSOR&#39;: &#39;s=...&#39;,</span>
+<span class="go"> &#39;_BOOT_ID&#39;: UUID(&#39;958b7e26-df4c-453a-a0f9-a8406cb508f2&#39;),</span>
+<span class="go"> &#39;_CMDLINE&#39;: &#39;/usr/bin/python3 ...&#39;,</span>
+<span class="go"> &#39;_MACHINE_ID&#39;: UUID(&#39;263bb31e-3e13-4062-9bdb-f1f4518999d2&#39;),</span>
+<span class="go"> &#39;_SYSTEMD_SLICE&#39;: &#39;user-1000.slice&#39;,</span>
+<span class="go"> &#39;_AUDIT_SESSION&#39;: 52,</span>
+<span class="go"> &#39;__REALTIME_TIMESTAMP&#39;: datetime.datetime(2015, 9, 5, 13, 17, 4, 945110),</span>
+<span class="go"> &#39;_SYSTEMD_UNIT&#39;: &#39;session-52.scope&#39;,</span>
+<span class="go"> &#39;_SYSTEMD_CGROUP&#39;: &#39;/user.slice/user-1000.slice/session-52.scope&#39;,</span>
+<span class="go"> &#39;_TRANSPORT&#39;: &#39;journal&#39;}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="journal-access-types">
+<h3>Journal access types<a class="headerlink" href="#journal-access-types" title="Permalink to this headline">¶</a></h3>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.journal.LOCAL_ONLY">
+<span class="sig-prename descclassname"><span class="pre">journal.</span></span><span class="sig-name descname"><span class="pre">LOCAL_ONLY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#systemd.journal.LOCAL_ONLY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.journal.RUNTIME_ONLY">
+<span class="sig-prename descclassname"><span class="pre">journal.</span></span><span class="sig-name descname"><span class="pre">RUNTIME_ONLY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#systemd.journal.RUNTIME_ONLY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.journal.SYSTEM">
+<span class="sig-prename descclassname"><span class="pre">journal.</span></span><span class="sig-name descname"><span class="pre">SYSTEM</span></span><em class="property"> <span class="pre">=</span> <span class="pre">4</span></em><a class="headerlink" href="#systemd.journal.SYSTEM" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.journal.CURRENT_USER">
+<span class="sig-prename descclassname"><span class="pre">journal.</span></span><span class="sig-name descname"><span class="pre">CURRENT_USER</span></span><em class="property"> <span class="pre">=</span> <span class="pre">8</span></em><a class="headerlink" href="#systemd.journal.CURRENT_USER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.journal.OS_ROOT">
+<span class="sig-prename descclassname"><span class="pre">journal.</span></span><span class="sig-name descname"><span class="pre">OS_ROOT</span></span><em class="property"> <span class="pre">=</span> <span class="pre">16</span></em><a class="headerlink" href="#systemd.journal.OS_ROOT" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+<div class="section" id="journal-event-types">
+<h3>Journal event types<a class="headerlink" href="#journal-event-types" title="Permalink to this headline">¶</a></h3>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.journal.NOP">
+<span class="sig-prename descclassname"><span class="pre">journal.</span></span><span class="sig-name descname"><span class="pre">NOP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">0</span></em><a class="headerlink" href="#systemd.journal.NOP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.journal.APPEND">
+<span class="sig-prename descclassname"><span class="pre">journal.</span></span><span class="sig-name descname"><span class="pre">APPEND</span></span><em class="property"> <span class="pre">=</span> <span class="pre">1</span></em><a class="headerlink" href="#systemd.journal.APPEND" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.journal.INVALIDATE">
+<span class="sig-prename descclassname"><span class="pre">journal.</span></span><span class="sig-name descname"><span class="pre">INVALIDATE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">2</span></em><a class="headerlink" href="#systemd.journal.INVALIDATE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><cite>systemd.journal</cite> module</a><ul>
+<li><a class="reference internal" href="#journalhandler-class"><cite>JournalHandler</cite> class</a></li>
+<li><a class="reference internal" href="#accessing-the-journal">Accessing the Journal</a><ul>
+<li><a class="reference internal" href="#example-polling-for-journal-events">Example: polling for journal events</a></li>
+<li><a class="reference internal" href="#journal-access-types">Journal access types</a></li>
+<li><a class="reference internal" href="#journal-event-types">Journal event types</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">python-systemd package</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="id128.html"
+                        title="next chapter"><cite>systemd.id128</cite> module</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>  
+  </body>
+</html>

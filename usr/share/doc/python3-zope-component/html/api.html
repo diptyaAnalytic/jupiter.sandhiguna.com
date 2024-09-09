@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>zope.component API Reference &#8212; zope.component 4.3.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/alabaster.css" />
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Interface Definitions" href="api/interfaces.html" />
+    <link rel="prev" title="Layers" href="testlayer.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="zope-component-api-reference">
+<h1><code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code> API Reference<a class="headerlink" href="#zope-component-api-reference" title="Permalink to this headline">¶</a></h1>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="api/interfaces.html">Interface Definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/sitemanager.html">Site Manager APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/utility.html">Utility Registration APIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/utility.html#named-utilities">Named Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utility.html#querying-multiple-utilities">Querying Multiple Utilities</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utility.html#delegated-utility-lookup">Delegated Utility Lookup</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/adapter.html">Adapter Registration APIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/adapter.html#conforming-adapter-lookup">Conforming Adapter Lookup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/adapter.html#named-adapter-lookup">Named Adapter Lookup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/adapter.html#invoking-an-interface-to-perform-adapter-lookup">Invoking an Interface to Perform Adapter Lookup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/adapter.html#registering-adapters-for-arbitrary-objects">Registering Adapters For Arbitrary Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/adapter.html#looking-up-adapters-using-multiple-objects">Looking Up Adapters Using Multiple Objects</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/adapter.html#finding-more-than-one-adapter">Finding More Than One Adapter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/adapter.html#subscription-adapters">Subscription Adapters</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/adapter.html#event-handlers">Event handlers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/adapter.html#helpers-for-declaring-testing-adapters">Helpers for Declaring / Testing Adapters</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/factory.html">Factory APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/interface.html">Interface Registration APIs</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/interface.html#registering-interfaces-as-utilities">Registering Interfaces as Utilities</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="api/security.html">Security APIs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="api/persistent.html">Persistent Registries</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/persistent.html#conforming-adapter-lookup">Conforming Adapter Lookup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/persistent.html#subscription-to-events-in-persistent-registries">Subscription to Events in Persistent Registries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/persistent.html#adapter-registrations-after-serialization-deserialization">Adapter Registrations after Serialization / Deserialization</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="index.html">zope.component</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="narr.html">Zope Component Architecture</a></li>
+<li class="toctree-l1"><a class="reference internal" href="socketexample.html">The Zope 3 Component Architecture (Socket Example)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="event.html">Events</a></li>
+<li class="toctree-l1"><a class="reference internal" href="factory.html">Factories</a></li>
+<li class="toctree-l1"><a class="reference internal" href="persistentregistry.html">Persistent Component Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="zcml.html">ZCML directives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="configure.html">Package configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="hooks.html">The current component registry</a></li>
+<li class="toctree-l1"><a class="reference internal" href="testlayer.html">Layers</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#"><code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code> API Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="api/interfaces.html">Interface Definitions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/sitemanager.html">Site Manager APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/utility.html">Utility Registration APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/adapter.html">Adapter Registration APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/factory.html">Factory APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/interface.html">Interface Registration APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/security.html">Security APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="api/persistent.html">Persistent Registries</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="hacking.html">Hacking on <code class="xref py py-mod docutils literal notranslate"><span class="pre">zope.component</span></code></a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="index.html">Documentation overview</a><ul>
+      <li>Previous: <a href="testlayer.html" title="previous chapter">Layers</a></li>
+      <li>Next: <a href="api/interfaces.html" title="next chapter">Interface Definitions</a></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;Zope Foundation and Contributors.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 4.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/api.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

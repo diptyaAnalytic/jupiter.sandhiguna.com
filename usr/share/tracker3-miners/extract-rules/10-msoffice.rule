@@ -1,0 +1,7 @@
+[ExtractorRule]
+ModulePath=libextract-msoffice.so
+MimeTypes=application/vnd.ms-word;application/vnd.ms-word.*;application/vnd.ms-powerpoint;application/vnd.ms-excel;application/vnd.ms-access;application/vnd.ms-publisher;application/vnd.ms-tnef;application/vnd.ms-word;application/vnd.ms-works;application/vnd.ms-wpl;application/msword;
+FallbackRdfTypes=nfo:Document
+Graph=tracker:Documents
+Hash=beb0090293df70f5ce59e1f0095505ad9d3c2ff680348cbfba916fa50987688d
+

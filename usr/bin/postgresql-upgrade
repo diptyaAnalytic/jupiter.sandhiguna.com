@@ -1,0 +1,231 @@
+#!/usr/bin/bash
+
+# postgresql-upgrade - one-hit shell command running initdb && pg_upgrade with
+# preconfigured options to simplify the upgrade process.  This script has
+# nothing to do with systemd services, for upgrading systemd postgresql services
+# please use /usr/bin/postgresql-setup.
+
+set -e
+
+
+. "/usr/share/postgresql-setup/library.sh"
+
+run_cmd ()
+{
+    echo >&2
+    info "cmd: $(eval echo "$1")"
+    echo >&2
+    eval "$1"
+}
+
+run_cmd_args ()
+{
+    local space='' cmd=''
+    for arg; do
+        cmd+="$space$(printf %q "$arg")"
+        space=' '
+    done
+    run_cmd "$cmd"
+}
+
+# We upgrade by default from system's default PostgreSQL installation
+option_upgradefrom="postgresql"
+
+# PostgreSQL data directory after upgrade.
+option_datadir=
+
+# For non-inplace upgrades.
+option_datadir_old=
+
+# use pg_upgrade --link?
+option_hardlink=false
+
+# ensure privacy
+umask 0077
+
+: "${RESTORECON=/sbin/restorecon}"
+test -x "$RESTORECON" || RESTORECON=:
+
+:
+
+PGENGINE=/usr/bin
+
+long_opts="\
+upgrade-ids,\
+upgrade-from:,\
+version,usage,help"
+
+USAGE_STRING="Usage: $0 [--upgrade-from=ID] DATADIR
+
+Wrapper script for pg_upgrade.  It has pre-configured pg_upgrade options and
+environment variables.
+
+Options:
+  --upgrade-ids              Print list of available IDs of upgrade scenarios to
+                             standard output.
+  --upgrade-from=ID          Specify id \"old\" postgresql stack to upgrade
+                             from.  List of available IDs can be listed by
+                             --upgrade-ids.  Default is '$option_upgradefrom'.
+
+Other options:
+  --help                     show this help
+  --version                  show version of this package
+
+Environment:
+  PGSETUP_INITDB_OPTIONS     Options carried by this variable are passed to
+                             subsequent call of \`initdb\` binary (see man
+                             initdb(1)).  This variable is used also during
+                             'upgrade' mode because the new cluster is actually
+                             re-initialized from the old one.
+  PGSETUP_PGUPGRADE_OPTIONS  Options in this variable are passed next to the
+                             subsequent call of \`pg_upgrade\`.  For more info
+                             about possible options please look at man
+                             pg_upgrade(1)."
+
+print_version()
+{
+    echo "postgresql-upgrade 8.7"
+    echo "Built against PostgreSQL version 13.4."
+}
+
+args=$(getopt -o "" -l "$long_opts" -n "postgresql-setup" -- "$@")
+eval set -- "$args"
+
+while true; do
+    case "$1" in
+    --help|--usage)
+        echo "$USAGE_STRING"
+        exit 0
+        ;;
+
+    --upgrade-from)
+        option_upgradefrom="$2"
+        shift 2
+        ;;
+
+    --upgrade-ids)
+        parse_upgrade_setup help
+        exit 0
+        ;;
+
+    --version)
+        print_version
+        exit 0
+        ;;
+
+    --)
+        shift
+        break
+        ;;
+
+    *)
+        die "author's fault: option $1 not handled"
+        break
+        ;;
+    esac
+done
+
+test $# -eq 1 || die "exactly one DATADIR option required"
+option_datadir=$(readlink -f "$1") || die "wrong datadir $1"
+
+inplace=false
+test -n "$option_datadir_old" || {
+    option_datadir_old=${option_datadir}_old
+    option_hardlink=:
+    inplace=:
+}
+
+if ! parse_upgrade_setup config "$option_upgradefrom"; then
+    die "bad --upgrade-from parameter '$option_upgradefrom'," \
+        "try --upgrade-ids"
+fi
+
+version_file=$option_datadir/PG_VERSION
+
+test -f "$version_file" || die "can't read '$version_file'"
+
+old_data_version="$(cat "$version_file")"
+
+if test "$old_data_version" != "$upgradefrom_major"; then
+    error   "Cannot upgrade because the database in $option_datadir of"
+    error_q "version $old_data_version but it should be $upgradefrom_major"
+    exit 1
+fi
+
+if [ ! -x "$upgradefrom_engine/postgres" ]; then
+    error "Please install the $upgradefrom_package package."
+    exit 1
+fi
+
+# Check for data_directory entry in config file
+# valid entry means that custom PGDATA path is present which is not supported
+# BZ (#1935301)
+conffile="$option_datadir/postgresql.conf"
+
+test -r "$conffile" || {
+    error "config file $conffile is not readable or does not exist"
+    die "Old cluster in '$data' does not seem to be initialized"
+}
+
+sp='[[:space:]]'
+sed_expr_pgdata="s/^$sp*data_directory$sp*=\(.*\)/\1/p"
+conf_pgdata=`sed -n "$sed_expr_pgdata" $conffile | tail -1`
+
+test -n "$conf_pgdata" && {
+    error   $"data_directory field in configuration file ($conffile) is not supported."
+    error_q $"db datadir (PGDATA) cannot be specified in the configuration file."
+    error_q $"In order to use this script for upgrade, please, move the files"
+    error_q $"to the default location first and remove data_directory entry from"
+    error_q $"configuration file."
+
+    exit 1
+}
+
+exit_handler_revert_datadir=false
+
+exit_handler ()
+{
+    exit_status=$?
+
+    ! $exit_handler_revert_datadir || {
+        info "restoring previous datadir"
+        rm -rf "$option_datadir"
+        mv "$option_datadir_old" "$option_datadir"
+    }
+
+    exit $exit_status
+}
+
+trap exit_handler EXIT
+
+if $inplace; then
+    ! test -e "$option_datadir_old" || die "$option_datadir_old already exists"
+    mv "$option_datadir" "$option_datadir_old"
+    exit_handler_revert_datadir=:
+fi
+
+test -e "$option_datadir" || mkdir "$option_datadir"
+$RESTORECON "$option_datadir"
+
+initdbcmd="\"\$PGENGINE\"/initdb --pgdata=\"\$option_datadir\" --auth=ident $PGSETUP_INITDB_OPTIONS"
+run_cmd "$initdbcmd"
+
+test -n "$option_workdir" || {
+    option_workdir=$(mktemp -d "/tmp/postgresql_upgrade_XXXXXX")
+    info "logs are stored in $option_workdir"
+}
+cd "$option_workdir"
+
+set -- "$PGENGINE"/pg_upgrade \
+        --old-bindir="$upgradefrom_engine" \
+        --new-bindir="$PGENGINE" \
+        --old-datadir="$option_datadir_old" \
+        --new-datadir="$option_datadir"
+
+$option_hardlink && set -- "$@" --link
+
+test -n "$PGSETUP_PGUPGRADE_OPTIONS" && eval 'set -- "$@" '"$PGSETUP_PGUPGRADE_OPTIONS"
+
+run_cmd_args "$@"
+exit_handler_revert_datadir=false
+info "old data directory and configuration is in $option_datadir_old"

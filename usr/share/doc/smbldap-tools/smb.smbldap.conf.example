@@ -1,0 +1,13 @@
+## Put 'include = /etc/samba/smb.smbldap.conf' into
+## your /etc/samba/smb.conf file to enable smbldap-tools
+[global]
+add user script = /usr/sbin/smbldap-useradd -m '%u' -t 1
+rename user script = /usr/sbin/smbldap-usermod -r '%unew' '%uold'
+delete user script = /usr/sbin/smbldap-userdel '%u'
+set primary group script = /usr/sbin/smbldap-usermod -g '%g' '%u'
+add group script = /usr/sbin/smbldap-groupadd -p '%g'
+delete group script = /usr/sbin/smbldap-groupdel '%g'
+add user to group script = /usr/sbin/smbldap-groupmod -m '%u' '%g'
+delete user from group script = /usr/sbin/smbldap-groupmod -x '%u' '%g'
+add machine script = /usr/sbin/smbldap-useradd -w '%u' -t 1
+

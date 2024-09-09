@@ -1,0 +1,1 @@
+/usr/bin/miniterm-3.py

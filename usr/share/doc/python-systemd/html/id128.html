@@ -1,0 +1,311 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>systemd.id128 module &#8212; python-systemd 234 documentation</title>
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="_static/classic.css" />
+    
+    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="systemd.daemon module" href="daemon.html" />
+    <link rel="prev" title="systemd.journal module" href="journal.html" /> 
+  </head><body>
+  <a href="index.html">python-systemd </a>·
+  <a href="http://www.freedesktop.org/software/systemd/man/index.html">man pages </a>·
+  <a href="http://www.freedesktop.org/software/systemd/man/systemd.directives.html">directives </a>
+
+  <span style="float:right">python-systemd 234</span>
+  <hr />
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="module-systemd.id128">
+<span id="systemd-id128-module"></span><h1><cite>systemd.id128</cite> module<a class="headerlink" href="#module-systemd.id128" title="Permalink to this headline">¶</a></h1>
+<p>Python interface to the libsystemd-id128 library.</p>
+<p>Provides SD_MESSAGE_* constants and functions to query and generate
+128-bit unique identifiers.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_BACKTRACE">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_BACKTRACE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('1f4e0a44-a886-4993-9aae-a34fc6da8c95')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_BACKTRACE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_BOOTCHART">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_BOOTCHART</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('9f26aa56-2cf4-40c2-b16c-773d0479b518')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_BOOTCHART" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_CONFIG_ERROR">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_CONFIG_ERROR</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('c772d24e-9a88-4cbe-b9ea-12625c306c01')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_CONFIG_ERROR" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_COREDUMP">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_COREDUMP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('fc2e22bc-6ee6-47b6-b907-29ab34a250b1')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_COREDUMP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_DNSSEC_DOWNGRADE">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_DNSSEC_DOWNGRADE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('36db2dfa-5a90-45e1-bd4a-f5f93e1cf057')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_DNSSEC_DOWNGRADE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_DNSSEC_FAILURE">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_DNSSEC_FAILURE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('1675d7f1-7217-4098-b110-8bf8c7dc8f5d')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_DNSSEC_FAILURE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_DNSSEC_TRUST_ANCHOR_REVOKED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_DNSSEC_TRUST_ANCHOR_REVOKED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('4d4408cf-d0d1-4485-9184-d1e65d7c8a65')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_DNSSEC_TRUST_ANCHOR_REVOKED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_FORWARD_SYSLOG_MISSED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_FORWARD_SYSLOG_MISSED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('0027229c-a064-4181-a76c-4e92458afa2e')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_FORWARD_SYSLOG_MISSED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_HIBERNATE_KEY">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_HIBERNATE_KEY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('b72ea4a2-8815-45a0-b50e-200e55b9b073')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_HIBERNATE_KEY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_INVALID_CONFIGURATION">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_INVALID_CONFIGURATION</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('c772d24e-9a88-4cbe-b9ea-12625c306c01')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_INVALID_CONFIGURATION" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_JOURNAL_DROPPED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_JOURNAL_DROPPED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('a596d6fe-7bfa-4994-828e-72309e95d61e')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_JOURNAL_DROPPED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_JOURNAL_MISSED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_JOURNAL_MISSED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('e9bf28e6-e834-481b-b6f4-8f548ad13606')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_JOURNAL_MISSED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_JOURNAL_START">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_JOURNAL_START</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('f77379a8-490b-408b-be5f-6940505a777b')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_JOURNAL_START" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_JOURNAL_STOP">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_JOURNAL_STOP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('d93fb3c9-c24d-451a-97ce-a615ce59c00b')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_JOURNAL_STOP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_JOURNAL_USAGE">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_JOURNAL_USAGE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('ec387f57-7b84-4b8f-a948-f33cad9a75e6')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_JOURNAL_USAGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_LID_CLOSED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_LID_CLOSED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('b72ea4a2-8815-45a0-b50e-200e55b9b070')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_LID_CLOSED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_LID_OPENED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_LID_OPENED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('b72ea4a2-8815-45a0-b50e-200e55b9b06f')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_LID_OPENED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_MACHINE_START">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_MACHINE_START</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('24d8d445-2573-4024-9606-8381a6312df2')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_MACHINE_START" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_MACHINE_STOP">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_MACHINE_STOP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('58432bd3-bace-477c-b514-b56381b8a758')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_MACHINE_STOP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_OVERMOUNTING">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_OVERMOUNTING</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('1dee0369-c7fc-4736-b709-9b38ecb46ee7')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_OVERMOUNTING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_POWER_KEY">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_POWER_KEY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('b72ea4a2-8815-45a0-b50e-200e55b9b071')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_POWER_KEY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_SEAT_START">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_SEAT_START</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('fcbefc5d-a23d-4280-93f9-7c82a9290f7b')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_SEAT_START" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_SEAT_STOP">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_SEAT_STOP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('e7852bfe-4678-4ed0-accd-e04bc864c2d5')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_SEAT_STOP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_SESSION_START">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_SESSION_START</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('8d45620c-1a43-48db-b174-10da57c60c66')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_SESSION_START" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_SESSION_STOP">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_SESSION_STOP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('33549394-24b4-456d-9802-ca8333ed424a')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_SESSION_STOP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_SHUTDOWN">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_SHUTDOWN</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('98268866-d1d5-4a49-9c4e-98921d93bc40')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_SHUTDOWN" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_SLEEP_START">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_SLEEP_START</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('6bbd95ee-9779-41e4-97c4-8be27c254128')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_SLEEP_START" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_SLEEP_STOP">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_SLEEP_STOP</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('8811e6df-2a8e-40f5-8a94-cea26f8ebf14')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_SLEEP_STOP" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_SPAWN_FAILED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_SPAWN_FAILED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('64125765-1c1b-4ec9-a862-4d7a40a9e1e7')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_SPAWN_FAILED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_STARTUP_FINISHED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_STARTUP_FINISHED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('b07a249c-d024-414a-82dd-00cd181378ff')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_STARTUP_FINISHED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_SUSPEND_KEY">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_SUSPEND_KEY</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('b72ea4a2-8815-45a0-b50e-200e55b9b072')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_SUSPEND_KEY" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_SYSTEM_DOCKED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_SYSTEM_DOCKED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('f5f416b8-6207-4b28-927a-48c3ba7d51ff')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_SYSTEM_DOCKED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_SYSTEM_UNDOCKED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_SYSTEM_UNDOCKED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('51e171bd-5852-4856-8110-144c517cca53')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_SYSTEM_UNDOCKED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_TIME_CHANGE">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_TIME_CHANGE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('c7a78707-9b35-4eaa-a9e7-7b371893cd27')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_TIME_CHANGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_TIMEZONE_CHANGE">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_TIMEZONE_CHANGE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('45f82f4a-ef7a-4bbf-942c-e861d1f20990')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_TIMEZONE_CHANGE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_TRUNCATED_CORE">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_TRUNCATED_CORE</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('5aadd8e9-54dc-4b1a-8c95-4d63fd9e1137')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_TRUNCATED_CORE" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_UNIT_FAILED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_UNIT_FAILED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('be02cf68-55d2-428b-a40d-f7e9d022f03d')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_UNIT_FAILED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_UNIT_RELOADED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_UNIT_RELOADED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('7b05ebc6-6838-4222-baa8-881179cfda54')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_UNIT_RELOADED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_UNIT_RELOADING">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_UNIT_RELOADING</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('d34d037f-ff18-47e6-ae66-9a370e694725')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_UNIT_RELOADING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_UNIT_STARTED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_UNIT_STARTED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('39f53479-d3a0-45ac-8e11-786248231fbf')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_UNIT_STARTED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_UNIT_STARTING">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_UNIT_STARTING</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('7d4958e8-42da-4a75-8f6c-1cdc7b36dcc5')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_UNIT_STARTING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_UNIT_STOPPED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_UNIT_STOPPED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('9d1aaa27-d601-40bd-9636-5438aad20286')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_UNIT_STOPPED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_UNIT_STOPPING">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_UNIT_STOPPING</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('de5b426a-63be-47a7-b6ac-3eaac82e2f6f')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_UNIT_STOPPING" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="systemd.id128.SD_MESSAGE_USER_STARTUP_FINISHED">
+<span class="sig-prename descclassname"><span class="pre">id128.</span></span><span class="sig-name descname"><span class="pre">SD_MESSAGE_USER_STARTUP_FINISHED</span></span><em class="property"> <span class="pre">=</span> <span class="pre">UUID('eed00a68-ffd8-4e31-8821-05fd973abdd1')</span></em><a class="headerlink" href="#systemd.id128.SD_MESSAGE_USER_STARTUP_FINISHED" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systemd.id128.get_boot">
+<span class="sig-prename descclassname"><span class="pre">systemd.id128.</span></span><span class="sig-name descname"><span class="pre">get_boot</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">UUID</span></span></span><a class="headerlink" href="#systemd.id128.get_boot" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a 128-bit unique identifier for this boot.
+Wraps sd_id128_get_boot(3).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systemd.id128.get_machine">
+<span class="sig-prename descclassname"><span class="pre">systemd.id128.</span></span><span class="sig-name descname"><span class="pre">get_machine</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">UUID</span></span></span><a class="headerlink" href="#systemd.id128.get_machine" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a 128-bit unique identifier for this machine.
+Wraps sd_id128_get_machine(3).</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="systemd.id128.randomize">
+<span class="sig-prename descclassname"><span class="pre">systemd.id128.</span></span><span class="sig-name descname"><span class="pre">randomize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">UUID</span></span></span><a class="headerlink" href="#systemd.id128.randomize" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return a new random 128-bit unique identifier.
+Wraps sd_id128_randomize(3).</p>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="journal.html"
+                        title="previous chapter"><cite>systemd.journal</cite> module</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="daemon.html"
+                        title="next chapter"><cite>systemd.daemon</cite> module</a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>  
+  </body>
+</html>

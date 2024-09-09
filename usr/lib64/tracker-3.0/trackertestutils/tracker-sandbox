@@ -1,0 +1,6 @@
+#!/usr/bin/sh
+
+export GI_TYPELIB_PATH=/usr/lib64/girepository-1.0/:$GI_TYPELIB_PATH
+export PYTHONPATH=/usr/lib64/tracker-3.0
+
+python3 -m trackertestutils --prefix=/usr "$@"
