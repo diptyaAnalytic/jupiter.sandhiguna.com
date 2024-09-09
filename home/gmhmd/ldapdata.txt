@@ -1,0 +1,1626 @@
+dn: dc=sandhiguna,dc=com
+objectClass: top
+objectClass: dcObject
+objectClass: organization
+o: Sandhiguna
+dc: sandhiguna
+structuralObjectClass: organization
+entryUUID: a7e567b0-cf45-103b-8ff4-07b2239dc25b
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211101095557Z
+entryCSN: 20211101095557.745106Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211101095557Z
+
+dn: cn=Manager,dc=sandhiguna,dc=com
+objectClass: organizationalRole
+cn: Manager
+description: Directory Manager
+structuralObjectClass: organizationalRole
+entryUUID: a7e5cea8-cf45-103b-8ff5-07b2239dc25b
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211101095557Z
+entryCSN: 20211101095557.747737Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211101095557Z
+
+dn: ou=People,dc=sandhiguna,dc=com
+objectClass: organizationalUnit
+ou: People
+structuralObjectClass: organizationalUnit
+entryUUID: a7e62344-cf45-103b-8ff6-07b2239dc25b
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211101095557Z
+entryCSN: 20211101095557.749909Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211101095557Z
+
+dn: ou=Group,dc=sandhiguna,dc=com
+objectClass: organizationalUnit
+ou: Group
+structuralObjectClass: organizationalUnit
+entryUUID: a7e6763c-cf45-103b-8ff7-07b2239dc25b
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211101095557Z
+entryCSN: 20211101095557.752032Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211101095557Z
+
+dn: cn=Directory Managers,cn=Manager,dc=sandhiguna,dc=com
+cn: Directory Managers
+objectClass: groupOfNames
+objectClass: top
+structuralObjectClass: groupOfNames
+entryUUID: 70942594-cf9f-103b-9553-2f9844ce69b1
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211101203839Z
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+entryCSN: 20211113102336.096075Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211113102336Z
+
+dn: ou=Mailbox,dc=sandhiguna,dc=com
+ou: Mailbox
+objectClass: organizationalUnit
+objectClass: top
+structuralObjectClass: organizationalUnit
+entryUUID: e39b3b10-d033-103b-9bf7-4dd88214fbb9
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211102142118Z
+entryCSN: 20211102142118.143938Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211102142118Z
+
+dn: ou=Applications,dc=sandhiguna,dc=com
+ou: Applications
+objectClass: organizationalUnit
+objectClass: top
+structuralObjectClass: organizationalUnit
+entryUUID: f5d6d730-d03d-103b-9bfb-4dd88214fbb9
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211102153323Z
+entryCSN: 20211102153323.700883Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211102153323Z
+
+dn: cn=MailService,ou=Applications,dc=sandhiguna,dc=com
+description: LDAP Account for MailService System
+cn: MailService
+objectClass: simpleSecurityObject
+objectClass: top
+objectClass: applicationProcess
+userPassword:: e1NTSEF9V1RZWDV5cy9jcEdZQ1J3UDFoMGFRQzVnVENqcmwxL0dyU21xWlE9P
+ Q==
+structuralObjectClass: applicationProcess
+entryUUID: 7e94eb3e-d03e-103b-9bfc-4dd88214fbb9
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211102153713Z
+entryCSN: 20211102153713.116715Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211102153713Z
+
+dn: ou=Domains,dc=sandhiguna,dc=com
+ou: Domains
+objectClass: organizationalUnit
+objectClass: top
+structuralObjectClass: organizationalUnit
+entryUUID: bfd0e330-d054-103b-9bfd-4dd88214fbb9
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211102181631Z
+entryCSN: 20211102181631.489682Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211102181631Z
+
+dn: cn=sandhiguna.com,ou=Domains,dc=sandhiguna,dc=com
+cn: sandhiguna.com
+objectClass: postfixDomain
+objectClass: top
+structuralObjectClass: postfixDomain
+entryUUID: 67e202b0-d056-103b-9bfe-4dd88214fbb9
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211102182822Z
+entryCSN: 20211102183003.325414Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211102183003Z
+
+dn: cn=sandhiguna.id,ou=Domains,dc=sandhiguna,dc=com
+cn: sandhiguna.id
+objectClass: postfixDomain
+objectClass: top
+structuralObjectClass: postfixDomain
+entryUUID: 800316b8-d056-103b-9bff-4dd88214fbb9
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211102182903Z
+entryCSN: 20211102183000.562635Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211102183000Z
+
+dn: uid=gilang,ou=People,dc=sandhiguna,dc=com
+cn: Gilang Mentari Hamidy
+sn: Hamidy
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: postfixUser
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: suaraUser
+objectClass: bizUser
+objectClass: posixAccount
+structuralObjectClass: inetOrgPerson
+entryUUID: 9505c7ca-d21a-103b-9c00-4dd88214fbb9
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211105002511Z
+givenName: Gilang Mentari
+mailAlias: gilang.hamidy@sandhiguna.com
+mail: gilang@sandhiguna.com
+email: gilang.hamidy@gmail.com
+userPassword:: e1NTSEF9MmtIeG9qcDluV2ZBZ3V4QW5uTnFvZjc0Tk9KSU1hOS8=
+uid: gilang
+gidNumber: 8001
+homeDirectory: /home/gilang
+uidNumber: 8001
+entryCSN: 20220113034410.503818Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220113034410Z
+
+dn: uid=dody,ou=People,dc=sandhiguna,dc=com
+mailAlias: dody.suhendra@sandhiguna.com
+givenName: Dody
+cn: Dody Suhendra
+sn: Suhendra
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: postfixUser
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: suaraUser
+objectClass: bizUser
+objectClass: posixAccount
+structuralObjectClass: inetOrgPerson
+entryUUID: f92b701a-d21a-103b-9c01-4dd88214fbb9
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211105002759Z
+mail: dody@sandhiguna.com
+email: dodysuhendra@gmail.com
+userPassword:: e1NTSEF9dXUzdllnZ01Ra3BOOFRodDh5ZGxjc0NrMExMMTFidHU=
+uid: dody
+gidNumber: 8001
+homeDirectory: /home/dody
+uidNumber: 8005
+entryCSN: 20220113035317.314292Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220113035317Z
+
+dn: cn=Roundcube,ou=Applications,dc=sandhiguna,dc=com
+description: LDAP Account for MailService System
+cn: Roundcube
+objectClass: simpleSecurityObject
+objectClass: top
+objectClass: applicationProcess
+userPassword:: e1NTSEF9YmhEbGdsSkQ1RS9kNGZzdXVrWTZCZ2xSTnNHcUFVVWlJUys3REE9P
+ Q==
+structuralObjectClass: applicationProcess
+entryUUID: 762f1724-d21b-103b-9c02-4dd88214fbb9
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211105003128Z
+entryCSN: 20211105003128.967621Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211105003128Z
+
+dn: cn=Corporate,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: corp@sandhiguna.id
+ou: PT Sandhiguna Widya Proteksi
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+member: uid=dody,ou=People,dc=sandhiguna,dc=com
+member: uid=tommy,ou=People,dc=sandhiguna,dc=com
+member: uid=fred,ou=People,dc=sandhiguna,dc=com
+cn: Corporate
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: 55ff1fe4-d392-103b-9c03-4dd88214fbb9
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211106211456Z
+mail: corp@sandhiguna.com
+entryCSN: 20211115115822.471097Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211115115822Z
+
+dn: cn=Recruitment,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: recruitment@sandhiguna.id
+mail: recruitment@sandhiguna.com
+ou: Sandhiguna Recruitment
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+member: uid=mia,ou=People,dc=sandhiguna,dc=com
+cn: Recruitment
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: 87a5e774-d452-103b-9fcd-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211107201042Z
+entryCSN: 20220508155732.267209Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220508155732Z
+
+dn: cn=LDAPSelfService,ou=Applications,dc=sandhiguna,dc=com
+description: LDAP Account for MailService System
+cn: LDAPSelfService
+objectClass: simpleSecurityObject
+objectClass: top
+objectClass: applicationProcess
+userPassword:: SGQ0U1ZxVmpvSUpWZWVRR3E5VXl3emNEanFQUTdidlI=
+structuralObjectClass: applicationProcess
+entryUUID: 8f96ed1c-d839-103b-9fce-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211112192203Z
+entryCSN: 20211112192203.469711Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211112192203Z
+
+dn: cn=Space,ou=Applications,dc=sandhiguna,dc=com
+description: LDAP Account for MailService System
+cn: Space
+objectClass: simpleSecurityObject
+objectClass: top
+objectClass: applicationProcess
+userPassword:: Z3NKUlJkaXJoTXJzU25zcW5KUXlZU0ZQM2dNd2lYbVY=
+structuralObjectClass: applicationProcess
+entryUUID: 8c2a77ea-d869-103b-9fd0-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211113010533Z
+entryCSN: 20211113010533.568777Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211113010533Z
+
+dn: ou=Corp,dc=sandhiguna,dc=com
+ou: Corp
+objectClass: organizationalUnit
+structuralObjectClass: organizationalUnit
+entryUUID: 60f9c236-d8b1-103b-9fd2-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211113093944Z
+entryCSN: 20211113093944.872055Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211113093944Z
+
+dn: cn=Technical,ou=Corp,dc=sandhiguna,dc=com
+cn: Technical
+objectClass: groupOfNames
+objectClass: top
+objectClass: spaceGroup
+structuralObjectClass: groupOfNames
+entryUUID: 09edc038-d8ba-103b-9fdb-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211113104144Z
+member: cn=Board of Directors,ou=Corp,dc=sandhiguna,dc=com
+member: cn=KMS,cn=Technical,ou=Corp,dc=sandhiguna,dc=com
+entryCSN: 20220111143404.474750Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220111143404Z
+
+dn: cn=KMS,cn=Technical,ou=Corp,dc=sandhiguna,dc=com
+cn: KMS
+objectClass: groupOfNames
+objectClass: top
+objectClass: spaceGroup
+structuralObjectClass: groupOfNames
+entryUUID: 204ade9c-d8ba-103b-9fdc-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211113104221Z
+member: uid=ismail,ou=People,dc=sandhiguna,dc=com
+member: uid=herman,ou=People,dc=sandhiguna,dc=com
+member: uid=adamas,ou=People,dc=sandhiguna,dc=com
+member: uid=sri,ou=People,dc=sandhiguna,dc=com
+member: uid=afrizal,ou=People,dc=sandhiguna,dc=com
+member: uid=rafli,ou=People,dc=sandhiguna,dc=com
+member: uid=rizky,ou=People,dc=sandhiguna,dc=com
+member: uid=irsa,ou=People,dc=sandhiguna,dc=com
+member: uid=nabila,ou=People,dc=sandhiguna,dc=com
+member: uid=raihan,ou=People,dc=sandhiguna,dc=com
+entryCSN: 20220509101012.119136Z#000000#000#000000
+modifiersName: uid=gilang,ou=People,dc=sandhiguna,dc=com
+modifyTimestamp: 20220509101012Z
+
+dn: uid=ismail,ou=People,dc=sandhiguna,dc=com
+uid: ismail
+mail: ismail@sandhiguna.com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: postfixUser
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: suaraUser
+objectClass: bizUser
+objectClass: posixAccount
+structuralObjectClass: inetOrgPerson
+entryUUID: 62756c9c-d8ba-103b-9fdd-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211113104412Z
+email: inboxes.ismail@gmail.com
+userPassword:: e1NTSEF9a1poVUg5aEllRmdCTklmY3N4UDA3K2NXNWNJWjBBYnY=
+cn: Ismail Rizka Pambudi
+sn: Pambudi
+givenName: Ismail Rizka
+gidNumber: 8001
+homeDirectory: /home/ismail
+uidNumber: 8008
+entryCSN: 20220113035534.550273Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220113035534Z
+
+dn: cn=Marketing,ou=Corp,dc=sandhiguna,dc=com
+cn: Marketing
+objectClass: groupOfNames
+objectClass: top
+objectClass: spaceGroup
+structuralObjectClass: groupOfNames
+entryUUID: fd032786-d8ba-103b-9fde-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211113104832Z
+member: cn=Board of Directors,ou=Corp,dc=sandhiguna,dc=com
+member: uid=andi,ou=People,dc=sandhiguna,dc=com
+member: uid=ghoffar,ou=People,dc=sandhiguna,dc=com
+entryCSN: 20220801073205.476549Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220801073205Z
+
+dn: cn=Board of Directors,ou=Corp,dc=sandhiguna,dc=com
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+member: uid=dody,ou=People,dc=sandhiguna,dc=com
+member: uid=tommy,ou=People,dc=sandhiguna,dc=com
+member: uid=fred,ou=People,dc=sandhiguna,dc=com
+cn: Board of Directors
+objectClass: groupOfNames
+objectClass: top
+objectClass: spaceGroup
+structuralObjectClass: groupOfNames
+entryUUID: 37284310-d8bb-103b-9fdf-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211113105009Z
+entryCSN: 20211222171218.453054Z#000000#000#000000
+modifiersName: uid=gilang,ou=People,dc=sandhiguna,dc=com
+modifyTimestamp: 20211222171218Z
+
+dn: uid=tommy,ou=People,dc=sandhiguna,dc=com
+uid: tommy
+mail: tommy@sandhiguna.com
+cn: Tommy
+sn: Tommy
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: postfixUser
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: suaraUser
+objectClass: bizUser
+objectClass: posixAccount
+email: e98tom@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: 2c7d6dcc-d8c1-103b-9fe0-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211113113248Z
+userPassword:: e1NTSEF9UDhsYklDYUhyUUF5M05GanVTSmNhRFIwRmVUU2JEcm4=
+gidNumber: 8001
+homeDirectory: /home/tommy
+uidNumber: 8015
+givenName: Tommy
+entryCSN: 20220818084155.976455Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220818084155Z
+
+dn: uid=fred,ou=People,dc=sandhiguna,dc=com
+mailAlias: frederic.ezerman@sandhiguna.com
+mail: fred@sandhiguna.com
+givenName: Martianus Frederic
+cn: Frederic Ezerman
+sn: Ezerman
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: postfixUser
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: suaraUser
+objectClass: bizUser
+objectClass: posixAccount
+email: frederic.ezerman@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: 6d054cca-d8c1-103b-9fe1-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211113113437Z
+userPassword:: e1NTSEF9dnhkMitmSk5CVzdEZ3RQajVHMlZaTzltMlhFM2FXNzE=
+gidNumber: 8001
+homeDirectory: /home/fred
+uidNumber: 8006
+uid: fred
+entryCSN: 20220202195810.335234Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220202195810Z
+
+dn: uid=herman,ou=People,dc=sandhiguna,dc=com
+uid: herman
+mail: herman@sandhiguna.com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: postfixUser
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: suaraUser
+objectClass: bizUser
+objectClass: posixAccount
+email: drubicza@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: 995f34fc-d8c1-103b-9fe2-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211113113551Z
+cn: Harmawan Mappaturu Salihun
+sn: Salihun
+givenName: Harmawan Mappaturu
+gidNumber: 8001
+homeDirectory: /home/herman
+uidNumber: 8002
+userPassword:: e1NTSEF9NHhCcEI1VFVQNURLbEhOZmJPcUhxWXRhM0IwYjBhNXU=
+entryCSN: 20230814230214.343528Z#000000#000#000000
+modifiersName: uid=herman,ou=People,dc=sandhiguna,dc=com
+modifyTimestamp: 20230814230214Z
+
+dn: uid=adamas,ou=People,dc=sandhiguna,dc=com
+uid: adamas
+mail: adamas@sandhiguna.com
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: postfixUser
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: suaraUser
+objectClass: bizUser
+objectClass: posixAccount
+email: adamas.aqsa@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: bf4d4758-d8c1-103b-9fe3-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211113113655Z
+userPassword:: e1NTSEF9QzZYcjY0VjY3dkRtQk8wYXFzSW03SE50cFd4S2lGM2c=
+sn: Fahreza
+givenName: Adamas Aqsa
+cn: Adamas Aqsa Fahreza
+gidNumber: 8001
+homeDirectory: /home/adamas
+uidNumber: 8003
+entryCSN: 20220113035229.248418Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220113035229Z
+
+dn: cn=Human Resource,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: hr@sandhiguna.id
+mail: hr@sandhiguna.com
+ou: HR Department
+member: uid=tommy,ou=People,dc=sandhiguna,dc=com
+member: uid=dody,ou=People,dc=sandhiguna,dc=com
+member: uid=fred,ou=People,dc=sandhiguna,dc=com
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+member: uid=mia,ou=People,dc=sandhiguna,dc=com
+cn: Human Resource
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: 857c4b4a-da70-103b-9fe4-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211115150031Z
+entryCSN: 20220103043053.294157Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220103043053Z
+
+dn: cn=Zoom 1,ou=Mailbox,dc=sandhiguna,dc=com
+mail: zoom.1@sandhiguna.com
+ou: Sandhiguna - Zoom 1
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+member: uid=tommy,ou=People,dc=sandhiguna,dc=com
+member: uid=dody,ou=People,dc=sandhiguna,dc=com
+member: uid=fred,ou=People,dc=sandhiguna,dc=com
+cn: Zoom 1
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: 3102bfe0-dbb5-103b-9fe5-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211117054435Z
+entryCSN: 20211219055930.955071Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211219055930Z
+
+dn: cn=Finance,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: finance@sandhiguna.id
+mail: finance@sandhiguna.com
+ou: Sandhiguna Finance Dept.
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+member: uid=dody,ou=People,dc=sandhiguna,dc=com
+member: uid=tommy,ou=People,dc=sandhiguna,dc=com
+member: uid=fred,ou=People,dc=sandhiguna,dc=com
+member: uid=mia,ou=People,dc=sandhiguna,dc=com
+member: uid=grace,ou=People,dc=sandhiguna,dc=com
+member: uid=ervina,ou=People,dc=sandhiguna,dc=com
+cn: Finance
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: f00b0164-dbe6-103b-9fe6-976c0ccbb27e
+creatorsName: uid=gilang,ou=People,dc=sandhiguna,dc=com
+createTimestamp: 20211117114041Z
+entryCSN: 20230118060531.732853Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20230118060531Z
+
+dn: cn=DMARC,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: dmarc@sandhiguna.id
+mail: dmarc@sandhiguna.com
+ou: Sandhiguna DMARC Handler
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+cn: DMARC
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: 28604ee2-dc88-103b-9fe7-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211118065445Z
+entryCSN: 20211118065445.199184Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211118065445Z
+
+dn: cn=IT Operations,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: tech-ops@sandhiguna.id
+mail: tech-ops@sandhiguna.com
+ou: Sandhiguna Technology Officers
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+cn: IT Operations
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: c7da755a-df13-103b-9fe8-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211121123915Z
+entryCSN: 20211121123915.128416Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211121123915Z
+
+dn: cn=CompBen,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: comp-ben@sandhiguna.id
+mail: comp-ben@sandhiguna.com
+ou: Compensation and Benefit HR Sandhiguna
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+member: uid=tommy,ou=People,dc=sandhiguna,dc=com
+cn: CompBen
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: 05fbae5a-e0fc-103b-9fe9-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211123225413Z
+entryCSN: 20211123225413.768927Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211123225413Z
+
+dn: uid=rafli,ou=People,dc=sandhiguna,dc=com
+uid: rafli
+givenName: M Rafli
+cn: M Rafli Firmansyah
+sn: Firmansyah
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: top
+objectClass: suaraUser
+objectClass: postfixUser
+objectClass: bizUser
+objectClass: posixAccount
+email: mraflifirmansyah@outlook.com
+structuralObjectClass: inetOrgPerson
+entryUUID: d053c07e-e206-103b-9fea-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211125064359Z
+userPassword:: e1NTSEF9VHE4Y01mRXBOdHc1L3RxSTZ3TE5XUUlmQWg5MHFtMkU=
+mail: rafli@sandhiguna.com
+gidNumber: 8001
+homeDirectory: /home/rafli
+uidNumber: 8012
+entryCSN: 20220125224557.342435Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220125224557Z
+
+dn: ou=New Joiners,ou=Group,dc=sandhiguna,dc=com
+ou: New Joiners
+member: uid=rafli,ou=People,dc=sandhiguna,dc=com
+member: uid=nabila,ou=People,dc=sandhiguna,dc=com
+member: uid=irsa,ou=People,dc=sandhiguna,dc=com
+member: uid=rizky,ou=People,dc=sandhiguna,dc=com
+member: uid=luqman,ou=People,dc=sandhiguna,dc=com
+member: uid=afrizal,ou=People,dc=sandhiguna,dc=com
+cn: New Joiners
+objectClass: groupOfNames
+objectClass: top
+objectClass: spaceGroup
+structuralObjectClass: groupOfNames
+entryUUID: 5f4f366e-e207-103b-9feb-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211125064759Z
+entryCSN: 20211222171238.927643Z#000000#000#000000
+modifiersName: uid=gilang,ou=People,dc=sandhiguna,dc=com
+modifyTimestamp: 20211222171238Z
+
+dn: uid=luqman,ou=People,dc=sandhiguna,dc=com
+uid: luqman
+givenName: Lukman Nuradi
+cn: Luqman Nuradi Prawadika
+sn: Prawadika
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+structuralObjectClass: inetOrgPerson
+entryUUID: d84369be-e207-103b-9fec-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211125065122Z
+entryCSN: 20220128162131.588004Z#000000#000#000000
+modifiersName: uid=gilang,ou=People,dc=sandhiguna,dc=com
+modifyTimestamp: 20220128162131Z
+
+dn: uid=irsa,ou=People,dc=sandhiguna,dc=com
+uid: irsa
+givenName: Irsa Rika
+cn: Irsa Rika Rahma
+sn: Rahma
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: top
+objectClass: suaraUser
+objectClass: postfixUser
+objectClass: bizUser
+objectClass: posixAccount
+email: irsarika10@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: 29185a34-e208-103b-9fed-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211125065337Z
+userPassword:: e1NTSEF9bHNwb2dQNkpraXRGMy9OMis2RWNJWkNKQ2pkdFZjalk=
+mail: irsa@sandhiguna.com
+gidNumber: 8001
+homeDirectory: /home/irsa
+uidNumber: 8007
+entryCSN: 20220122110803.002728Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220122110803Z
+
+dn: uid=nabila,ou=People,dc=sandhiguna,dc=com
+uid: nabila
+givenName: Nabila
+cn: Nabila Pratiwi
+sn: Pratiwi
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: top
+objectClass: suaraUser
+objectClass: postfixUser
+objectClass: bizUser
+objectClass: posixAccount
+email: nabila23pratiwi@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: 5c1a4064-e208-103b-9fee-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211125065503Z
+userPassword:: e1NTSEF9QW15eUUwdnMvTlh1eDg0Z3BBMFk5WUpMQ2FiTU93dmM=
+mail: nabila@sandhiguna.com
+gidNumber: 8001
+homeDirectory: /home/nabila
+uidNumber: 8011
+entryCSN: 20220113035719.755639Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220113035719Z
+
+dn: uid=rizky,ou=People,dc=sandhiguna,dc=com
+uid: rizky
+givenName: Rizky Marganda
+cn: Rizky Marganda Sitohang
+sn: Sitohang
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: top
+objectClass: suaraUser
+objectClass: postfixUser
+objectClass: bizUser
+objectClass: posixAccount
+email: rizkysitohang3@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: 7e98a7b6-e208-103b-9fef-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211125065601Z
+userPassword:: e1NTSEF9VllwalYyVHA4OWVMME51aTRLRXRYSzZzcGZOblJLdTc=
+mail: rizky@sandhiguna.com
+gidNumber: 8001
+homeDirectory: /home/rizky
+uidNumber: 8013
+entryCSN: 20220113035829.189710Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220113035829Z
+
+dn: uid=v-testuser,ou=People,dc=sandhiguna,dc=com
+uid: v-testuser
+mail: gilang.hamidy@gmail.com
+givenName: Test User
+cn: Test User
+sn: Gilang
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: top
+objectClass: suaraUser
+objectClass: bizTestUser
+email: gilang.hamidy@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: d04207f6-e415-103b-9ff2-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211127213624Z
+userPassword:: e1NTSEF9eERzQnJac2RWY2sxMy9FYnRLYi9HdEZ3VVlkWFFtRTFDc2xzakE9P
+ Q==
+entryCSN: 20211203152228.931377Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211203152228Z
+
+dn: ou=ERP Roles,dc=sandhiguna,dc=com
+ou: ERP Roles
+objectClass: organizationalUnit
+objectClass: top
+structuralObjectClass: organizationalUnit
+entryUUID: fe463d74-e867-103b-9ff3-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211203093444Z
+entryCSN: 20211203093444.621913Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211203093444Z
+
+dn: uid=sri,ou=People,dc=sandhiguna,dc=com
+uid: sri
+mail: sri@sandhiguna.com
+givenName: Sri
+cn: Sri Yulianti
+sn: Yulianti
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: top
+objectClass: suaraUser
+objectClass: postfixUser
+objectClass: bizUser
+objectClass: posixAccount
+structuralObjectClass: inetOrgPerson
+entryUUID: 83317f80-e868-103b-9ff4-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211203093827Z
+email: sriyulianti079@gmail.com
+userPassword:: e1NTSEF9NFE5YWQ1WUlpWHNtSHF0YlJDTFE3TDZybVEyU3dJNlQ=
+gidNumber: 8001
+homeDirectory: /home/sri
+uidNumber: 8014
+entryCSN: 20220113035852.466108Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220113035852Z
+
+dn: uid=z-biz-test,ou=People,dc=sandhiguna,dc=com
+homeDirectory: /home/biz-test
+ou: Sandhiguna Biz-Test
+cn: Sandhiguna Biz-Test
+objectClass: organizationalUnit
+objectClass: top
+objectClass: posixAccount
+objectClass: postfixUser
+structuralObjectClass: organizationalUnit
+entryUUID: 819a697c-e884-103b-9ff5-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211203125850Z
+uid: z-biz-test
+mail: z-biz-test@sandhiguna.com
+mailAlias: biz-test@sandhiguna.com
+userPassword:: e1NTSEF9STl1NWYrWUlXekNkMjNURm5VWHRKWHRnOGo1TGM4ZzVTalZQbmc9P
+ Q==
+uidNumber: 15000
+gidNumber: 8002
+entryCSN: 20220113035924.087490Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220113035924Z
+
+dn: cn=Employee,ou=ERP Roles,dc=sandhiguna,dc=com
+member: uid=v-testuser,ou=People,dc=sandhiguna,dc=com
+cn: Employee
+objectClass: groupOfNames
+objectClass: top
+structuralObjectClass: groupOfNames
+entryUUID: c4d53482-e8ee-103b-9ff7-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211204013930Z
+entryCSN: 20211204013930.309607Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211204013930Z
+
+dn: uid=afrizal,ou=People,dc=sandhiguna,dc=com
+uid: afrizal
+mail: afrizal@sandhiguna.com
+givenName: Afrizal Dani
+cn: Afrizal Dani Saoqi
+sn: Saoqi
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: top
+objectClass: suaraUser
+objectClass: postfixUser
+objectClass: bizUser
+objectClass: posixAccount
+email: afrizalds13@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: 6213556e-ec49-103b-9ff8-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211208080542Z
+userPassword:: e1NTSEF9ZitSWjhibjRJL0tVZkVVWnB5cjQ5ZVFsYjd3RUdyVlo=
+gidNumber: 8001
+homeDirectory: /home/afrizal
+uidNumber: 8004
+entryCSN: 20220113035252.631476Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220113035252Z
+
+dn: cn=Travel,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: travel@sandhiguna.id
+mail: travel@sandhiguna.com
+ou: Travel Manager Sandhiguna
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+member: uid=tommy,ou=People,dc=sandhiguna,dc=com
+member: uid=mia,ou=People,dc=sandhiguna,dc=com
+member: uid=ervina,ou=People,dc=sandhiguna,dc=com
+cn: Travel
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: 595abe28-eeb3-103b-9ff9-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211211094916Z
+entryCSN: 20230210085001.170472Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20230210085001Z
+
+dn: cn=Gitea,ou=Applications,dc=sandhiguna,dc=com
+description: LDAP Account for MailService System
+cn: Gitea
+objectClass: simpleSecurityObject
+objectClass: top
+objectClass: applicationProcess
+userPassword:: e1NTSEF9TXY0RzJITUoxd1hRT0hncjJrNGRLbTZqUUFHZlVCMVpaK3ViZkE9P
+ Q==
+structuralObjectClass: applicationProcess
+entryUUID: 6079b680-f257-103b-9ffa-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211216010059Z
+entryCSN: 20211216010059.559446Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211216010059Z
+
+dn: uid=z-titis,ou=People,dc=sandhiguna,dc=com
+mailAlias: titis@sandhiguna.com
+mailAlias: noreply@titis.sandhiguna.com
+uid: z-titis
+mail: z-titis@sandhiguna.com
+objectClass: organizationalUnit
+objectClass: top
+objectClass: posixAccount
+objectClass: postfixUser
+objectClass: suaraUser
+userPassword:: e1NTSEF9eVVTdkx6S0pwMHRaK0o0emk0R3krVXA3MVg4enlWak5KbnJQTlE9P
+ Q==
+structuralObjectClass: organizationalUnit
+entryUUID: 34a11790-f452-103b-9ffb-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211218132900Z
+cn: Titis Sandhiguna
+ou: Titis Sandhiguna
+homeDirectory: /home/titis
+uidNumber: 15001
+gidNumber: 8002
+entryCSN: 20230511173703.569331Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20230511173703Z
+
+dn: cn=Payroll,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: payroll@sandhiguna.id
+mail: payroll@sandhiguna.com
+ou: Sandhiguna Payroll
+member: uid=tommy,ou=People,dc=sandhiguna,dc=com
+member: uid=fred,ou=People,dc=sandhiguna,dc=com
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+cn: Payroll
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: 01ef8d56-f5fe-103b-9ffc-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211220163120Z
+entryCSN: 20211220163120.390334Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20211220163120Z
+
+dn: cn=Biz,ou=Applications,dc=sandhiguna,dc=com
+description: LDAP Account for MailService System
+cn: Biz
+objectClass: simpleSecurityObject
+objectClass: top
+objectClass: applicationProcess
+structuralObjectClass: applicationProcess
+entryUUID: 744f547c-f78d-103b-9ffd-976c0ccbb27e
+creatorsName: uid=gilang,ou=People,dc=sandhiguna,dc=com
+createTimestamp: 20211222161041Z
+userPassword:: e1NTSEF9S0Y5bUtocFVhM3BPWUxsSUVTUlVtVTFEN2plWjc0NUE3RjdRU0E9P
+ Q==
+entryCSN: 20230209160959.260919Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20230209160959Z
+
+dn: cn=Executives,ou=ERP Roles,dc=sandhiguna,dc=com
+member: uid=dody,ou=People,dc=sandhiguna,dc=com
+member: uid=tommy,ou=People,dc=sandhiguna,dc=com
+member: uid=fred,ou=People,dc=sandhiguna,dc=com
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+cn: Executives
+objectClass: groupOfNames
+objectClass: top
+structuralObjectClass: groupOfNames
+entryUUID: 0c8071de-fc8b-103b-9ffe-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211229003604Z
+entryCSN: 20211230020546.797502Z#000000#000#000000
+modifiersName: uid=gilang,ou=People,dc=sandhiguna,dc=com
+modifyTimestamp: 20211230020546Z
+
+dn: uid=z-biz,ou=People,dc=sandhiguna,dc=com
+mailAlias: noreply@biz.sandhiguna.com
+mailAlias: biz@sandhiguna.com
+uid: z-biz
+mail: z-biz@sandhiguna.com
+homeDirectory: /home/biz
+ou: Sandhiguna Biz
+gidNumber: 8002
+objectClass: organizationalUnit
+objectClass: top
+objectClass: posixAccount
+objectClass: postfixUser
+objectClass: suaraUser
+structuralObjectClass: organizationalUnit
+entryUUID: ba988c90-fc98-103b-9fff-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20211229021359Z
+uidNumber: 15002
+userPassword:: e1NTSEF9MlN5Szd2SXZ2TWc1WkUyUU52QUw2Q0pEeVIrTTBiVXcwMnBhaWc9P
+ Q==
+cn: Sandhiguna ERP
+entryCSN: 20230304061741.864170Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20230304061741Z
+
+dn: uid=grace,ou=People,dc=sandhiguna,dc=com
+uid: grace
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: top
+objectClass: suaraUser
+objectClass: bizTestUser
+objectClass: bizUser
+objectClass: postfixUser
+objectClass: spaceUser
+email: gracemoniquebkp@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: d1a23baa-fd62-103b-8000-976c0ccbb27e
+creatorsName: uid=gilang,ou=People,dc=sandhiguna,dc=com
+createTimestamp: 20211230022036Z
+mail: grace@sandhiguna.com
+cn: Grace Monique
+givenName: Grace
+sn: Monique
+userPassword:: e1NTSEF9K29LOUZnV0lsaGo4TGwxRWdyeERNUWtweTFybWxzTUw=
+entryCSN: 20230510060125.962904Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20230510060125Z
+
+dn: uid=mia,ou=People,dc=sandhiguna,dc=com
+uid: mia
+mail: mia@sandhiguna.com
+givenName: Mindo Are Rumia
+cn: Mindo Are Rumia Sinaga
+sn: Sinaga
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: suaraUser
+objectClass: postfixUser
+objectClass: top
+objectClass: bizUser
+objectClass: posixAccount
+email: averumia2013@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: 0de37eb2-fd63-103b-8001-976c0ccbb27e
+creatorsName: uid=gilang,ou=People,dc=sandhiguna,dc=com
+createTimestamp: 20211230022217Z
+gidNumber: 8001
+homeDirectory: /home/mia
+uidNumber: 8010
+userPassword:: e1NTSEF9b0xKelptOERnU2JocEFrWCtxTzFTU0dtcU54Mm1XeDM=
+entryCSN: 20230511103237.934867Z#000000#000#000000
+modifiersName: cn=LDAPSelfService,ou=Applications,dc=sandhiguna,dc=com
+modifyTimestamp: 20230511103237Z
+
+dn: cn=Administrations,ou=Corp,dc=sandhiguna,dc=com
+member: uid=mia,ou=People,dc=sandhiguna,dc=com
+cn: Administrations
+objectClass: groupOfNames
+objectClass: top
+objectClass: spaceGroup
+structuralObjectClass: groupOfNames
+entryUUID: d4e5baa8-0221-103c-8002-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20220105031800Z
+entryCSN: 20220122111406.332229Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220122111406Z
+
+dn: cn=Tax,ou=Mailbox,dc=sandhiguna,dc=com
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+member: uid=mia,ou=People,dc=sandhiguna,dc=com
+member: uid=grace,ou=People,dc=sandhiguna,dc=com
+member: uid=ervina,ou=People,dc=sandhiguna,dc=com
+cn: Tax
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: e1011b9e-06c6-103c-8003-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20220111010932Z
+mail: tax@sandhiguna.com
+mailAlias: tax@sandhiguna.id
+ou: Sandhiguna Tax
+entryCSN: 20230223085003.551709Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20230223085003Z
+
+dn: cn=SynologyNASBatam,ou=Applications,dc=sandhiguna,dc=com
+description: LDAP Account for SynologyNAS at Batam Office
+cn: SynologyNASBatam
+objectClass: simpleSecurityObject
+objectClass: top
+objectClass: applicationProcess
+structuralObjectClass: applicationProcess
+entryUUID: b47139f2-080a-103c-8005-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20220112154734Z
+userPassword:: e1NTSEF9RTBvMHc1d1pZRHdmMmgrQzBqbkpsM0VNaEEyaWsvM0licVIvZlE9P
+ Q==
+entryCSN: 20220211102343.406754Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220211102343Z
+
+dn: ou=POSIXGroup,dc=sandhiguna,dc=com
+ou: POSIXGroup
+objectClass: organizationalUnit
+structuralObjectClass: organizationalUnit
+entryUUID: 356dbe82-086e-103c-8006-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20220113033951Z
+entryCSN: 20220113033951.344871Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220113033951Z
+
+dn: cn=SandhigunaUsers,ou=POSIXGroup,dc=sandhiguna,dc=com
+gidNumber: 8001
+cn: SandhigunaUsers
+objectClass: posixGroup
+objectClass: top
+structuralObjectClass: posixGroup
+entryUUID: 66506f86-086e-103c-8007-976c0ccbb27e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20220113034113Z
+entryCSN: 20220113034113.361153Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220113034113Z
+
+dn: cn=Finance,ou=Corp,dc=sandhiguna,dc=com
+member: uid=grace,ou=People,dc=sandhiguna,dc=com
+member: uid=febri,ou=People,dc=sandhiguna,dc=com
+cn: Finance
+objectClass: groupOfNames
+objectClass: top
+objectClass: spaceGroup
+structuralObjectClass: groupOfNames
+entryUUID: 1af25c60-393e-103c-9218-67ebc628589b
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20220316062858Z
+entryCSN: 20220809084908.799534Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220809084908Z
+
+dn: cn=kriptika.id,ou=Domains,dc=sandhiguna,dc=com
+cn: kriptika.id
+objectClass: postfixDomain
+objectClass: top
+structuralObjectClass: postfixDomain
+entryUUID: 7709acfe-588f-103c-82c5-374a2dee019c
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20220425025927Z
+entryCSN: 20220425025927.832893Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220425025927Z
+
+dn: cn=Kriptika Mail,ou=Mailbox,dc=sandhiguna,dc=com
+mail: mail@kriptika.id
+ou: PT Kriptika Malka Sandhi
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+member: uid=tommy,ou=People,dc=sandhiguna,dc=com
+member: uid=dody,ou=People,dc=sandhiguna,dc=com
+member: uid=fred,ou=People,dc=sandhiguna,dc=com
+cn: Kriptika Mail
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: 9c4f57e8-588f-103c-82c6-374a2dee019c
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20220425030030Z
+entryCSN: 20220425033143.662862Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220425033143Z
+
+dn: uid=raihan,ou=People,dc=sandhiguna,dc=com
+uid: raihan
+uidNumber: 8015
+mail: raihan@sandhiguna.com
+homeDirectory: /home/raihan
+givenName: Muhammad Raihan
+gidNumber: 8001
+cn: Muhammad Raihan Mahardhika
+sn: Mahardhika
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: top
+objectClass: suaraUser
+objectClass: postfixUser
+objectClass: bizUser
+objectClass: posixAccount
+email: rehanmain00@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: f428d79e-5a67-103c-82c7-374a2dee019c
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20220427112140Z
+userPassword:: e1NTSEF9Q2FzQjJ1cG5ONzU3bVZsNm9MWGVIcS9PbjZUL3NCRWE=
+entryCSN: 20220509081307.605364Z#000000#000#000000
+modifiersName: cn=LDAPSelfService,ou=Applications,dc=sandhiguna,dc=com
+modifyTimestamp: 20220509081307Z
+
+dn: uid=andi,ou=People,dc=sandhiguna,dc=com
+uid: andi
+uidNumber: 8016
+mail: andi@sandhiguna.com
+homeDirectory: /home/andi
+gidNumber: 8001
+sn: Fakhriza
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: top
+objectClass: suaraUser
+objectClass: postfixUser
+objectClass: bizUser
+objectClass: posixAccount
+email:: IGFuZGlmYXJpZHpAZ21haWwuY29t
+structuralObjectClass: inetOrgPerson
+entryUUID: 9419616c-873e-103c-82c8-374a2dee019c
+creatorsName: uid=gilang,ou=People,dc=sandhiguna,dc=com
+createTimestamp: 20220623124852Z
+cn: Andi Faridz Fakhriza
+givenName: Andi Faridz
+userPassword:: e1NTSEF9RS9UVEtSVEdwK1BmNFJxbnoxTHR3L0w1UmcrLzJwZWU=
+entryCSN: 20230527032703.364796Z#000000#000#000000
+modifiersName: uid=andi,ou=People,dc=sandhiguna,dc=com
+modifyTimestamp: 20230527032703Z
+
+dn: uid=ghoffar,ou=People,dc=sandhiguna,dc=com
+uid: ghoffar
+mail: ghoffar@sandhiguna.com
+homeDirectory: /home/ghoffar
+givenName: M Ghoffar Hariyo
+gidNumber: 8001
+cn: M Ghoffar Hariyo Adrianto
+sn: Adrianto
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: karyaUser
+objectClass: top
+objectClass: suaraUser
+objectClass: postfixUser
+objectClass: bizUser
+objectClass: posixAccount
+email: radenmasadri@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: c9a8f318-97f8-103c-82c9-374a2dee019c
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20220714194206Z
+uidNumber: 8017
+userPassword:: e1NTSEF9Y05VS0o2Q1VpN2Fla3R6Vm9XdmFudUVCTE1uUmZrcmk=
+entryCSN: 20220815000429.609984Z#000000#000#000000
+modifiersName: cn=LDAPSelfService,ou=Applications,dc=sandhiguna,dc=com
+modifyTimestamp: 20220815000429Z
+
+dn: uid=febri,ou=People,dc=sandhiguna,dc=com
+uid: febri
+givenName: Febri
+cn: Febri Fernando
+sn: Fernando
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+structuralObjectClass: inetOrgPerson
+entryUUID: 44592432-a5b6-103c-97d9-d99d2dbd9b9e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20220801072112Z
+entryCSN: 20220906175916.368106Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20220906175916Z
+
+dn: cn=Finance-Notification,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: finance.notification@sandhiguna.id
+mail: finance.notification@sandhiguna.com
+ou: Sandhiguna Finance Dept.
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+member: uid=mia,ou=People,dc=sandhiguna,dc=com
+member: uid=grace,ou=People,dc=sandhiguna,dc=com
+member: uid=ervina,ou=People,dc=sandhiguna,dc=com
+cn: Finance-Notification
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: c19afe4c-add7-103c-97da-d99d2dbd9b9e
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20220811154105Z
+entryCSN: 20230118060432.814225Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20230118060432Z
+
+dn: uid=x.junhao.wang,ou=People,dc=sandhiguna,dc=com
+givenName: Junhao
+cn: Wang Junhao
+sn: Wang
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: karyaUser
+objectClass: externalEmail
+structuralObjectClass: inetOrgPerson
+entryUUID: ec066d8a-cdec-103c-97db-d99d2dbd9b9e
+creatorsName: uid=gilang,ou=People,dc=sandhiguna,dc=com
+createTimestamp: 20220921113313Z
+email: wang.junhao@an-security.com
+uid: x.junhao.wang
+userPassword:: e1NTSEF9VEh6R1JjTW1VZEw3aGt4ejJoWVcweERTR2k2dlJjem4=
+entryCSN: 20230222040611.905768Z#000000#000#000000
+modifiersName: uid=x.junhao.wang,ou=People,dc=sandhiguna,dc=com
+modifyTimestamp: 20230222040611Z
+
+dn: uid=x.daryl.koh,ou=People,dc=sandhiguna,dc=com
+uid: x.daryl.koh
+givenName: Daryl
+cn: Daryl Koh
+sn: Koh
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: top
+objectClass: karyaUser
+objectClass: externalEmail
+email: daryl@an-security.com
+structuralObjectClass: inetOrgPerson
+entryUUID: 5a6bacd6-cded-103c-97dd-d99d2dbd9b9e
+creatorsName: uid=gilang,ou=People,dc=sandhiguna,dc=com
+createTimestamp: 20220921113618Z
+userPassword:: e1NTSEF9dHdhRGhtYWxERzV4TmQ3dHBJejRVRE93L3lQUFpZMVQ=
+entryCSN: 20220922035529.708423Z#000000#000#000000
+modifiersName: cn=LDAPSelfService,ou=Applications,dc=sandhiguna,dc=com
+modifyTimestamp: 20220922035529Z
+
+dn: cn=Sales,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: sales@sandhiguna.id
+mail: sales@sandhiguna.com
+ou: Sandhiguna Sales Division
+member: uid=tommy,ou=People,dc=sandhiguna,dc=com
+member: uid=ghoffar,ou=People,dc=sandhiguna,dc=com
+member: uid=andi,ou=People,dc=sandhiguna,dc=com
+cn: Sales
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: 5a840696-decd-103c-9761-0d42cbd12d71
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20221012230004Z
+entryCSN: 20221012230004.590204Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20221012230004Z
+
+dn: uid=z-space,ou=People,dc=sandhiguna,dc=com
+mailAlias: noreply@space.sandhiguna.com
+uid: z-space
+uidNumber: 15005
+mail: space@sandhiguna.com
+homeDirectory: /home/space
+ou: Sandhiguna Space
+gidNumber: 8002
+cn: Sandhiguna Space
+objectClass: organizationalUnit
+objectClass: top
+objectClass: posixAccount
+objectClass: postfixUser
+structuralObjectClass: organizationalUnit
+entryUUID: d397c006-e7e5-103c-9762-0d42cbd12d71
+creatorsName: uid=gilang,ou=People,dc=sandhiguna,dc=com
+createTimestamp: 20221024124756Z
+userPassword:: e1NTSEF9ZlRXS3Z4YXBqS0lQZDcwOHhOcG1XQW1qNEZGSDlmQ0hsZ0h0OWc9P
+ Q==
+entryCSN: 20221024125348.595158Z#000000#000#000000
+modifiersName: cn=LDAPSelfService,ou=Applications,dc=sandhiguna,dc=com
+modifyTimestamp: 20221024125348Z
+
+dn: uid=ervina,ou=People,dc=sandhiguna,dc=com
+uid: ervina
+uidNumber: 8020
+mail: ervina@sandhiguna.com
+homeDirectory: /home/ervina
+givenName: Ervinasari
+gidNumber: 8001
+cn: Ervinasari Harianja
+sn: Harianja
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: spaceUser
+objectClass: top
+objectClass: suaraUser
+objectClass: postfixUser
+objectClass: bizUser
+objectClass: posixAccount
+email: ervinasari.harianja@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: 043ed6ba-fdb5-103c-9763-0d42cbd12d71
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20221121065357Z
+userPassword:: e1NTSEF9RkU2Qk5mdk42ZEU3SUdkOGpCb2hHMG5kNkRtUndnSzI=
+entryCSN: 20230511103316.599257Z#000000#000#000000
+modifiersName: cn=LDAPSelfService,ou=Applications,dc=sandhiguna,dc=com
+modifyTimestamp: 20230511103316Z
+
+dn: cn=Support,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: support@sandhiguna.id
+mail: support@sandhiguna.com
+ou: Sandhiguna Support
+member: uid=tommy,ou=People,dc=sandhiguna,dc=com
+member: uid=andi,ou=People,dc=sandhiguna,dc=com
+member: uid=ghoffar,ou=People,dc=sandhiguna,dc=com
+cn: Support
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: c74eef9e-1c57-103d-8842-cb1a671aae41
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20221230063438Z
+entryCSN: 20221230063438.591748Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20221230063438Z
+
+dn: cn=Doc,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: doc@sandhiguna.id
+mail: doc@sandhiguna.com
+ou: Sandhiguna Documentation Team
+member: uid=irsa,ou=People,dc=sandhiguna,dc=com
+member: uid=herman,ou=People,dc=sandhiguna,dc=com
+member: uid=andi,ou=People,dc=sandhiguna,dc=com
+cn: Doc
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: faca21ae-1c57-103d-8843-cb1a671aae41
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20221230063604Z
+entryCSN: 20221230063604.963333Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20221230063604Z
+
+dn: cn=Security Report,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: sec-report@sandhiguna.id
+mail: sec-report@sandhiguna.com
+ou: Sandhiguna Security Report Channel
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+member: uid=dody,ou=People,dc=sandhiguna,dc=com
+member: uid=fred,ou=People,dc=sandhiguna,dc=com
+member: uid=herman,ou=People,dc=sandhiguna,dc=com
+cn: Security Report
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: cc823c4c-244e-103d-8844-cb1a671aae41
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20230109095031Z
+entryCSN: 20230109095031.148611Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20230109095031Z
+
+dn: uid=z-autobuild,ou=People,dc=sandhiguna,dc=com
+mailAlias: autobuild@sandhiguna.com
+uid: z-autobuild
+uidNumber: 15006
+mail: z-autobuild@sandhiguna.com
+homeDirectory: /home/autobuild
+ou: Sandhiguna Autobuild
+gidNumber: 8901
+cn: Sandhiguna Autobuild
+objectClass: organizationalUnit
+objectClass: top
+objectClass: posixAccount
+objectClass: postfixUser
+objectClass: karyaUser
+userPassword:: e1NIQX1GVFdIdFQ5RmYyZEFpT0VZWU5UVWl6QXpmUjQ9
+structuralObjectClass: organizationalUnit
+entryUUID: 885576aa-42b3-103d-9c76-bf0a616dd86c
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20230217020710Z
+entryCSN: 20230217143404.346340Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20230217143404Z
+
+dn: uid=andy.pribadi,ou=People,dc=sandhiguna,dc=com
+uid: andy.pribadi
+uidNumber: 9001
+mail: andy.pribadi@sandhiguna.com
+homeDirectory: /home/andy.pribadi
+givenName: Andy
+gidNumber: 9001
+cn: F. Andy Pribadi
+sn: Pribadi
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: suaraUser
+objectClass: postfixUser
+objectClass: posixAccount
+objectClass: top
+email: fapribadi@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: 12e1a6d2-4795-103d-9c77-bf0a616dd86c
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20230223071144Z
+userPassword:: e1NTSEF9c1dlUlFOcHNHTjFDUkdpRkJ1UEFtdjRzeUp0cWlNWnY=
+entryCSN: 20230319154106.796760Z#000000#000#000000
+modifiersName: cn=LDAPSelfService,ou=Applications,dc=sandhiguna,dc=com
+modifyTimestamp: 20230319154106Z
+
+dn: cn=Social Media,ou=Mailbox,dc=sandhiguna,dc=com
+mailAlias: social-media@sandhiguna.id
+mail: social-media@sandhiguna.com
+member: uid=tommy,ou=People,dc=sandhiguna,dc=com
+member: uid=ghoffar,ou=People,dc=sandhiguna,dc=com
+member: uid=andi,ou=People,dc=sandhiguna,dc=com
+member: uid=gilang,ou=People,dc=sandhiguna,dc=com
+cn: Social Media
+objectClass: groupOfNames
+objectClass: top
+objectClass: postfixUser
+structuralObjectClass: groupOfNames
+entryUUID: ba0dbfc6-6b59-103d-9b71-355a8d060296
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20230409193737Z
+ou: Sandhiguna Social Media
+entryCSN: 20230409193749.212497Z#000000#000#000000
+modifiersName: cn=Manager,dc=sandhiguna,dc=com
+modifyTimestamp: 20230409193749Z
+
+dn: uid=dedi.junaidi,ou=People,dc=sandhiguna,dc=com
+uid: dedi.junaidi
+uidNumber: 9002
+mail: dedi.junaidi@sandhiguna.com
+givenName: Dedi
+gidNumber: 9001
+sn: Junaidi
+objectClass: inetOrgPerson
+objectClass: organizationalPerson
+objectClass: person
+objectClass: externalEmail
+objectClass: postfixUser
+objectClass: posixAccount
+objectClass: top
+email: deddytrunojoyo@gmail.com
+structuralObjectClass: inetOrgPerson
+entryUUID: c8abe484-9d97-103d-92e6-335c764ead88
+creatorsName: cn=Manager,dc=sandhiguna,dc=com
+createTimestamp: 20230612180748Z
+homeDirectory: /home/dedi.junaidi
+cn: Dedi Junaidi
+userPassword:: e1NTSEF9bEpldG9PK1BjK3pCUkl1QWF3QjhEcEFvN082VHFlZHI=
+entryCSN: 20230613024817.328630Z#000000#000#000000
+modifiersName: cn=LDAPSelfService,ou=Applications,dc=sandhiguna,dc=com
+modifyTimestamp: 20230613024817Z
+
