@@ -1,0 +1,10 @@
+[droplet-agent]
+name=DigitalOcean Droplet Agent
+baseurl=https://repos-droplet.digitalocean.com/yum/droplet-agent/$basearch
+repo_gpgcheck=0
+gpgcheck=1
+enabled=1
+gpgkey=https://repos-droplet.digitalocean.com/gpg.key
+sslverify=0
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300

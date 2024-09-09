@@ -1,0 +1,15 @@
+uris = ldaps://localhost/
+dn = cn=MailService,ou=Applications,dc=sandhiguna,dc=com
+dnpass = WwWWHKfZyIRQw7D3PymlwmoyvsRbxVkv
+tls_ca_cert_file = /etc/letsencrypt/isrg-root.pem
+#tls_ca_cert_file = /etc/letsencrypt/live/jupiter.sandhiguna.com/fullchain.pem
+tls_require_cert = hard
+debug_level = 0
+auth_bind = yes
+auth_bind_userdn = uid=%n,ou=People,dc=sandhiguna,dc=com
+default_pass_scheme = SSHA
+ldap_version = 3
+base = dc=sandhiguna,dc=com
+scope = subtree
+user_attrs = uid=ldapid, =mail=maildir:/mnt/jupiter_1/mail/vhosts/%d/%n
+user_filter = (&(objectClass=postfixUser)(mail=%u))

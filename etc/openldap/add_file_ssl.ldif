@@ -1,0 +1,4 @@
+dn: cn=config
+changetype: modify
+replace: olcTLSCertificateFile
+olcTLSCertificateFile: /etc/letsencrypt/live/jupiter.sandhiguna.com/cert.pem

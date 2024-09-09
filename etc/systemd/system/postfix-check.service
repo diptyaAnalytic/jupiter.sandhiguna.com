@@ -1,0 +1,14 @@
+[Unit]
+Description=Sandhiguna Postfix Sender Auth
+After=network-online.target
+Wants=network-online.target systemd-networkd-wait-online.service
+
+[Service]
+Restart=on-failure
+RestartSec=5s
+ExecStart=python /etc/postfix/sender_check_daemon.py
+User=nobody
+Group=nobody
+
+[Install]
+WantedBy=multi-user.target

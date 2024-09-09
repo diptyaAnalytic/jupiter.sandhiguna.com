@@ -1,0 +1,7 @@
+vmail:100000:65536
+www-roundcube:165536:65536
+policyd-spf:231072:65536
+www-space:296608:65536
+gmhmd:362144:65536
+herman:427680:65536
+letsencrypt:493216:65536

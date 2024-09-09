@@ -1,0 +1,15 @@
+
+#
+# /etc/fstab
+# Created by anaconda on Fri Apr 23 10:53:58 2021
+#
+# Accessible filesystems, by reference, are maintained under '/dev/disk/'.
+# See man pages fstab(5), findfs(8), mount(8) and/or blkid(8) for more info.
+#
+# After editing this file, run 'systemctl daemon-reload' to update systemd
+# units generated from this file.
+#
+UUID=386769a3-cfa5-47c8-8797-d5ec58c9cb6c /                       ext4    defaults        1 1
+/mnt/swapfile swap swap defaults 0 0
+/dev/disk/by-id/scsi-0DO_Volume_jupiter-1 /mnt/jupiter_1 ext4 defaults,nofail,discard 0 0
+

@@ -1,0 +1,14 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 e133a06b
+dn: cn=config
+objectClass: olcGlobal
+cn: config
+structuralObjectClass: olcGlobal
+entryUUID: 1de04818-cf41-103b-9259-2bc1cf0a0d24
+creatorsName: cn=config
+createTimestamp: 20211101092328Z
+olcTLSCertificateFile: /etc/letsencrypt/live/jupiter.sandhiguna.com/cert.pem
+olcTLSCACertificateFile: /etc/letsencrypt/isrg-root.pem
+entryCSN: 20240708074153.590389Z#000000#000#000000
+modifiersName: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+modifyTimestamp: 20240708074153Z

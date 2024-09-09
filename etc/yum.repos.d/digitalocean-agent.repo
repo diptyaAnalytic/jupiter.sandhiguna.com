@@ -1,0 +1,10 @@
+[digitalocean-agent]
+name=DigitalOcean Agent
+baseurl=https://repos.insights.digitalocean.com/yum/do-agent/$basearch
+repo_gpgcheck=0
+gpgcheck=1
+enabled=1
+gpgkey=https://repos.insights.digitalocean.com/sonar-agent-current.asc
+sslverify=0
+sslcacert=/etc/pki/tls/certs/ca-bundle.crt
+metadata_expire=300

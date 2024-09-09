@@ -1,0 +1,10 @@
+/etc/dovecot/dovecot-postlogin.py       --      system_u:object_r:dovecot_exec_t:s0
+/mnt/jupiter_1/mail(/.*)? system_u:object_r:mail_spool_t:s0
+/mnt/jupiter_1/db(/.*)?  system_u:object_r:mysqld_db_t:s0
+/var/www/space(/*)?  system_u:object_r:httpd_sys_content_t:s0
+/var/www/space/data(/*)  system_u:object_r:httpd_sys_rw_content_t:s0
+/var/www/space/config(/*)  system_u:object_r:httpd_sys_rw_content_t:s0
+/var/www/space/apps(/*)  system_u:object_r:httpd_sys_rw_content_t:s0
+/var/www/space/.user.ini  system_u:object_r:httpd_sys_rw_content_t:s0
+/mnt/jupiter_1/space(/*)?  system_u:object_r:httpd_sys_rw_content_t:s0
+/mnt/jupiter_1/gpg-keystore(/*)? system_u:object_r:httpd_sys_rw_content_t:s0

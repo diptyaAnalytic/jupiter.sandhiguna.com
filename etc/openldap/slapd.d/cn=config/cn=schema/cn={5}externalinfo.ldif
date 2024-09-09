@@ -1,0 +1,28 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 d227c86c
+dn: cn={5}externalinfo
+objectClass: olcSchemaConfig
+cn: {5}externalinfo
+structuralObjectClass: olcSchemaConfig
+entryUUID: e99bacbe-d83c-103b-9fcf-976c0ccbb27e
+creatorsName: cn=root,cn=config
+createTimestamp: 20211112194602Z
+olcObjectClasses: {0}(1.3.6.1.4.1.4203.666.2.101 NAME 'externalEmail' DESC '
+ External E-mail for communication' SUP top AUXILIARY MUST(email))
+olcObjectClasses: {1}(1.3.6.1.4.1.4203.666.2.102 NAME 'spaceUser' DESC 'Indi
+ cates a person is a Sandhiguna Space user' SUP top AUXILIARY MUST(uid))
+olcObjectClasses: {2}(1.3.6.1.4.1.4203.666.2.103 NAME 'karyaUser' DESC 'Indi
+ cates a person is a Sandhiguna Karya user' SUP top AUXILIARY MUST(uid))
+olcObjectClasses: {3}(1.3.6.1.4.1.4203.666.2.104 NAME 'suaraUser' DESC 'Indi
+ cates a person is a Suara Sandhiguna user' SUP top AUXILIARY MUST(uid $ mai
+ l))
+olcObjectClasses: {4}(1.3.6.1.4.1.4203.666.2.105 NAME 'bizUser' DESC 'Indica
+ tes a person is a Biz Sandhiguna user' SUP top AUXILIARY MUST(uid $ mail))
+olcObjectClasses: {5}(1.3.6.1.4.1.4203.666.2.106 NAME 'bizTestUser' DESC 'In
+ dicates a person is a Biz Test Sandhiguna user' SUP top AUXILIARY MUST(uid 
+ $ mail))
+olcObjectClasses: {6}(1.3.6.1.4.1.4203.666.2.107 NAME 'spaceGroup' DESC 'Ind
+ icates a group is a Sandhiguna Space group' SUP top AUXILIARY)
+entryCSN: 20211222171100.113361Z#000000#000#000000
+modifiersName: cn=root,cn=config
+modifyTimestamp: 20211222171100Z

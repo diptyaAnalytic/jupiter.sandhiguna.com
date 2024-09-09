@@ -1,0 +1,23 @@
+# AUTO-GENERATED FILE - DO NOT EDIT!! Use ldapmodify.
+# CRC32 90624928
+dn: cn={4}postfix
+objectClass: olcSchemaConfig
+cn: {4}postfix
+structuralObjectClass: olcSchemaConfig
+entryUUID: 9e6be40e-d033-103b-9bf6-4dd88214fbb9
+creatorsName: gidNumber=0+uidNumber=0,cn=peercred,cn=external,cn=auth
+createTimestamp: 20211102141922Z
+olcAttributeTypes: {0}(1.3.6.1.4.1.4203.666.1.200 NAME 'mailAlias' DESC 'Pos
+ tfix mail local address alias attribute' EQUALITY caseIgnoreMatch SUBSTR ca
+ seIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024})
+olcAttributeTypes: {1}(1.3.6.1.4.1.4203.666.1.202 NAME 'domainName'DESC 'Dom
+ ain name that is processed by Postfix mail system' EQUALITY caseIgnoreMatch
+  SUBSTR caseIgnoreSubstringsMatch SYNTAX 1.3.6.1.4.1.1466.115.121.1.15{1024
+ } )
+olcObjectClasses: {0}(1.3.6.1.4.1.4203.666.1.100 NAME 'postfixUser' DESC 'Po
+ stfix mail user class' SUP top AUXILIARY MAY(mailAlias $ mail ))
+olcObjectClasses: {1}(1.3.6.1.4.1.4203.666.1.101 NAME 'postfixDomain' DESC '
+ Postfix mail domain class' SUP top STRUCTURAL MUST(cn))
+entryCSN: 20211107123020.861463Z#000000#000#000000
+modifiersName: cn=root,cn=config
+modifyTimestamp: 20211107123020Z

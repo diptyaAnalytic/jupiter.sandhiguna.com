@@ -1,0 +1,3 @@
+20211108.private._domainkey	IN	TXT	( "v=DKIM1; k=rsa; "
+	  "p=MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2asol5f1yjUizGpG5s2x5M45LiDZ2EHgrrgKfLfyiTBDUORf3bXwdlMdkT3twFCSPP5yEoR9jljkygR11wd4PupwqujiiwHQoGrTt4rVyjZyfsQG0BpIlSJFKg3ni/UXODhH6zYI7GLRxQpx4Jc2lex8WNloGxMD7uaqFpbGJHrUsrCdmnJ36lxPs1xlmpTrRCuQ00TC95uJoz"
+	  "TxdOp/liiQ/tIiPFcvNdEhKyEKSVjT/lxd0Bm3CedPOGJNRNU/wB8B/I1WPacPSn/gusETULaXTXXO720rINpufRgL0Z/6brX6EeAHTb8ZZrCvXqgdzLxT8Godh14tFubw7L9RqwIDAQAB" )  ; ----- DKIM key 20211108.private for sandhiguna.com

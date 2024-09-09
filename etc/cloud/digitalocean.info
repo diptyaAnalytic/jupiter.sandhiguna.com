@@ -1,0 +1,7 @@
+import_url:   https://kojipkgs.fedoraproject.org/compose/34/latest-Fedora-34/compose/Cloud/x86_64/images/Fedora-Cloud-Base-34-1.2.x86_64.qcow2
+import_date:  2021-05-26
+distribution: 
+release:      
+codename:     
+build_arch:   
+build_tag:    014df730-d49c-4f11-aa0b-d113c007d847

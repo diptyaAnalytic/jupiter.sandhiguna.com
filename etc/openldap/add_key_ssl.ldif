@@ -1,0 +1,4 @@
+dn: cn=config
+changetype: modify
+replace: olcTLSCertificateKeyFile
+olcTLSCertificateKeyFile: /etc/letsencrypt/archive/jupiter.sandhiguna.com/privkey13.pem

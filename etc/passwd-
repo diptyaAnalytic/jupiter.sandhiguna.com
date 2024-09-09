@@ -1,0 +1,43 @@
+root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+halt:x:7:0:halt:/sbin:/sbin/halt
+mail:x:8:12:mail:/var/spool/mail:/sbin/nologin
+operator:x:11:0:operator:/root:/sbin/nologin
+games:x:12:100:games:/usr/games:/sbin/nologin
+ftp:x:14:50:FTP User:/var/ftp:/sbin/nologin
+nobody:x:65534:65534:Kernel Overflow User:/:/sbin/nologin
+systemd-network:x:192:192:systemd Network Management:/:/sbin/nologin
+systemd-coredump:x:999:997:systemd Core Dumper:/:/sbin/nologin
+systemd-resolve:x:193:193:systemd Resolver:/:/sbin/nologin
+systemd-oom:x:998:996:systemd Userspace OOM Killer:/:/sbin/nologin
+systemd-timesync:x:997:995:systemd Time Synchronization:/:/sbin/nologin
+dbus:x:81:81:System message bus:/:/sbin/nologin
+tss:x:59:59:Account used for TPM access:/dev/null:/sbin/nologin
+unbound:x:996:993:Unbound DNS resolver:/etc/unbound:/sbin/nologin
+sshd:x:74:74:Privilege-separated SSH:/usr/share/empty.sshd:/sbin/nologin
+chrony:x:995:992::/var/lib/chrony:/sbin/nologin
+polkitd:x:993:989:User for polkitd:/:/sbin/nologin
+ldap:x:55:55:OpenLDAP server:/var/lib/ldap:/sbin/nologin
+dovecot:x:97:97:Dovecot IMAP server:/usr/libexec/dovecot:/sbin/nologin
+dovenull:x:992:988:Dovecot's unauthorized user:/usr/libexec/dovecot:/sbin/nologin
+postfix:x:89:89::/var/spool/postfix:/sbin/nologin
+vmail:x:1000:1000::/mnt/jupiter_1/mail:/sbin/nologin
+nginx:x:991:987:Nginx web server:/var/lib/nginx:/sbin/nologin
+apache:x:48:48:Apache:/usr/share/httpd:/sbin/nologin
+mysql:x:27:27:MySQL Server:/var/lib/mysql:/sbin/nologin
+www-roundcube:x:1001:1001::/home/www-roundcube:/bin/bash
+opendkim:x:990:986:OpenDKIM Milter:/run/opendkim:/sbin/nologin
+policyd-spf:x:1002:1002::/home/policyd-spf:/bin/false
+sa-milt:x:988:984:SpamAssassin Milter:/var/lib/spamass-milter:/sbin/nologin
+www-space:x:1003:1003::/home/www-space:/bin/bash
+postgres:x:26:26:PostgreSQL Server:/var/lib/pgsql:/bin/bash
+gmhmd:x:1004:1004::/home/gmhmd:/bin/bash
+redis:x:987:982:Redis Database Server:/var/lib/redis:/sbin/nologin
+herman:x:1005:1005::/home/herman:/bin/bash
+do-agent:x:986:981::/home/do-agent:/bin/false
+letsencrypt:x:1006:1006::/home/letsencrypt:/bin/bash

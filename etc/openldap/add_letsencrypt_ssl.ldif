@@ -1,0 +1,5 @@
+dn: cn=config
+changetype: modify
+replace: olcTLSCACertificateFile
+#olcTLSCACertificateFile: /etc/letsencrypt/live/jupiter.sandhiguna.com/fullchain.pem
+olcTLSCACertificateFile: /etc/letsencrypt/isrg-root.pem

@@ -1,0 +1,7 @@
+# Created by anaconda
+
+# Created by cloud-init on instance boot automatically, do not edit.
+#
+NETWORKING=yes
+NETWORKING_IPV6=yes
+IPV6_AUTOCONF=no
