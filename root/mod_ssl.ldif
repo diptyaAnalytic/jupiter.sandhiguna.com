@@ -1,0 +1,13 @@
+# create new
+
+dn: cn=config
+changetype: modify
+replace: olcTLSCACertificateFile
+olcTLSCACertificateFile: /etc/letsencrypt/live/jupiter.sandhiguna.com/fullchain.pem
+-
+replace: olcTLSCertificateFile
+olcTLSCertificateFile: /etc/letsencrypt/live/jupiter.sandhiguna.com/cert.pem
+-
+replace: olcTLSCertificateKeyFile
+olcTLSCertificateKeyFile: /etc/letsencrypt/live/jupiter.sandhiguna.com/privkey.pem
+

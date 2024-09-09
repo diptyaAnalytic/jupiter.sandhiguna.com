@@ -1,0 +1,6 @@
+dn: olcDatabase={2}mdb,cn=config
+#olcRootDN: cn=Manager,dc=sandhiguna,dc=com
+changetype: modify
+replace: olcRootPW
+olcRootPW: {SSHA}Ue/7tZtX8sRkjpgEuG4gHc6WiATh8A9K
+

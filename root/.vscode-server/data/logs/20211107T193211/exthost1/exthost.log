@@ -1,0 +1,9 @@
+[2021-11-07 19:32:16.335] [exthost] [info] Extension host with pid 58115 started
+[2021-11-07 19:32:16.350] [exthost] [info] Lock '/root/.vscode-server/data/User/workspaceStorage/f793e94683e2c52b5b46a8f4023f2bc7/vscode.lock': Lock acquired.
+[2021-11-07 19:32:16.959] [exthost] [info] ExtensionService#_doActivateExtension vscode.extension-editing, startup: false, activationEvent: 'onLanguage:markdown'
+[2021-11-07 19:32:16.978] [exthost] [info] ExtensionService#_doActivateExtension vscode.markdown-language-features, startup: false, activationEvent: 'onLanguage:markdown'
+[2021-11-07 19:32:17.050] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: true, activationEvent: '*'
+[2021-11-07 19:32:17.054] [exthost] [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*', root cause: vscode.github
+[2021-11-07 19:32:18.158] [exthost] [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+[2021-11-07 19:32:18.559] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+[2021-11-07 19:32:18.566] [exthost] [info] Eager extensions activated

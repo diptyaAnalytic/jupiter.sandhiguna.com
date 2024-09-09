@@ -1,0 +1,13 @@
+[2021-11-07 12:34:00.490] [exthost] [info] Extension host with pid 54854 started
+[2021-11-07 12:34:00.546] [exthost] [info] Lock '/root/.vscode-server/data/User/workspaceStorage/91993eaf1033452246cda339dd51ef3c/vscode.lock': Lock acquired.
+[2021-11-07 12:34:00.828] [exthost] [info] ExtensionService#_doActivateExtension ms-python.python, startup: false, activationEvent: 'onLanguage:python', root cause: ms-python.vscode-pylance
+[2021-11-07 12:34:01.868] [exthost] [info] ExtensionService#_doActivateExtension ms-toolsai.jupyter, startup: false, activationEvent: 'onLanguage:python'
+[2021-11-07 12:34:03.119] [exthost] [info] ExtensionService#_doActivateExtension vscode.debug-auto-launch, startup: true, activationEvent: '*'
+[2021-11-07 12:34:03.138] [exthost] [info] ExtensionService#_doActivateExtension vscode.git, startup: true, activationEvent: '*', root cause: vscode.github
+[2021-11-07 12:34:05.159] [exthost] [info] ExtensionService#_doActivateExtension vscode.github, startup: true, activationEvent: '*'
+[2021-11-07 12:34:05.574] [exthost] [info] ExtensionService#_doActivateExtension vscode.merge-conflict, startup: false, activationEvent: 'onStartupFinished'
+[2021-11-07 12:34:05.594] [exthost] [info] Eager extensions activated
+[2021-11-07 12:34:06.479] [exthost] [info] ExtensionService#_doActivateExtension ms-toolsai.jupyter-renderers, startup: false, activationEvent: 'api', root cause: ms-toolsai.jupyter
+[2021-11-07 12:34:08.048] [exthost] [info] ExtensionService#_doActivateExtension ms-python.vscode-pylance, startup: false, activationEvent: 'onLanguage:python'
+[2021-11-07 12:44:15.491] [exthost] [info] ExtensionService#_doActivateExtension vscode.emmet, startup: false, activationEvent: 'onLanguage:php'
+[2021-11-07 12:44:16.097] [exthost] [info] ExtensionService#_doActivateExtension vscode.php-language-features, startup: false, activationEvent: 'onLanguage:php'

@@ -1,0 +1,27 @@
+[2021-11-07 12:12:04.734] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2021-11-07 12:12:04.734] [remoteagent] [info] Extension host agent started.
+[2021-11-07 12:12:05.587] [remoteagent] [info] [127.0.0.1][9c87201a][ManagementConnection] New connection established.
+[2021-11-07 12:12:06.088] [remoteagent] [info] [127.0.0.1][fb4fc5df][ExtensionHostConnection] New connection established.
+[2021-11-07 12:12:06.100] [remoteagent] [info] [127.0.0.1][fb4fc5df][ExtensionHostConnection] <54427> Launched Extension Host Process.
+[2021-11-07 12:12:07.564] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/5'
+[2021-11-07 12:12:08.054] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/7'
+[2021-11-07 12:12:08.986] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/8'
+[2021-11-07 12:12:10.044] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/9'
+[2021-11-07 12:12:10.777] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/b252:0'
+[2021-11-07 12:12:11.982] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2021-11-07 12:32:14.118] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 12:32:52.004] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 12:33:04.655] [remoteagent] [info] [127.0.0.1][9c87201a][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[2021-11-07 12:33:04.791] [remoteagent] [info] [127.0.0.1][9c87201a][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2021-11-07 12:33:06.064] [remoteagent] [info] [127.0.0.1][fb4fc5df][ExtensionHostConnection] <54427> Extension Host Process exited with code: 0, signal: null.
+[2021-11-07 12:33:06.066] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2021-11-07 12:38:06.065] [remoteagent] [info] Last EH closed, shutting down

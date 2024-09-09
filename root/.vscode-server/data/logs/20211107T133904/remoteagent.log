@@ -1,0 +1,47 @@
+[2021-11-07 13:39:04.075] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2021-11-07 13:39:04.075] [remoteagent] [info] Extension host agent started.
+[2021-11-07 13:39:04.388] [remoteagent] [info] Deleted from disk ms-toolsai.jupyter /root/.vscode-server/extensions/ms-toolsai.jupyter-2021.9.1101343141
+[2021-11-07 13:39:04.939] [remoteagent] [info] [127.0.0.1][6d153245][ManagementConnection] New connection established.
+[2021-11-07 13:39:05.432] [remoteagent] [info] [127.0.0.1][f36341b7][ExtensionHostConnection] New connection established.
+[2021-11-07 13:39:05.438] [remoteagent] [info] [127.0.0.1][f36341b7][ExtensionHostConnection] <56899> Launched Extension Host Process.
+[2021-11-07 13:39:18.727] [remoteagent] [info] [127.0.0.1][6d153245][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2021-11-07 13:39:19.740] [remoteagent] [info] [127.0.0.1][f36341b7][ExtensionHostConnection] <56899> Extension Host Process exited with code: 0, signal: null.
+[2021-11-07 13:39:19.741] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2021-11-07 13:39:29.099] [remoteagent] [info] Got delay-shutdown request while in shutdown timeout, delaying
+[2021-11-07 13:39:29.099] [remoteagent] [info] Cancelling previous shutdown timeout
+[2021-11-07 13:39:30.351] [remoteagent] [info] [127.0.0.1][17fb8c70][ManagementConnection] New connection established.
+[2021-11-07 13:39:30.867] [remoteagent] [info] [127.0.0.1][ca914cb1][ExtensionHostConnection] New connection established.
+[2021-11-07 13:39:30.879] [remoteagent] [info] [127.0.0.1][ca914cb1][ExtensionHostConnection] <57005> Launched Extension Host Process.
+[2021-11-07 13:39:32.529] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/5'
+[2021-11-07 13:39:33.030] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/7'
+[2021-11-07 13:39:34.049] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/8'
+[2021-11-07 13:39:35.002] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/9'
+[2021-11-07 13:39:35.870] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/b252:0'
+[2021-11-07 13:39:37.074] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2021-11-07 13:43:39.290] [remoteagent] [info] [127.0.0.1][17fb8c70][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[2021-11-07 13:44:29.100] [remoteagent] [info] New EH opened, aborting shutdown
+[2021-11-07 13:47:59.481] [remoteagent] [info] [127.0.0.1][17fb8c70][ManagementConnection] Another client has connected, will shorten the wait for reconnection 5m before disposing...
+[2021-11-07 13:47:59.482] [remoteagent] [info] [127.0.0.1][05b61c1c][ManagementConnection] New connection established.
+[2021-11-07 13:47:59.660] [remoteagent] [info] [127.0.0.1][6d2bbe2b][ExtensionHostConnection] New connection established.
+[2021-11-07 13:47:59.669] [remoteagent] [info] [127.0.0.1][6d2bbe2b][ExtensionHostConnection] <57295> Launched Extension Host Process.
+[2021-11-07 13:48:01.306] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/5'
+[2021-11-07 13:48:01.876] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/7'
+[2021-11-07 13:48:03.108] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/8'
+[2021-11-07 13:48:04.590] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/9'
+[2021-11-07 13:48:05.444] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/b252:0'
+[2021-11-07 13:48:06.672] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2021-11-07 13:52:59.750] [remoteagent] [info] [127.0.0.1][17fb8c70][ManagementConnection] The reconnection short grace time of 5m has expired, so the connection will be disposed.
+[2021-11-07 13:53:00.726] [remoteagent] [info] [127.0.0.1][ca914cb1][ExtensionHostConnection] <57005> Extension Host Process exited with code: 0, signal: null.
+[2021-11-07 15:55:14.815] [remoteagent] [info] [127.0.0.1][05b61c1c][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[2021-11-07 18:38:57.879] [remoteagent] [info] [127.0.0.1][6d2bbe2b][ExtensionHostConnection] <57295> Extension Host Process exited with code: 0, signal: null.
+[2021-11-07 18:38:57.880] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2021-11-07 18:43:57.880] [remoteagent] [info] Last EH closed, shutting down

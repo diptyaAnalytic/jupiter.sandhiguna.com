@@ -1,0 +1,11 @@
+
+module dovecot 1.0;
+
+require {
+	type dovecot_t;
+	type dovecot_etc_t;
+	class file execute;
+}
+
+#============= dovecot_t ==============
+allow dovecot_t dovecot_etc_t:file execute;

@@ -1,0 +1,82 @@
+[2021-11-06 20:48:58.269] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2021-11-06 20:48:58.269] [remoteagent] [info] Extension host agent started.
+[2021-11-06 20:48:59.213] [remoteagent] [info] [127.0.0.1][2751ca97][ManagementConnection] New connection established.
+[2021-11-06 20:48:59.660] [remoteagent] [info] [127.0.0.1][409160ca][ExtensionHostConnection] New connection established.
+[2021-11-06 20:48:59.666] [remoteagent] [info] [127.0.0.1][409160ca][ExtensionHostConnection] <47307> Launched Extension Host Process.
+[2021-11-06 20:49:01.028] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/5'
+[2021-11-06 20:49:01.377] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/7'
+[2021-11-06 20:49:02.547] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/8'
+[2021-11-06 20:49:03.549] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/9'
+[2021-11-06 20:49:04.329] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/b252:0'
+[2021-11-06 20:49:05.674] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2021-11-07 01:25:26.041] [remoteagent] [info] Installing extension: ms-python.python
+[2021-11-07 01:25:27.094] [remoteagent] [info] Installing extension: ms-toolsai.jupyter
+[2021-11-07 01:25:27.095] [remoteagent] [info] Installing extension: ms-toolsai.jupyter-keymap
+[2021-11-07 01:25:27.095] [remoteagent] [info] Installing extension: ms-toolsai.jupyter-renderers
+[2021-11-07 01:25:27.095] [remoteagent] [info] Installing extension: ms-python.vscode-pylance
+[2021-11-07 01:25:27.647] [remoteagent] [info] Downloaded extension: ms-toolsai.jupyter-keymap /root/.vscode-server/data/CachedExtensionVSIXs/ms-toolsai.jupyter-keymap-1.0.0
+[2021-11-07 01:25:27.648] [remoteagent] [info] Downloaded extension: ms-toolsai.jupyter-renderers /root/.vscode-server/data/CachedExtensionVSIXs/ms-toolsai.jupyter-renderers-1.0.3
+[2021-11-07 01:25:27.687] [remoteagent] [info] Downloaded extension: ms-toolsai.jupyter /root/.vscode-server/data/CachedExtensionVSIXs/ms-toolsai.jupyter-2021.9.1101343141
+[2021-11-07 01:25:27.690] [remoteagent] [info] Downloaded extension: ms-python.python /root/.vscode-server/data/CachedExtensionVSIXs/ms-python.python-2021.11.1422169775
+[2021-11-07 01:25:27.706] [remoteagent] [info] Extracted extension to /root/.vscode-server/extensions/.1d05fa89-5fd8-4301-a2b0-c699ca47a1c2: ms-toolsai.jupyter-keymap
+[2021-11-07 01:25:27.713] [remoteagent] [info] Renamed to /root/.vscode-server/extensions/ms-toolsai.jupyter-keymap-1.0.0
+[2021-11-07 01:25:27.716] [remoteagent] [info] Extracting completed. ms-toolsai.jupyter-keymap
+[2021-11-07 01:25:28.429] [remoteagent] [info] Extracted extension to /root/.vscode-server/extensions/.36a20b3d-26ad-4c11-b032-82796d63924d: ms-toolsai.jupyter-renderers
+[2021-11-07 01:25:28.441] [remoteagent] [info] Renamed to /root/.vscode-server/extensions/ms-toolsai.jupyter-renderers-1.0.3
+[2021-11-07 01:25:28.444] [remoteagent] [info] Extracting completed. ms-toolsai.jupyter-renderers
+[2021-11-07 01:25:29.549] [remoteagent] [info] Extracted extension to /root/.vscode-server/extensions/.a0580f58-b521-43db-a677-4e2d7de6fcbd: ms-toolsai.jupyter
+[2021-11-07 01:25:29.562] [remoteagent] [info] Renamed to /root/.vscode-server/extensions/ms-toolsai.jupyter-2021.9.1101343141
+[2021-11-07 01:25:29.566] [remoteagent] [info] Extracting completed. ms-toolsai.jupyter
+[2021-11-07 01:25:31.385] [remoteagent] [info] Extracted extension to /root/.vscode-server/extensions/.3e274be8-60fd-4ad9-a42b-9873f74ad9e6: ms-python.python
+[2021-11-07 01:25:31.400] [remoteagent] [info] Renamed to /root/.vscode-server/extensions/ms-python.python-2021.11.1422169775
+[2021-11-07 01:25:31.404] [remoteagent] [info] Extracting completed. ms-python.python
+[2021-11-07 01:25:31.826] [remoteagent] [info] Downloaded extension: ms-python.vscode-pylance /root/.vscode-server/data/CachedExtensionVSIXs/ms-python.vscode-pylance-2021.11.0
+[2021-11-07 01:25:35.055] [remoteagent] [info] Extracted extension to /root/.vscode-server/extensions/.d3d1e6ad-b5db-489b-a034-7b0750459eb1: ms-python.vscode-pylance
+[2021-11-07 01:25:35.073] [remoteagent] [info] Renamed to /root/.vscode-server/extensions/ms-python.vscode-pylance-2021.11.0
+[2021-11-07 01:25:35.075] [remoteagent] [info] Extracting completed. ms-python.vscode-pylance
+[2021-11-07 01:25:35.075] [remoteagent] [info] Extension installed successfully: ms-toolsai.jupyter-keymap
+[2021-11-07 01:25:35.075] [remoteagent] [info] Extension installed successfully: ms-toolsai.jupyter-renderers
+[2021-11-07 01:25:35.075] [remoteagent] [info] Extension installed successfully: ms-toolsai.jupyter
+[2021-11-07 01:25:35.075] [remoteagent] [info] Extension installed successfully: ms-python.python
+[2021-11-07 01:25:35.075] [remoteagent] [info] Extension installed successfully: ms-python.vscode-pylance
+[2021-11-07 01:39:25.417] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 01:40:14.344] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 01:40:30.205] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 01:40:31.632] [remoteagent] [info] [127.0.0.1][409160ca][ExtensionHostConnection] The client has reconnected.
+[2021-11-07 01:40:51.537] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 01:40:57.782] [remoteagent] [info] [127.0.0.1][2751ca97][ManagementConnection] The client has reconnected.
+[2021-11-07 01:40:58.160] [remoteagent] [info] [127.0.0.1][409160ca][ExtensionHostConnection] The client has reconnected.
+[2021-11-07 01:41:25.064] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 01:41:32.237] [remoteagent] [info] [127.0.0.1][409160ca][ExtensionHostConnection] The client has reconnected.
+[2021-11-07 01:41:32.354] [remoteagent] [info] [127.0.0.1][409160ca][ExtensionHostConnection] <47307> Extension Host Process exited with code: null, signal: SIGKILL.
+[2021-11-07 01:41:32.356] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2021-11-07 01:41:53.358] [remoteagent] [error] [127.0.0.1][409160ca][ExtensionHostConnection] Unknown reconnection token (seen before).
+[2021-11-07 01:41:53.620] [remoteagent] [info] [127.0.0.1][2751ca97][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2021-11-07 01:42:20.139] [remoteagent] [info] Got delay-shutdown request while in shutdown timeout, delaying
+[2021-11-07 01:42:20.139] [remoteagent] [info] Cancelling previous shutdown timeout
+[2021-11-07 01:42:21.280] [remoteagent] [info] [127.0.0.1][ac39abef][ManagementConnection] New connection established.
+[2021-11-07 01:42:21.763] [remoteagent] [info] [127.0.0.1][a3cb9bcd][ExtensionHostConnection] New connection established.
+[2021-11-07 01:42:21.774] [remoteagent] [info] [127.0.0.1][a3cb9bcd][ExtensionHostConnection] <51206> Launched Extension Host Process.
+[2021-11-07 01:42:23.871] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/5'
+[2021-11-07 01:42:24.291] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/7'
+[2021-11-07 01:42:25.528] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/8'
+[2021-11-07 01:42:26.872] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/9'
+[2021-11-07 01:42:27.665] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/b252:0'
+[2021-11-07 01:42:29.130] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2021-11-07 01:47:20.140] [remoteagent] [info] New EH opened, aborting shutdown
+[2021-11-07 02:02:05.150] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 02:03:02.606] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 02:05:56.659] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 02:06:18.641] [remoteagent] [error] No ptyHost heartbeat after 12 seconds
+[2021-11-07 02:07:21.282] [remoteagent] [info] [127.0.0.1][a3cb9bcd][ExtensionHostConnection] <51206> Extension Host Process exited with code: null, signal: SIGKILL.
+[2021-11-07 02:07:21.288] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2021-11-07 02:12:21.288] [remoteagent] [info] Last EH closed, shutting down

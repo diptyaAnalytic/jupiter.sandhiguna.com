@@ -1,0 +1,36 @@
+[2021-11-07 12:33:55.628] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2021-11-07 12:33:55.628] [remoteagent] [info] Extension host agent started.
+[2021-11-07 12:33:56.604] [remoteagent] [info] [127.0.0.1][53d30c89][ManagementConnection] New connection established.
+[2021-11-07 12:33:57.085] [remoteagent] [info] [127.0.0.1][358c9a76][ExtensionHostConnection] New connection established.
+[2021-11-07 12:33:57.095] [remoteagent] [info] [127.0.0.1][358c9a76][ExtensionHostConnection] <54854> Launched Extension Host Process.
+[2021-11-07 12:33:59.506] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/5'
+[2021-11-07 12:34:00.432] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/7'
+[2021-11-07 12:34:01.567] [remoteagent] [info] Installing extension: ms-toolsai.jupyter
+[2021-11-07 12:34:02.834] [remoteagent] [info] Downloaded extension: ms-toolsai.jupyter /root/.vscode-server/data/CachedExtensionVSIXs/ms-toolsai.jupyter-2021.10.1001414422
+[2021-11-07 12:34:03.942] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/8'
+[2021-11-07 12:34:06.507] [remoteagent] [info] Extracted extension to /root/.vscode-server/extensions/.409e85c5-c500-4672-b33a-9f496347a071: ms-toolsai.jupyter
+[2021-11-07 12:34:06.543] [remoteagent] [info] Renamed to /root/.vscode-server/extensions/ms-toolsai.jupyter-2021.10.1001414422
+[2021-11-07 12:34:06.546] [remoteagent] [info] Extracting completed. ms-toolsai.jupyter
+[2021-11-07 12:34:06.574] [remoteagent] [info] Extension installed successfully: ms-toolsai.jupyter
+[2021-11-07 12:34:08.281] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/9'
+[2021-11-07 12:34:11.945] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/b252:0'
+[2021-11-07 12:34:19.621] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2021-11-07 12:44:19.445] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 12:47:59.100] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 12:48:02.559] [remoteagent] [info] [127.0.0.1][358c9a76][ExtensionHostConnection] The client has reconnected.
+[2021-11-07 12:48:29.546] [remoteagent] [info] [127.0.0.1][358c9a76][ExtensionHostConnection] The client has reconnected.
+[2021-11-07 12:48:55.208] [remoteagent] [info] [127.0.0.1][358c9a76][ExtensionHostConnection] The client has reconnected.
+[2021-11-07 12:50:25.647] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 12:51:43.568] [remoteagent] [info] [127.0.0.1][358c9a76][ExtensionHostConnection] <54854> Extension Host Process exited with code: null, signal: SIGKILL.
+[2021-11-07 12:51:43.574] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2021-11-07 12:51:43.720] [remoteagent] [info] [127.0.0.1][53d30c89][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[2021-11-07 12:56:43.576] [remoteagent] [info] Last EH closed, shutting down

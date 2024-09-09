@@ -1,0 +1,40 @@
+
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+Extension host agent listening on 46241
+
+[19:32:11] Extension host agent started.
+[19:32:12] [127.0.0.1][5203aa73][ManagementConnection] New connection established.
+[19:32:13] [127.0.0.1][ba76dcc8][ExtensionHostConnection] New connection established.
+[19:32:13] [127.0.0.1][ba76dcc8][ExtensionHostConnection] <58115> Launched Extension Host Process.
+[19:32:15] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/5'
+[19:32:15] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/7'
+[19:32:16] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/8'
+[19:32:17] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/9'
+[19:32:18] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/b252:0'
+rejected promise not handled within 1 second: Error: Could not find pty with id "1"
+stack trace: Error: Could not find pty with id "1",    at a._throwIfNoPty (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:17:5466),    at a.updateTitle (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:17:2170),    at Object.call (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:13:8419),    at S.onPromise (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:12:4939),    at S.onRawMessage (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:12:4298),    at /root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:12:3551,    at R.fire (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:8:1712),    at process.D (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:6:32686),    at process.emit (events.js:315:20),    at emit (internal/child_process.js:903:12),    at processTicksAndRejections (internal/process/task_queues.js:81:21)
+[Error: Could not find pty with id "1",    at a._throwIfNoPty (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:17:5466),    at a.updateTitle (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:17:2170),    at Object.call (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:13:8419),    at S.onPromise (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:12:4939),    at S.onRawMessage (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:12:4298),    at /root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:12:3551,    at R.fire (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:8:1712),    at process.D (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:6:32686),    at process.emit (events.js:315:20),    at emit (internal/child_process.js:903:12),    at processTicksAndRejections (internal/process/task_queues.js:81:21)]
+rejected promise not handled within 1 second: Error: Could not find pty with id "1"
+stack trace: Error: Could not find pty with id "1",    at a._throwIfNoPty (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:17:5466),    at a.updateIcon (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:17:2230),    at Object.call (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:13:8419),    at S.onPromise (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:12:4939),    at S.onRawMessage (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:12:4298),    at /root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:12:3551,    at R.fire (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:8:1712),    at process.D (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:6:32686),    at process.emit (events.js:315:20),    at emit (internal/child_process.js:903:12),    at processTicksAndRejections (internal/process/task_queues.js:81:21)
+[Error: Could not find pty with id "1",    at a._throwIfNoPty (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:17:5466),    at a.updateIcon (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:17:2230),    at Object.call (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:13:8419),    at S.onPromise (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:12:4939),    at S.onRawMessage (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:12:4298),    at /root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:12:3551,    at R.fire (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:8:1712),    at process.D (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/terminal/node/ptyHostMain.js:6:32686),    at process.emit (events.js:315:20),    at emit (internal/child_process.js:903:12),    at processTicksAndRejections (internal/process/task_queues.js:81:21)]
+[19:32:19] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[IPC Library: File Watcher (chokidar)] Unhandled Promise Rejection:  Canceled: Canceled
+    at _ (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/files/node/watcher/unix/watcherApp.js:5:1157)
+    at p.cancel (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/files/node/watcher/unix/watcherApp.js:10:13177)
+    at R.cancel (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/files/node/watcher/unix/watcherApp.js:10:13539)
+    at Object.stop (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/files/node/watcher/unix/watcherApp.js:11:34203)
+    at async D.stop (/root/.vscode-server/bin/b3318bc0524af3d74034b8bb8a64df0ccf35549a/out/vs/platform/files/node/watcher/unix/watcherApp.js:11:35532)
+[19:50:20] No ptyHost heartbeat after 6 seconds
+[19:50:32] No ptyHost heartbeat after 6 seconds
+[19:50:40] No ptyHost heartbeat after 6 seconds
+[19:50:52] No ptyHost heartbeat after 6 seconds
+[19:50:59] No ptyHost heartbeat after 6 seconds
+[19:51:06] No ptyHost heartbeat after 12 seconds
+[19:51:34] No ptyHost heartbeat after 6 seconds

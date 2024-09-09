@@ -1,0 +1,24 @@
+[2021-11-05 09:33:24.649] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2021-11-05 09:33:24.649] [remoteagent] [info] Extension host agent started.
+[2021-11-05 09:33:25.611] [remoteagent] [info] [127.0.0.1][2bcbcc6e][ManagementConnection] New connection established.
+[2021-11-05 09:33:26.097] [remoteagent] [info] [127.0.0.1][29e5b805][ExtensionHostConnection] New connection established.
+[2021-11-05 09:33:26.117] [remoteagent] [info] [127.0.0.1][29e5b805][ExtensionHostConnection] <40387> Launched Extension Host Process.
+[2021-11-05 09:33:27.472] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/5'
+[2021-11-05 09:33:27.820] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/7'
+[2021-11-05 09:33:28.911] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/8'
+[2021-11-05 09:33:29.925] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/9'
+[2021-11-05 09:33:30.690] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/b252:0'
+[2021-11-05 09:33:31.820] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2021-11-05 23:38:49.186] [remoteagent] [info] [127.0.0.1][2bcbcc6e][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+[2021-11-06 02:22:31.746] [remoteagent] [info] [127.0.0.1][29e5b805][ExtensionHostConnection] <40387> Extension Host Process exited with code: 0, signal: null.
+[2021-11-06 02:22:31.747] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2021-11-06 02:27:31.748] [remoteagent] [info] Last EH closed, shutting down

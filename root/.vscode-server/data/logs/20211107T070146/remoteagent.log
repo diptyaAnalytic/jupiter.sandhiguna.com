@@ -1,0 +1,27 @@
+[2021-11-07 07:01:46.134] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2021-11-07 07:01:46.134] [remoteagent] [info] Extension host agent started.
+[2021-11-07 07:01:46.974] [remoteagent] [info] [127.0.0.1][df6a5bac][ManagementConnection] New connection established.
+[2021-11-07 07:01:47.482] [remoteagent] [info] [127.0.0.1][e3120aeb][ExtensionHostConnection] New connection established.
+[2021-11-07 07:01:47.495] [remoteagent] [info] [127.0.0.1][e3120aeb][ExtensionHostConnection] <52762> Launched Extension Host Process.
+[2021-11-07 07:01:48.849] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/5'
+[2021-11-07 07:01:49.397] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/7'
+[2021-11-07 07:01:50.491] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/8'
+[2021-11-07 07:01:51.589] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/9'
+[2021-11-07 07:01:52.133] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/b252:0'
+[2021-11-07 07:01:53.458] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2021-11-07 07:07:38.457] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 07:24:09.719] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 07:28:20.816] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 07:28:35.342] [remoteagent] [error] No ptyHost heartbeat after 12 seconds
+[2021-11-07 07:30:19.886] [remoteagent] [info] [127.0.0.1][e3120aeb][ExtensionHostConnection] <52762> Extension Host Process exited with code: null, signal: SIGKILL.
+[2021-11-07 07:30:19.889] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2021-11-07 07:35:19.889] [remoteagent] [info] Last EH closed, shutting down

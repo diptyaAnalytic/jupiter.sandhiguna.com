@@ -1,0 +1,27 @@
+[2021-11-07 19:32:11.875] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2021-11-07 19:32:11.875] [remoteagent] [info] Extension host agent started.
+[2021-11-07 19:32:12.907] [remoteagent] [info] [127.0.0.1][5203aa73][ManagementConnection] New connection established.
+[2021-11-07 19:32:13.394] [remoteagent] [info] [127.0.0.1][ba76dcc8][ExtensionHostConnection] New connection established.
+[2021-11-07 19:32:13.401] [remoteagent] [info] [127.0.0.1][ba76dcc8][ExtensionHostConnection] <58115> Launched Extension Host Process.
+[2021-11-07 19:32:15.079] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/5'
+[2021-11-07 19:32:15.518] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/7'
+[2021-11-07 19:32:16.544] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/8'
+[2021-11-07 19:32:17.802] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/9'
+[2021-11-07 19:32:18.521] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/b252:0'
+[2021-11-07 19:32:19.836] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2021-11-07 19:50:20.218] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 19:50:32.841] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 19:50:41.147] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 19:50:52.971] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 19:51:00.504] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 19:51:07.863] [remoteagent] [error] No ptyHost heartbeat after 12 seconds
+[2021-11-07 19:51:36.999] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds

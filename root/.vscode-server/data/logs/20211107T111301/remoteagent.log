@@ -1,0 +1,24 @@
+[2021-11-07 11:13:01.461] [remoteagent] [info] 
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+
+[2021-11-07 11:13:01.461] [remoteagent] [info] Extension host agent started.
+[2021-11-07 11:13:02.719] [remoteagent] [info] [127.0.0.1][db11b449][ManagementConnection] New connection established.
+[2021-11-07 11:13:03.242] [remoteagent] [info] [127.0.0.1][83921443][ExtensionHostConnection] New connection established.
+[2021-11-07 11:13:03.265] [remoteagent] [info] [127.0.0.1][83921443][ExtensionHostConnection] <53647> Launched Extension Host Process.
+[2021-11-07 11:13:04.745] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/5'
+[2021-11-07 11:13:05.292] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/7'
+[2021-11-07 11:13:06.243] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/8'
+[2021-11-07 11:13:07.517] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/9'
+[2021-11-07 11:13:08.259] [remoteagent] [warning] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/b252:0'
+[2021-11-07 11:13:09.470] [remoteagent] [error] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[2021-11-07 11:31:29.450] [remoteagent] [warning] No ptyHost heartbeat after 6 seconds
+[2021-11-07 11:31:57.317] [remoteagent] [info] [127.0.0.1][83921443][ExtensionHostConnection] <53647> Extension Host Process exited with code: null, signal: SIGKILL.
+[2021-11-07 11:31:57.319] [remoteagent] [info] Last EH closed, waiting before shutting down
+[2021-11-07 11:36:57.319] [remoteagent] [info] Last EH closed, shutting down

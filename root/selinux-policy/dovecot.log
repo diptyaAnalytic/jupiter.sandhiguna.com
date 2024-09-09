@@ -1,0 +1,1 @@
+type=AVC msg=audit(1636269457.834:37313): avc:  denied  { execute } for  pid=52900 comm="script-login" name="dovecot-postlogin.py" dev="vda1" ino=273450 scontext=system_u:system_r:dovecot_t:s0 tcontext=unconfined_u:object_r:dovecot_etc_t:s0 tclass=file permissive=0

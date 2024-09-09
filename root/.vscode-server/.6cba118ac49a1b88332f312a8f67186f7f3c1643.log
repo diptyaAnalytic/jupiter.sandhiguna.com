@@ -1,0 +1,42 @@
+
+
+*
+* Visual Studio Code Server
+*
+* Reminder: You may only use this software with Visual Studio family products,
+* as described in the license https://aka.ms/vscode-remote/license
+*
+
+Extension host agent listening on 36183
+
+[12:12:04] Extension host agent started.
+[12:12:05] [127.0.0.1][9c87201a][ManagementConnection] New connection established.
+[12:12:06] [127.0.0.1][fb4fc5df][ExtensionHostConnection] New connection established.
+[12:12:06] [127.0.0.1][fb4fc5df][ExtensionHostConnection] <54427> Launched Extension Host Process.
+[12:12:07] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/5'
+[12:12:08] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/7'
+[12:12:08] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/8'
+[12:12:10] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/9'
+[12:12:10] [File Watcher (chokidar)] Error: ELOOP: too many symbolic links encountered, stat '/run/udev/watch/b252:0'
+[12:12:11] [File Watcher (chokidar)] Inotify limit reached (ENOSPC)
+[IPC Library: File Watcher (chokidar)] Unhandled Promise Rejection:  Canceled: Canceled
+    at w (/root/.vscode-server/bin/6cba118ac49a1b88332f312a8f67186f7f3c1643/out/vs/platform/files/node/watcher/unix/watcherApp.js:5:1157)
+    at B.cancel (/root/.vscode-server/bin/6cba118ac49a1b88332f312a8f67186f7f3c1643/out/vs/platform/files/node/watcher/unix/watcherApp.js:10:26439)
+    at F.cancel (/root/.vscode-server/bin/6cba118ac49a1b88332f312a8f67186f7f3c1643/out/vs/platform/files/node/watcher/unix/watcherApp.js:10:26801)
+    at Object.stop (/root/.vscode-server/bin/6cba118ac49a1b88332f312a8f67186f7f3c1643/out/vs/platform/files/node/watcher/unix/watcherApp.js:11:32773)
+    at async L.stop (/root/.vscode-server/bin/6cba118ac49a1b88332f312a8f67186f7f3c1643/out/vs/platform/files/node/watcher/unix/watcherApp.js:11:34107)
+[12:32:13] No ptyHost heartbeat after 6 seconds
+[12:32:51] No ptyHost heartbeat after 6 seconds
+[12:33:04] [127.0.0.1][9c87201a][ManagementConnection] The client has disconnected, will wait for reconnection 3h before disposing...
+Error: Unexpected SIGPIPE
+    at process.<anonymous> (/root/.vscode-server/bin/6cba118ac49a1b88332f312a8f67186f7f3c1643/out/bootstrap.js:1:370)
+    at process.emit (events.js:315:20)
+[12:33:04] [127.0.0.1][9c87201a][ManagementConnection] The client has disconnected gracefully, so the connection will be disposed.
+[12:33:06] [127.0.0.1][fb4fc5df][ExtensionHostConnection] <54427> Extension Host Process exited with code: 0, signal: null.
+Last EH closed, waiting before shutting down
+[12:33:06] Last EH closed, waiting before shutting down
+Error: Unexpected SIGPIPE
+    at process.<anonymous> (/root/.vscode-server/bin/6cba118ac49a1b88332f312a8f67186f7f3c1643/out/bootstrap.js:1:370)
+    at process.emit (events.js:315:20)
+Last EH closed, shutting down
+[12:38:06] Last EH closed, shutting down
